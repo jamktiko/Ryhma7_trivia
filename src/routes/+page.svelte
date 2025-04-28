@@ -1,34 +1,15 @@
 <script lang="ts">
-	import Button from '$lib/components/Button.svelte';
+    import Button from '$lib/components/Button.svelte';
 </script>
 
-<!-- HTML tähän -->
-<html lang="en">
-	<head>
-		<title>MindSpark Trivia</title>
-	</head>
+<div>
+    <h1>Welcome to MindSpark!</h1>
+    <h2>Are you ready to test your knowledge?</h2>
+	
+<Button text="testi nappi" onclick={() => {}} />
 
-	<body>
-		<div>
-			<h1>Welcome to MindSpark!</h1>
-			<h2>Are you ready to test your knowledge?</h2>
-			<!-- <Button text="testi nappi" onclick={() => {}} /> -->
-		</div>
-	</body>
-</html>
+</div>
 
 <style>
-	body {
-		font-size: 100%;
-		margin: 5 auto;
-		text-align: center;
-		background-color: #e1d5e7;
-		color: #411c5e;
-	}
-	h1 {
-		font-size: 55px;
-	}
-	h2 {
-		font-size: 48px;
-	}
+   
 </style>
