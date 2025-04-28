@@ -12,5 +12,5 @@
 <button {onclick} {disabled}>{text}</button>
 
 <style>
-	/* Tyylit tähän */
+	/* Tyylit tähän!!!! */
 </style>
