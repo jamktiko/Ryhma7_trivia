@@ -1,28 +1,51 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte';
+	import { triviaManager } from '$lib/stores/triviaStore.svelte';
 
-	function moro() {
-		console.log('Moro!');
+	// Function to handle category selection and store it
+	async function categorySelect(categoryId: number) {
+		console.log(`Selected category ID: ${categoryId}`);
+
+		// Fetch and store questions for this category
+		try {
+			const questions = await triviaManager.fetchCategory(categoryId);
+			console.log(`Fetched ${questions.length} questions for category ${categoryId}`);
+
+			// The selection is now stored in triviaManager.selectedCategoryId
+			// and the questions are stored in triviaManager.questions
+		} catch (error) {
+			console.error('Failed to fetch questions:', error);
+		}
 	}
 </script>
 
 <!-- HTML tähän -->
-<html lang="en">
-	<head>
-		<title>MindSpark Trivia</title>
-	</head>
+<head>
+	<title>MindSpark Trivia</title>
+</head>
 
-	<body>
-		<div>
-			<h1>Welcome to MindSpark!</h1>
-			<h2>Are you ready to test your knowledge?</h2>
-			<!-- <Button text="testi nappi" /> -->
+<div>
+	<h1>Welcome to MindSpark!</h1>
+	<h2>Are you ready to test your knowledge?</h2>
+
+	<!-- Display categories using the Button component -->
+	{#if triviaManager.categories}
+		{#each triviaManager.categories as category}
+			<Button text={category.name} onclick={() => categorySelect(category.id)} />
+		{/each}
+	{/if}
+
+	<!-- Show the selected category and question count if available -->
+	{#if triviaManager.selectedCategoryId}
+		<div class="selection-info">
+			<p>Selected category: {triviaManager.selectedCategory?.name}</p>
+			<p>Questions loaded: {triviaManager.questions.length}</p>
 		</div>
-	</body>
-</html>
+	{/if}
+</div>
 
 <style>
-	body {
+	:global body {
 		font-size: 100%;
 		margin: 5 auto;
 		text-align: center;
@@ -34,5 +57,11 @@
 	}
 	h2 {
 		font-size: 48px;
+	}
+	.selection-info {
+		margin-top: 20px;
+		padding: 10px;
+		background-color: #f0f0f0;
+		border-radius: 5px;
 	}
 </style>
