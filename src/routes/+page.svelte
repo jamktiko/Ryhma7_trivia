@@ -3,9 +3,17 @@
 </script>
 
 <!-- HTML tähän -->
-<h1>hellurei</h1>
-<Button text="testi nappi" onclick={() => {}} />
+<body>
+	<div>
+		<h1>hellurei</h1>
+		<!-- <Button text="testi nappi" onclick={() => {}} /> -->
+	</div>
+</body>
 
 <style>
-	/* Tyyli tähän */
+	body {
+		font-size: 100%;
+		margin: auto;
+		background-color: #e1d5e7;
+	}
 </style>
