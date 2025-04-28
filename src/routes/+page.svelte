@@ -10,7 +10,8 @@
 
 	<body>
 		<div>
-			<h1>MindSpark Trivia</h1>
+			<h1>Welcome to MindSpark!</h1>
+			<h2>Are you ready to test your knowledge?</h2>
 			<!-- <Button text="testi nappi" onclick={() => {}} /> -->
 		</div>
 	</body>
@@ -20,10 +21,14 @@
 	body {
 		font-size: 100%;
 		margin: 5 auto;
+		text-align: center;
 		background-color: #e1d5e7;
 		color: #411c5e;
 	}
 	h1 {
-		font-family: 'Protest Strike', system-ui;
+		font-size: 55px;
+	}
+	h2 {
+		font-size: 48px;
 	}
 </style>
