@@ -1,23 +1,38 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte';
 
-	// Kategorian valinta
-	async function handleCategorySelect(categoryId: number) {
-		try {
-			const results = await triviaManager.fetchCategory(categoryId);
-			console.log(`Category ID: ${categoryId}`);
-			console.log(`${results.length} questions loaded`);
-		} catch (error) {
-			console.error('Error fetching category:', error);
-		}
+	function moro() {
+		console.log('Moro!');
 	}
 </script>
 
-<div class="categories">
-	{#each triviaManager.categories as category}
-		<Button text={category.name} onclick={() => handleCategorySelect(category.id)} />
-	{/each}
-</div>
+<!-- HTML tähän -->
+<html lang="en">
+	<head>
+		<title>MindSpark Trivia</title>
+	</head>
+
+	<body>
+		<div>
+			<h1>Welcome to MindSpark!</h1>
+			<h2>Are you ready to test your knowledge?</h2>
+			<!-- <Button text="testi nappi" /> -->
+		</div>
+	</body>
+</html>
 
 <style>
+	body {
+		font-size: 100%;
+		margin: 5 auto;
+		text-align: center;
+		background-color: #e1d5e7;
+		color: #411c5e;
+	}
+	h1 {
+		font-size: 55px;
+	}
+	h2 {
+		font-size: 48px;
+	}
 </style>
