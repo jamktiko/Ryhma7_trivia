@@ -27,6 +27,7 @@
 <div>
 	<h1>Welcome to MindSpark!</h1>
 	<h2>Are you ready to test your knowledge?</h2>
+	<h3>Choose a category</h3>
 
 	<!-- Display categories using the Button component -->
 	{#if triviaManager.categories}
@@ -63,5 +64,8 @@
 		padding: 10px;
 		background-color: #f0f0f0;
 		border-radius: 5px;
+	}
+	h3 {
+		font-size: 40px;
 	}
 </style>
