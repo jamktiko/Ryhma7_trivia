@@ -2,24 +2,18 @@
 	import Button from '$lib/components/Button.svelte';
 	import { triviaManager } from '$lib/stores/triviaStore.svelte';
 
-	// Function to handle category selection and store it
 	async function categorySelect(categoryId: number) {
 		console.log(`Selected category ID: ${categoryId}`);
-
-		// Fetch and store questions for this category
 		try {
 			const questions = await triviaManager.fetchCategory(categoryId);
 			console.log(`Fetched ${questions.length} questions for category ${categoryId}`);
-
-			// The selection is now stored in triviaManager.selectedCategoryId
-			// and the questions are stored in triviaManager.questions
 		} catch (error) {
 			console.error('Failed to fetch questions:', error);
 		}
 	}
 </script>
 
-<!-- HTML tähän -->
+<!-- HTML tähän. Ei HTML tägiä, ei toimi Sveltessä -->
 <head>
 	<title>MindSpark Trivia</title>
 </head>
@@ -29,14 +23,11 @@
 	<h2>Are you ready to test your knowledge?</h2>
 	<h3>Choose a category</h3>
 
-	<!-- Display categories using the Button component -->
 	{#if triviaManager.categories}
 		{#each triviaManager.categories as category}
 			<Button text={category.name} onclick={() => categorySelect(category.id)} />
 		{/each}
 	{/if}
-
-	<!-- Show the selected category and question count if available -->
 	{#if triviaManager.selectedCategoryId}
 		<div class="selection-info">
 			<p>Selected category: {triviaManager.selectedCategory?.name}</p>

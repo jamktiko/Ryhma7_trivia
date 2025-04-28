@@ -1,5 +1,5 @@
 <script lang="ts">
-	// Define types for our trivia data
+	// Tyypitys
 	interface Category {
 		id: number;
 		name: string;
@@ -14,8 +14,7 @@
 		incorrect_answers: string[];
 	}
 
-	// Create reactive state for our trivia manager
-	const triviaState = $state({
+	const triviaObject = $state({
 		categories: [
 			{ id: 21, name: 'Sports' },
 			{ id: 23, name: 'History' },
@@ -26,51 +25,49 @@
 		questions: [] as Question[]
 	});
 
-	// Export the triviaManager object with methods and accessors
+	// Getterit kategoriaa, valittua kategoriaa ja kysymyksiä varten
 	export const triviaManager = {
+		// Palauttaa kaikki kategoriat
 		get categories() {
-			return triviaState.categories;
+			return triviaObject.categories;
 		},
-
+		// Palauttaa valitun kategorian ID:n
 		get selectedCategoryId() {
-			return triviaState.selectedCategoryId;
+			return triviaObject.selectedCategoryId;
 		},
-
-		get questions() {
-			return triviaState.questions;
-		},
-
+		// Palauttaa kategoria objektin find metodilla, joka vastaa valittua kategoriaa
+		// Jos ei löydy, palauttaa undefined
 		get selectedCategory() {
-			return triviaState.categories.find((cat) => cat.id === triviaState.selectedCategoryId);
+			return triviaObject.categories.find(
+				(category) => category.id === triviaObject.selectedCategoryId
+			);
+		},
+		// Palauttaa kaikki kysymykset
+		get questions() {
+			return triviaObject.questions;
 		},
 
-		// Method to fetch questions for a selected category
+		// Fetchaa datan API:sta ja asettaa sen triviaObjectiin
+		// consolelogit placeholdereita.
 		async fetchCategory(categoryId: number): Promise<Question[]> {
 			try {
-				// Store the selected category ID
-				triviaState.selectedCategoryId = categoryId;
-
-				// Fetch questions from the API
+				triviaObject.selectedCategoryId = categoryId;
 				const response = await fetch(
 					`https://opentdb.com/api.php?amount=20&category=${categoryId}&difficulty=medium&type=multiple`
 				);
 				const data = await response.json();
-
-				// Store the questions
-				triviaState.questions = data.results;
-
+				triviaObject.questions = data.results;
 				return data.results;
 			} catch (error) {
 				console.error('Error fetching category questions:', error);
-				triviaState.questions = [];
+				triviaObject.questions = [];
 				return [];
 			}
 		},
-
-		// Method to reset the selection
+		// Resettaa CategoryId:n ja kysymykset taulukon.
 		reset() {
-			triviaState.selectedCategoryId = null;
-			triviaState.questions = [];
+			triviaObject.selectedCategoryId = null;
+			triviaObject.questions = [];
 		}
 	};
 </script>
