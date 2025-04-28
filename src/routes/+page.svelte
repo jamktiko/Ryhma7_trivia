@@ -3,17 +3,23 @@
 </script>
 
 <!-- HTML tähän -->
-<body>
-	<div>
-		<h1>hellurei</h1>
-		<!-- <Button text="testi nappi" onclick={() => {}} /> -->
-	</div>
-</body>
+<html lang="en">
+	<head>
+		<title>MindSpark Trivia</title>
+	</head>
+
+	<body>
+		<div>
+			<h1>MindSpark Trivia</h1>
+			<!-- <Button text="testi nappi" onclick={() => {}} /> -->
+		</div>
+	</body>
+</html>
 
 <style>
 	body {
 		font-size: 100%;
-		margin: auto;
+		margin: 5 auto;
 		background-color: #e1d5e7;
 	}
 </style>
