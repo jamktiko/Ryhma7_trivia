@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte';
-	import '@fontsource/protest-strike';
 </script>
 
 <!-- HTML tähän -->
@@ -22,6 +21,7 @@
 		font-size: 100%;
 		margin: 5 auto;
 		background-color: #e1d5e7;
+		color: #411c5e;
 	}
 	h1 {
 		font-family: 'Protest Strike', system-ui;
