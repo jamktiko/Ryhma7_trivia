@@ -1,7 +1,7 @@
 <script lang="ts">
 	interface Props {
 		text: string;
-		onclick: () => void;
+		onclick?: () => void;
 		disabled?: boolean;
 	}
 	let { text, onclick, disabled = false }: Props = $props();
