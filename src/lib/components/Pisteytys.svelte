@@ -8,7 +8,7 @@ function kellokay(){
 
 function laskepisteet( onkovastausoikein: boolean){
     const aikaakului = (Date.now() - ajastin) / 1000; // Muunnetaan sekunneiksi
-    const maxpisteet= 150;
+    const maxpisteet= 100;
     const maxaika=15; // vastausaika sekunteina
     const aikasakko= maxpisteet/maxaika;  //pistevähennys joka sekunilta   
     const vaaravastaus= 0;
