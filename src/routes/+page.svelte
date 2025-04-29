@@ -69,6 +69,7 @@
 
 <style>
 	#container {
+	#container {
 		width: 100%;
 		height: 100%;
 		font-size: 100%;
@@ -78,6 +79,10 @@
 	}
 
 	.catcontainer {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;

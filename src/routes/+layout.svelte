@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Header from '$lib/components/Header.svelte';
 	import type { Snippet } from 'svelte';
 	import Header from '$lib/components/Header.svelte';
 
@@ -30,12 +31,15 @@
 
 	h1 {
 		font-size: 55px;
+		font-family: 'Protest Strike', system-ui;
 	}
 	h2 {
 		font-size: 48px;
+		font-family: 'Protest Strike', system-ui;
 	}
 
 	h3 {
 		font-size: 40px;
+		font-family: 'KoHo', sans-serif;
 	}
 </style>
