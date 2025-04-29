@@ -27,13 +27,13 @@
 	:global body {
 		margin: 0;
 		padding: 0;
+		background-color: var(--body-color);
 	}
 	main {
 		width: 100%;
 		height: 100%;
 		font-size: 100%;
 		text-align: center;
-		background-color: var(--body-color);
 		color: #411c5e;
 	}
 
