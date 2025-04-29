@@ -38,7 +38,7 @@
 	{#if !kategoriaValittu}
 		<h1>Welcome to MindSpark!</h1>
 		<h2>Are you ready to test your knowledge?</h2>
-		<h3>Choose a category</h3>
+		<h3>Choose a category!</h3>
 	{/if}
 
 	{#if triviaManager.categories}
