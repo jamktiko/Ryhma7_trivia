@@ -1,7 +1,7 @@
 <script lang="ts">
-    import Button from '$lib/components/Button.svelte';
-    import { triviaManager } from '$lib/stores/triviaStore.svelte';
-    import Pisteytys from '$lib/components/Pisteytys.svelte';
+	import Button from '$lib/components/Button.svelte';
+	import { triviaManager } from '$lib/stores/triviaStore.svelte';
+	import Pisteytys from '$lib/components/Pisteytys.svelte';
 
 	let categorySelected: boolean = false;
 	let kategoriaValittu: boolean = false; // Define the missing variable
@@ -46,19 +46,13 @@
 	<Pisteytys />
 {/if}
 
-
 <style>
- 
-    
-
-    
-
-    .catcontainer {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
-    }
+	.catcontainer {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+	}
 
 	.catcontainer {
 		max-width: 672px;
