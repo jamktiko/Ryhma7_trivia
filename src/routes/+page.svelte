@@ -47,11 +47,11 @@
 	<title>MindSpark Trivia</title>
 </head>
 
-<div id="container">
+<main>
 	{#if !kategoriaValittu}
 		<h1>Welcome to MindSpark!</h1>
 		<h2>Are you ready to test your knowledge?</h2>
-		<h3>Choose a category</h3>
+		<h3>Choose a category!</h3>
 	{/if}
 
 	{#if triviaManager.categories}
@@ -67,22 +67,11 @@
 		
 		
 	{/if}
-	
-	
-</div>
+</main>
 
 
 
 <style>
-	#container {
-		width: 100%;
-		height: 100%;
-		font-size: 100%;
-		text-align: center;
-		background-color: var(--body-color);
-		color: #411c5e;
-	}
-
 	.catcontainer {
 		display: flex;
 		flex-wrap: wrap;
