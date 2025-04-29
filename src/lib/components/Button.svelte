@@ -8,7 +8,9 @@
 			| 'ansbutton1-color'
 			| 'ansbutton2-color'
 			| 'ansbutton3-color'
-			| 'ansbutton4-color';
+			| 'ansbutton4-color'
+			| 'success-color' // Add these new colors
+			| 'danger-color';
 	}
 	let { text, onclick, disabled = false, color }: Props = $props();
 </script>
@@ -60,5 +62,14 @@
 
 	.ansbutton4-color {
 		background-color: var(--ansbutton4-color);
+	}
+	.success-color {
+		background-color: rgba(46, 204, 113, 0.8); /* Green */
+		color: white;
+	}
+
+	.danger-color {
+		background-color: rgba(231, 76, 60, 0.8); /* Red */
+		color: white;
 	}
 </style>
