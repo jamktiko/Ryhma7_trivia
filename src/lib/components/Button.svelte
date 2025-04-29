@@ -44,6 +44,14 @@
 			2px 2px 4px rgba(0, 0, 0, 25%),
 			inset -3px -3px 4px rgba(0, 0, 0, 25%);
 	}
+
+	button:hover {
+		background-color: rgba(253, 170, 83, 40%);
+		box-shadow:
+			1px 1px 4px rgba(0, 0, 0, 25%),
+			inset -3px -3px 4px rgba(0, 0, 0, 25%);
+	}
+
 	.button1-color {
 		background-color: var(--button1-color);
 	}
@@ -63,13 +71,12 @@
 	.ansbutton4-color {
 		background-color: var(--ansbutton4-color);
 	}
-	.success-color {
-		background-color: rgba(46, 204, 113, 0.8); /* Green */
-		color: white;
+
+	.wrongans-color {
+		background-color: var(--wrongans-color);
 	}
 
-	.danger-color {
-		background-color: rgba(231, 76, 60, 0.8); /* Red */
-		color: white;
+	.correctans-color {
+		background-color: var(--correctans-color);
 	}
 </style>

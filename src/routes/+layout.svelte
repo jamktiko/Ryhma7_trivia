@@ -9,7 +9,7 @@
 </script>
 
 <main>
-<Header />
+	<Header />
 	{@render children()}
 </main>
 
@@ -22,6 +22,8 @@
 		--ansbutton2-color: rgba(192, 155, 173, 90%);
 		--ansbutton3-color: rgba(65, 28, 94, 30%);
 		--ansbutton4-color: rgba(253, 170, 83, 50%);
+		--wrongans-color: #F47676;
+		--correctans-color: #86E77F;
 	}
 
 	:global body {
@@ -35,19 +37,5 @@
 		font-size: 100%;
 		text-align: center;
 		color: #411c5e;
-	}
-
-	h1 {
-		font-size: 55px;
-		font-family: 'Protest Strike', system-ui;
-	}
-	h2 {
-		font-size: 48px;
-		font-family: 'Protest Strike', system-ui;
-	}
-
-	h3 {
-		font-size: 40px;
-		font-family: 'KoHo', sans-serif;
 	}
 </style>

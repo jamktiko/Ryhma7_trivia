@@ -19,6 +19,11 @@
 </script>
 
 <!-- HTML tähän. Ei HTML tägiä, ei toimi Sveltessä -->
+{#if !kategoriaValittu}
+	<h1>Welcome to MindSpark!</h1>
+	<h2>Are you ready to test your knowledge?</h2>
+	<h3>Choose a category!</h3>
+{/if}
 <head>
 	<title>MindSpark Trivia</title>
 </head>
@@ -27,6 +32,20 @@
 	<h1>Welcome to MindSpark!</h1>
 	<h2>Are you ready to test your knowledge?</h2>
 	<h3>Choose a category!</h3>
+
+	{#if triviaManager.categories}
+		<div class="catcontainer">
+			<div class="buttoncontainer">
+				{#each triviaManager.categories as category}
+					<Button
+						text={category.name}
+						color="button1-color"
+						onclick={() => categorySelect(category.id)}
+					/>
+				{/each}
+			</div>
+		</div>
+	{/if}
 
 	{#if triviaManager.categories}
 		<div class="catcontainer">
