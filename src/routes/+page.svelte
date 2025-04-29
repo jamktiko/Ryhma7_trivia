@@ -43,10 +43,6 @@
 </script>
 
 <!-- HTML tähän. Ei HTML tägiä, ei toimi Sveltessä -->
-<head>
-	<title>MindSpark Trivia</title>
-</head>
-
 {#if !kategoriaValittu}
 	<h1>Welcome to MindSpark!</h1>
 	<h2>Are you ready to test your knowledge?</h2>
@@ -81,14 +77,20 @@
 	h1 {
 		font-size: 55px;
 		font-family: 'Protest Strike';
+		padding: 10px;
+		margin: 0;
 	}
 	h2 {
-		font-size: 60px;
+		font-size: 48px;
 		font-family: 'Protest Strike';
+		padding-bottom: 40px;
+		margin: 0;
 	}
 
 	h3 {
 		font-size: 40px;
 		font-family: 'KoHo';
+		padding: 5px;
+		margin: 0;
 	}
 </style>
