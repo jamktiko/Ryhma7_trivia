@@ -8,7 +8,9 @@
 			| 'ansbutton1-color'
 			| 'ansbutton2-color'
 			| 'ansbutton3-color'
-			| 'ansbutton4-color';
+			| 'ansbutton4-color'
+			| 'success-color' // Add these new colors
+			| 'danger-color';
 	}
 	let { text, onclick, disabled = false, color }: Props = $props();
 </script>
@@ -42,6 +44,14 @@
 			2px 2px 4px rgba(0, 0, 0, 25%),
 			inset -3px -3px 4px rgba(0, 0, 0, 25%);
 	}
+
+	button:hover {
+		background-color: rgba(253, 170, 83, 40%);
+		box-shadow:
+			1px 1px 4px rgba(0, 0, 0, 25%),
+			inset -3px -3px 4px rgba(0, 0, 0, 25%);
+	}
+
 	.button1-color {
 		background-color: var(--button1-color);
 	}
@@ -60,5 +70,13 @@
 
 	.ansbutton4-color {
 		background-color: var(--ansbutton4-color);
+	}
+
+	.wrongans-color {
+		background-color: var(--wrongans-color);
+	}
+
+	.correctans-color {
+		background-color: var(--correctans-color);
 	}
 </style>

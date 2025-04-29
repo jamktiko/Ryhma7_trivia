@@ -3,42 +3,46 @@
     import { triviaManager } from '$lib/stores/triviaStore.svelte';
     import Pisteytys from '$lib/components/Pisteytys.svelte';
 
-    let kategoriaValittu: boolean = false;
-    let nykyinenKysymysIndeksi: number = 0;
-    let arvotutVastaukset: string[] = [];
+	let categorySelected: boolean = false;
 
-    async function categorySelect(categoryId: number) {
-        console.log(`Valittu kategoria: ${categoryId}`);
-        try {
-            const questions = await triviaManager.fetchCategory(categoryId);
-            console.log(`Haettu ${questions.length} kysymystä kategorialle ${categoryId}`);
-            kategoriaValittu = true;
-            if (questions.length > 0) {
-                vastaustenSekoitus();
-            }
-        } catch (error) {
-            console.error('Haku ei onnistunut', error);
-        }
-    }
-
-    function vastaustenSekoitus() {
-        const nykyinenKysymys = triviaManager.questions[nykyinenKysymysIndeksi];
-        if (!nykyinenKysymys) return;
-        const allAnswers = [nykyinenKysymys.correct_answer, ...nykyinenKysymys.incorrect_answers];
-        arvotutVastaukset = allAnswers.sort(() => Math.random() - 0.5);
-    }
-
-    // Funktio sivun päivittämiseen
-    function sivunpaivitus() {
-        window.location.reload();
-    }
+	//Funktio kategorian valintaan. Consolelogit testausta varten.
+	//Hakee Triviamanagerin API fetchillä datan.
+	async function categorySelect(categoryId: number) {
+		console.log(`Valittu kategoria: ${categoryId}`);
+		try {
+			const questions = await triviaManager.fetchCategory(categoryId);
+			console.log(`Haettu ${questions.length} kysymystä kategorialle ${categoryId}`);
+			categorySelected = true;
+		} catch (error) {
+			console.error('Haku ei onnistunut', error);
+		}
+	}
 </script>
 
-<svelte:head>
-    <title>MindSpark Trivia</title>
-</svelte:head>
+<!-- HTML tähän. Ei HTML tägiä, ei toimi Sveltessä -->
+<head>
+	<title>MindSpark Trivia</title>
+</head>
 
+{#if !categorySelected}
+	<h1>Welcome to MindSpark!</h1>
+	<h2>Are you ready to test your knowledge?</h2>
+	<h3>Choose a category!</h3>
 
+	{#if triviaManager.categories}
+		<div class="catcontainer">
+			<div class="buttoncontainer">
+				{#each triviaManager.categories as category}
+					<Button
+						text={category.name}
+						color="button1-color"
+						onclick={() => categorySelect(category.id)}
+					/>
+				{/each}
+			</div>
+		</div>
+	{/if}
+{/if}
 
 {#if !kategoriaValittu}
     <h1>Welcome to MindSpark!</h1>
@@ -63,6 +67,7 @@
 {/if}
 
 <style>
+<<<<<<< HEAD
     
 
     
@@ -74,3 +79,30 @@
         justify-content: center;
     }
 </style>
+=======
+	.catcontainer {
+		max-width: 672px;
+		margin: auto;
+	}
+	.buttoncontainer {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+	}
+	.question-container {
+		max-width: 672px;
+		margin: 20px auto;
+	}
+	.question-info {
+		margin-bottom: 20px;
+	}
+	.category-name {
+		font-size: 24px;
+		font-family: 'KoHo', sans-serif;
+	}
+	.question-text {
+		background-color: rgba(255, 255, 255, 0.4);
+		padding: 20px;
+		border-radius: 15px;
+		margin-bottom: 30px;
