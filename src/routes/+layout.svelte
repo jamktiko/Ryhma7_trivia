@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Header from '$lib/components/Header.svelte';
 	import type { Snippet } from 'svelte';
-	import Header from '$lib/components/Header.svelte';
 
 	interface Props {
 		children: Snippet;
@@ -24,6 +23,7 @@
 		--ansbutton3-color: rgba(65, 28, 94, 30%);
 		--ansbutton4-color: rgba(253, 170, 83, 50%);
 	}
+	@import url('https://fonts.googleapis.com/css2?family=Protest+Strike&display=swap');
 	:global body {
 		margin: 0;
 		padding: 0;

@@ -11,6 +11,6 @@
 		height: 158px;
 		display: flex;
 		margin: auto;
-		background-color: #e1d5e7;
+		justify-content: center;
 	}
 </style>

@@ -43,10 +43,6 @@
 </script>
 
 <!-- HTML tähän. Ei HTML tägiä, ei toimi Sveltessä -->
-<head>
-	<title>MindSpark Trivia</title>
-</head>
-
 <div id="container">
 	{#if !kategoriaValittu}
 		<h1>Welcome to MindSpark!</h1>
@@ -70,7 +66,7 @@
 		font-size: 100%;
 		text-align: center;
 		background-color: var(--body-color);
-		color: #411c5e;
+		color: var(--buttontext-color);
 	}
 
 	.catcontainer {
