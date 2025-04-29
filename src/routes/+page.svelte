@@ -57,7 +57,11 @@
 	{#if triviaManager.categories}
 		<div class="catcontainer">
 			{#each triviaManager.categories as category}
-				<Button text={category.name} onclick={() => categorySelect(category.id)} />
+				<Button
+					text={category.name}
+					color="button1-color"
+					onclick={() => categorySelect(category.id)}
+				/>
 			{/each}
 		</div>
 	{/if}
@@ -65,6 +69,10 @@
 
 <style>
 	.catcontainer {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
