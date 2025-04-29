@@ -43,33 +43,36 @@
 </script>
 
 <!-- HTML tähän. Ei HTML tägiä, ei toimi Sveltessä -->
-<div id="container">
+<head>
+	<title>MindSpark Trivia</title>
+</head>
+
+<main>
 	{#if !kategoriaValittu}
 		<h1>Welcome to MindSpark!</h1>
 		<h2>Are you ready to test your knowledge?</h2>
-		<h3>Choose a category</h3>
+		<h3>Choose a category!</h3>
 	{/if}
 
 	{#if triviaManager.categories}
 		<div class="catcontainer">
 			{#each triviaManager.categories as category}
-				<Button text={category.name} onclick={() => categorySelect(category.id)} />
+				<Button
+					text={category.name}
+					color="button1-color"
+					onclick={() => categorySelect(category.id)}
+				/>
 			{/each}
 		</div>
 	{/if}
-</div>
+</main>
 
 <style>
-	#container {
-		width: 100%;
-		height: 100%;
-		font-size: 100%;
-		text-align: center;
-		background-color: var(--body-color);
-		color: var(--buttontext-color);
-	}
-
 	.catcontainer {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
