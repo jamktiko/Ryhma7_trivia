@@ -13,10 +13,18 @@
 	}
 </script>
 
+<<<<<<< HEAD
+<div>
+    <h1>Welcome to MindSpark!</h1>
+    <h2>Are you ready to test your knowledge?</h2>
+	
+<Button text="testi nappi" onclick={() => {}} />
+=======
 <!-- HTML tähän. Ei HTML tägiä, ei toimi Sveltessä -->
 <head>
 	<title>MindSpark Trivia</title>
 </head>
+>>>>>>> efb8b65966b96802dcd6071262aade2f8cede3f0
 
 <div>
 	<h1>Welcome to MindSpark!</h1>
