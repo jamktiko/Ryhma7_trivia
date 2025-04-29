@@ -3,12 +3,12 @@
 	import { triviaManager } from '$lib/stores/triviaStore.svelte';
 
 	async function categorySelect(categoryId: number) {
-		console.log(`Selected category ID: ${categoryId}`);
+		console.log(`Valittu kategoria: ${categoryId}`);
 		try {
 			const questions = await triviaManager.fetchCategory(categoryId);
-			console.log(`Fetched ${questions.length} questions for category ${categoryId}`);
+			console.log(`Haettu ${questions.length} kysymystä kategorialle ${categoryId}`);
 		} catch (error) {
-			console.error('Failed to fetch questions:', error);
+			console.error('Haku ei onnistunut', error);
 		}
 	}
 </script>
@@ -28,35 +28,7 @@
 			<Button text={category.name} onclick={() => categorySelect(category.id)} />
 		{/each}
 	{/if}
-	{#if triviaManager.selectedCategoryId}
-		<div class="selection-info">
-			<p>Selected category: {triviaManager.selectedCategory?.name}</p>
-			<p>Questions loaded: {triviaManager.questions.length}</p>
-		</div>
-	{/if}
 </div>
 
 <style>
-	:global body {
-		font-size: 100%;
-		margin: 5 auto;
-		text-align: center;
-		background-color: #e1d5e7;
-		color: #411c5e;
-	}
-	h1 {
-		font-size: 55px;
-	}
-	h2 {
-		font-size: 48px;
-	}
-	.selection-info {
-		margin-top: 20px;
-		padding: 10px;
-		background-color: #f0f0f0;
-		border-radius: 5px;
-	}
-	h3 {
-		font-size: 40px;
-	}
 </style>
