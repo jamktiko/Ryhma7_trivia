@@ -14,7 +14,7 @@
 </main>
 
 <style>
-	body {
+	:global body {
 		font-size: 100%;
 		margin: 5 auto;
 		text-align: center;
