@@ -41,44 +41,6 @@
 			</div>
 		</div>
 	{/if}
-	<!-- Question and answers screen -->
-{:else if triviaManager.questions.length > 0}
-	<div class="question-container">
-		<!-- Question info -->
-		<div class="question-info">
-			<h3>Question {triviaManager.currentQuestionIndex + 1} of {triviaManager.questions.length}</h3>
-			<p class="category-name">
-				Category: {triviaManager.currentQuestion.category}
-			</p>
-		</div>
-
-		<!-- Question text -->
-		<div class="question-text">
-			<h2>{triviaManager.currentQuestion.question}</h2>
-		</div>
-
-		<!-- Answers -->
-		<div class="answers-container">
-			{#each triviaManager.shuffledAnswers as answer, i}
-				<Button
-					text={answer}
-					color={triviaManager.selectedAnswer === answer
-						? triviaManager.isAnswerCorrect
-							? 'success-color'
-							: 'danger-color'
-						: i === 0
-							? 'ansbutton1-color'
-							: i === 1
-								? 'ansbutton2-color'
-								: i === 2
-									? 'ansbutton3-color'
-									: 'ansbutton4-color'}
-					onclick={() => triviaManager.selectAnswer(answer)}
-					disabled={!triviaManager.canSelectAnswer}
-				/>
-			{/each}
-		</div>
-	</div>
 {/if}
 
 <style>
