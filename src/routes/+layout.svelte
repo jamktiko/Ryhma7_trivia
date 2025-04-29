@@ -14,13 +14,20 @@
 </main>
 
 <style>
-	:global body {
-		font-size: 100%;
-		margin: 5 auto;
-		text-align: center;
-		background-color: #e1d5e7;
-		color: #411c5e;
+	:root {
+	--body-color: rgba(130, 79, 157, 30%);
+  --button1-color: rgba(253, 170, 83, 30%);
+  --buttontext-color: #411C5E;
+  --ansbutton1-color: rgba(160, 198, 207, 80%);
+  --ansbutton2-color: rgba(192, 155, 173, 90%);
+  --ansbutton3-color: rgba(65, 28, 94, 30%);
+  --ansbutton4-color: rgba(253, 170, 83, 50%);
 	}
+	:global body {
+		margin: 0;
+		padding: 0;
+	}
+
 	h1 {
 		font-size: 55px;
 	}
