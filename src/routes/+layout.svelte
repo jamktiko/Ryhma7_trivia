@@ -31,18 +31,17 @@
 		background-color: var(--body-color);
 		color: #411c5e;
 	}
-
 	h1 {
 		font-size: 55px;
-		font-family: 'Protest Strike', system-ui;
+		font-family: 'Protest Strike';
 	}
 	h2 {
-		font-size: 48px;
-		font-family: 'Protest Strike', system-ui;
+		font-size: 60px;
+		font-family: 'Protest Strike';
 	}
 
 	h3 {
 		font-size: 40px;
-		font-family: 'KoHo', sans-serif;
+		font-family: 'KoHo';
 	}
 </style>

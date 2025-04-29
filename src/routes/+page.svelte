@@ -64,12 +64,8 @@
 				/>
 			{/each}
 		</div>
-		
-		
 	{/if}
 </main>
-
-
 
 <style>
 	.catcontainer {
