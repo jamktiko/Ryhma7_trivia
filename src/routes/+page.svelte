@@ -4,6 +4,7 @@
     import Pisteytys from '$lib/components/Pisteytys.svelte';
 
 	let categorySelected: boolean = false;
+	let kategoriaValittu: boolean = false; // Define the missing variable
 
 	//Funktio kategorian valintaan. Consolelogit testausta varten.
 	//Hakee Triviamanagerin API fetchillä datan.
@@ -23,7 +24,6 @@
 <head>
 	<title>MindSpark Trivia</title>
 </head>
-
 {#if !categorySelected}
 	<h1>Welcome to MindSpark!</h1>
 	<h2>Are you ready to test your knowledge?</h2>
@@ -42,32 +42,13 @@
 			</div>
 		</div>
 	{/if}
+{:else}
+	<Pisteytys />
 {/if}
 
-{#if !kategoriaValittu}
-    <h1>Welcome to MindSpark!</h1>
-    <h2>Are you ready to test your knowledge?</h2>
-    <h3>Choose a category!</h3>
-{/if}
-
-{#if triviaManager.categories}
-    <div class="catcontainer">
-        {#each triviaManager.categories as category}
-            <Button
-                text={category.name}
-                color="button1-color"
-                onclick={() => categorySelect(category.id)}
-            />
-        {/each}
-    </div>
-{/if}
-
-{#if kategoriaValittu}
-    <Pisteytys />
-{/if}
 
 <style>
-<<<<<<< HEAD
+ 
     
 
     
@@ -78,8 +59,7 @@
         align-items: center;
         justify-content: center;
     }
-</style>
-=======
+
 	.catcontainer {
 		max-width: 672px;
 		margin: auto;
@@ -87,7 +67,6 @@
 	.buttoncontainer {
 		display: flex;
 		flex-wrap: wrap;
-		align-items: center;
 		justify-content: center;
 	}
 	.question-container {
@@ -106,3 +85,5 @@
 		padding: 20px;
 		border-radius: 15px;
 		margin-bottom: 30px;
+	}
+</style>
