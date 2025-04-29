@@ -13,7 +13,7 @@
 			<h1>Welcome to MindSpark!</h1>
 			<h2>Are you ready to test your knowledge?</h2>
 			<h3>Choose a category</h3>
-			<!-- <Button text="testi nappi" onclick={() => {}} /> -->
+			<!-- <Button text="testi nappi" {}} /> -->
 		</div>
 	</body>
 </html>
