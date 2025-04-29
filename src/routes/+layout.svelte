@@ -9,7 +9,7 @@
 </script>
 
 <main>
-<Header />
+	<Header />
 	{@render children()}
 </main>
 
@@ -35,18 +35,5 @@
 		font-size: 100%;
 		text-align: center;
 		color: #411c5e;
-	}
-	h1 {
-		font-size: 55px;
-		font-family: 'Protest Strike';
-	}
-	h2 {
-		font-size: 60px;
-		font-family: 'Protest Strike';
-	}
-
-	h3 {
-		font-size: 40px;
-		font-family: 'KoHo';
 	}
 </style>
