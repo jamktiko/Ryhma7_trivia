@@ -80,4 +80,29 @@
 		border-radius: 15px;
 		margin-bottom: 30px;
 	}
+	.answers-container {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+	}
+	h1 {
+		font-size: 55px;
+		font-family: 'Protest Strike';
+		padding: 10px;
+		margin: 0;
+	}
+	h2 {
+		font-size: 48px;
+		font-family: 'Protest Strike';
+		padding: 40px;
+		margin: 0;
+	}
+
+	h3 {
+		font-size: 40px;
+		font-family: 'KoHo';
+		padding: 5px;
+		margin: 0;
+	}
 </style>
