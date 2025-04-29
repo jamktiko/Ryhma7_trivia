@@ -42,7 +42,7 @@
 		font-family: 'Protest Strike', system-ui;
 	}
 	h2 {
-		font-size: 48px;
+		font-size: 102px;
 		font-family: 'Protest Strike', system-ui;
 	}
 
