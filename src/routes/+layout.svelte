@@ -8,8 +8,8 @@
 	let { children }: Props = $props();
 </script>
 
-<Header />
 <main>
+<Header />
 	{@render children()}
 </main>
 
@@ -23,12 +23,17 @@
 		--ansbutton3-color: rgba(65, 28, 94, 30%);
 		--ansbutton4-color: rgba(253, 170, 83, 50%);
 	}
+
+	:global body {
+		margin: 0;
+		padding: 0;
+		background-color: var(--body-color);
+	}
 	main {
 		width: 100%;
 		height: 100%;
 		font-size: 100%;
 		text-align: center;
-		background-color: var(--body-color);
 		color: #411c5e;
 	}
 	h1 {

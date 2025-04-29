@@ -47,7 +47,6 @@
 	<title>MindSpark Trivia</title>
 </head>
 
-<main>
 	{#if !kategoriaValittu}
 		<h1>Welcome to MindSpark!</h1>
 		<h2>Are you ready to test your knowledge?</h2>
@@ -56,23 +55,24 @@
 
 	{#if triviaManager.categories}
 		<div class="catcontainer">
+			<div class="buttoncontainer">
 			{#each triviaManager.categories as category}
 				<Button
 					text={category.name}
 					color="button1-color"
 					onclick={() => categorySelect(category.id)}
 				/>
-			{/each}
+				{/each}
+			</div>
 		</div>
 	{/if}
-</main>
 
 <style>
 	.catcontainer {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: center;
-		justify-content: center;
+		max-width: 672px;
+		margin: auto;
+	}
+	.buttoncontainer {
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
