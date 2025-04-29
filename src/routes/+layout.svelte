@@ -22,6 +22,8 @@
 		--ansbutton2-color: rgba(192, 155, 173, 90%);
 		--ansbutton3-color: rgba(65, 28, 94, 30%);
 		--ansbutton4-color: rgba(253, 170, 83, 50%);
+		--wrongans-color: #F47676;
+		--correctans-color: #86E77F;
 	}
 
 	:global body {
