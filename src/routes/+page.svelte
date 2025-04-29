@@ -1,6 +1,9 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte';
 	import { triviaManager } from '$lib/stores/triviaStore.svelte';
+	import  Pisteytys from '$lib/components/Pisteytys.svelte';
+ 
+	
 
 	async function categorySelect(categoryId: number) {
 		console.log(`Selected category ID: ${categoryId}`);
@@ -10,23 +13,18 @@
 		} catch (error) {
 			console.error('Failed to fetch questions:', error);
 		}
-	}
+}
+
+
 </script>
 
-<<<<<<< HEAD
-<div>
-    <h1>Welcome to MindSpark!</h1>
-    <h2>Are you ready to test your knowledge?</h2>
-	
-<Button text="testi nappi" onclick={() => {}} />
-=======
 <!-- HTML tähän. Ei HTML tägiä, ei toimi Sveltessä -->
 <head>
 	<title>MindSpark Trivia</title>
 </head>
->>>>>>> efb8b65966b96802dcd6071262aade2f8cede3f0
 
 <div>
+	
 	<h1>Welcome to MindSpark!</h1>
 	<h2>Are you ready to test your knowledge?</h2>
 	<h3>Choose a category</h3>
@@ -40,9 +38,16 @@
 		<div class="selection-info">
 			<p>Selected category: {triviaManager.selectedCategory?.name}</p>
 			<p>Questions loaded: {triviaManager.questions.length}</p>
+		
 		</div>
+		
+		
 	{/if}
+	
+	
 </div>
+
+
 
 <style>
 	:global body {
