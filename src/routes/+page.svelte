@@ -47,7 +47,6 @@
 	<title>MindSpark Trivia</title>
 </head>
 
-<main>
 	{#if !kategoriaValittu}
 		<h1>Welcome to MindSpark!</h1>
 		<h2>Are you ready to test your knowledge?</h2>
@@ -65,7 +64,6 @@
 			{/each}
 		</div>
 	{/if}
-</main>
 
 <style>
 	.catcontainer {
