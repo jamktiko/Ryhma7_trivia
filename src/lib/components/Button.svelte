@@ -34,7 +34,7 @@
 	button {
 		width: 312px;
 		min-width: 312px;
-		height: 226px;
+		height: 188px;
 		margin: 8px;
 		border-radius: 30px;
 		border: none;
@@ -81,6 +81,14 @@
 		background-color: var(--correctans-color);
 	}
 
+	@media only screen and (max-width: 658px) {
+		button {
+			width: 45%;
+			min-width: 45%;
+			height: 180px;
+		}
+	}
+
 	@media only screen and (max-width: 412px) {
 		button {
 		width: 172px;
@@ -88,11 +96,17 @@
 		}
 	}
 
-	@media only screen and (min-width: 413px) and (max-width: 658px) {
+	@media only screen and (max-height: 792px) {
 		button {
-			width: 45%;
-			min-width: 45%;
-			height: 180px;
+		width: 172px;
+		height: 150px;
+		}
+	}
+
+	@media only screen and (max-height: 745px) {
+		button {
+		width: 172px;
+		height: 120px;
 		}
 	}
 </style>

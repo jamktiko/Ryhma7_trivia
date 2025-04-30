@@ -59,6 +59,7 @@
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
+		min-height: 200px;
 	}
 	.question-container {
 		max-width: 672px;
@@ -104,6 +105,19 @@
 	}
 
 	@media only screen and (max-width: 655px) {
+	h1 {
+			font-size: 40px;
+		}
+		h2 {
+			font-size: 32px;
+		}
+		h3 {
+			font-size: 28px;
+			padding: 10px 0 5px 0;
+		}
+	}
+
+	@media only screen and (max-height: 590px) {
 	h1 {
 			font-size: 40px;
 		}

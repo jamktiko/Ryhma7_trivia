@@ -38,9 +38,23 @@
 		transform: translate(-50%, -50%); /* painikkeen sijoittaminen keselle */
 		background-color: transparent; /* Poistaa taustan */
 		border: none; /* Poistaa reunukset */
-		width: 120px;
-		height: 120px;
+		width: 100%;
+		height: 100%;
 		cursor: pointer;
 		opacity: 0; /* Tekee painikkeen näkymättömäksi */
+	}
+
+	@media only screen and (max-height: 700px) {
+		header, .logo-container {
+			width: 174px;
+			height: 126px;
+		}
+	}
+
+	@media only screen and (max-height: 630px) {
+		header, .logo-container {
+			width: 109px;
+			height: 79px;
+		}
 	}
 </style>
