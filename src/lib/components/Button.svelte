@@ -30,6 +30,7 @@
 		--ansbutton3-color: rgba(65, 28, 94, 30%);
 		--ansbutton4-color: rgba(253, 170, 83, 50%);
 	} */
+
 	button {
 		width: 312px;
 		min-width: 312px;
@@ -79,4 +80,21 @@
 	.correctans-color {
 		background-color: var(--correctans-color);
 	}
+
+	@media only screen and (max-width: 412px) {
+		button {
+		width: 172px;
+		min-width: 172px;
+		height: 145px;
+		}
+	}
+
+	@media only screen and (min-width: 413px) and (max-width: 655px) {
+		button {
+			width: 45%;
+			min-width: 45%;
+			height: 180px;
+		}
+	}
+
 </style>
