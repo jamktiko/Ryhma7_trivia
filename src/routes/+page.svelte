@@ -89,20 +89,20 @@
 	h1 {
 		font-size: 55px;
 		font-family: 'Protest Strike';
-		padding: 10px;
+		padding: 3px;
 		margin: 0;
 	}
 	h2 {
 		font-size: 48px;
 		font-family: 'Protest Strike';
-		padding: 40px;
+		padding: 5px;
 		margin: 0;
 	}
 
 	h3 {
 		font-size: 40px;
 		font-family: 'KoHo';
-		padding: 5px;
+		padding: 30px 0 5px 0;
 		margin: 0;
 	}
 </style>
