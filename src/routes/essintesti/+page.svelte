@@ -50,9 +50,6 @@
 	<title>MindSpark Trivia</title>
 </head>
 {#if !categorySelected}
-	<h1>Welcome to MindSpark!</h1>
-	<h2>Are you ready to test your knowledge?</h2>
-	<h3>Choose a category!</h3>
 	<div class="header">
 		<div class="question-counter">{questionNumber}/{totalQuestions}</div>
 		<div class="timer">
@@ -63,16 +60,16 @@
 	<div class="progress-container">
 		<div class="progress-bar" style="width: {progress}%"></div>
 	</div>
+	<div class="question">
+		<p>What is the heaviest insect?</p>
+	</div>
 	{#if triviaManager.categories}
-		<div class="catcontainer">
-			<div class="buttoncontainer">
-				{#each triviaManager.categories as category}
-					<Button
-						text={category.name}
-						color="button1-color"
-						onclick={() => categorySelect(category.id)}
-					/>
-				{/each}
+		<div class="ccategories">
+			<div class="categories">
+				<button id="ansbutton1">A. Answer</button>
+				<button id="ansbutton2">B. Answer</button>
+				<button id="ansbutton3">C. Answer</button>
+				<button id="ansbutton4">D. Answer</button>
 			</div>
 		</div>
 	{/if}
@@ -122,30 +119,30 @@
 	}
 	h1 {
 		font-size: 55px;
-		font-family: 'Protest Strike';
+		font-family: 'Protest Strike', sans-serif;
 		padding: 10px;
 		margin: 0;
 	}
 	h2 {
 		font-size: 48px;
-		font-family: 'Protest Strike';
+		font-family: 'Protest Strike', sans-serif;
 		padding: 5px;
 		margin: 0;
 	}
 
 	h3 {
 		font-size: 40px;
-		font-family: 'KoHo';
+		font-family: 'KoHo', sans-serif;
 		padding: 50px 0 20px 0;
 		margin: 0;
 	}
 	.header {
-		margin-left: 27.5%;
+		margin-left: 30%;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		margin-bottom: 6px;
-		font-family: 'KoHo';
+		font-family: 'Protest Strike', sans-serif;
 	}
 
 	.question-counter {
@@ -155,7 +152,7 @@
 	}
 
 	.timer {
-		margin-right: 38%;
+		margin-right: 43%;
 		background-color: rgba(65, 28, 94, 30%);
 		color: #4b1d6f;
 		padding: 6px 12px;
@@ -165,11 +162,11 @@
 		align-items: center;
 		gap: 6px;
 		font-size: 0.9rem;
-		font-family: 'KoHo';
+		font-family: 'KoHo', sans-serif;
 	}
 
 	.progress-container {
-		width: 45%;
+		width: 40%;
 		margin: auto;
 		height: 20px;
 		background-color: #f0eaf9;
@@ -181,5 +178,132 @@
 		height: 100%;
 		background-color: #4b1d6f;
 		transition: width 0.1s linear;
+	}
+	.question {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+		width: 400px;
+		height: 200px;
+		margin: 30px auto;
+		background-color: rgba(245, 245, 245, 60%);
+		border: 1px solid #411c5e;
+		border-radius: 20px;
+		box-shadow: 2px, 6px, 4px, rgba(0, 0, 0, 25%);
+		font-size: 40px;
+		font-family: 'KoHo', sans-serif;
+		color: #411c5e;
+		text-align: center;
+		box-shadow:
+			2px 2px 4px rgba(0, 0, 0, 25%),
+			inset -3px -3px 4px rgba(0, 0, 0, 25%);
+	}
+	.ccategories {
+		max-width: 672px;
+		margin: auto;
+	}
+
+	.categories {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+	}
+
+	#ansbutton1,
+	#ansbutton2,
+	#ansbutton3,
+	#ansbutton4 {
+		width: 312px;
+		min-width: 312px;
+		height: 226px;
+		background-color: var(--button1-color);
+		margin: 8px;
+		border-radius: 30px;
+		border: none;
+		font-family: 'Protest Strike';
+		font-size: 32px;
+		color: var(--buttontext-color);
+		box-shadow:
+			2px 2px 4px rgba(0, 0, 0, 25%),
+			inset -3px -3px 4px rgba(0, 0, 0, 25%);
+	}
+
+	#ansbutton1 {
+		background-color: var(--ansbutton1-color);
+		border: none;
+		font-family: 'KoHo', sans-serif;
+	}
+
+	#ansbutton2 {
+		background-color: var(--ansbutton2-color);
+		border: none;
+		font-family: 'KoHo', sans-serif;
+	}
+
+	#ansbutton3 {
+		background-color: var(--ansbutton3-color);
+		border: none;
+		font-family: 'KoHo', sans-serif;
+	}
+
+	#ansbutton4 {
+		background-color: var(--ansbutton4-color);
+		border: none;
+		font-family: 'KoHo', sans-serif;
+	}
+	@media only screen and (max-width: 412px) {
+		.header {
+			margin-left: 23%;
+		}
+		.timer {
+			margin-right: 29%;
+		}
+		.progress-container {
+			width: 55%;
+		}
+		.question {
+			width: 40%;
+			min-width: 40%;
+			height: 110px;
+			font-size: 20px;
+			margin: 10px auto;
+		}
+		#ansbutton1,
+		#ansbutton2,
+		#ansbutton3,
+		#ansbutton4 {
+			width: 50%;
+			min-width: 50%;
+			height: 40px;
+			font-size: 15px;
+		}
+	}
+	@media only screen and (min-width: 413px) and (max-width: 655px) {
+		.question {
+			width: 65%;
+			min-width: 65%;
+			height: 120px;
+			font-size: 30px;
+			margin: 20px auto;
+			text-align: center;
+		}
+		#ansbutton1,
+		#ansbutton2,
+		#ansbutton3,
+		#ansbutton4 {
+			height: 50px;
+			font-size: 25px;
+		}
+		.header {
+			margin-left: 18%;
+		}
+		.timer {
+			margin-right: 21.5%;
+		}
+		.progress-container {
+			width: 65%;
+		}
 	}
 </style>
