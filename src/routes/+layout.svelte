@@ -38,4 +38,5 @@
 		text-align: center;
 		color: #411c5e;
 	}
+
 </style>

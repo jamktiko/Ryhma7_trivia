@@ -85,8 +85,9 @@
 		button {
 		width: 172px;
 		min-width: 172px;
-		height: 145px;
+		height: 120px;
 		}
+
 	}
 
 	@media only screen and (min-width: 413px) and (max-width: 655px) {
