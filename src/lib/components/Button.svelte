@@ -84,18 +84,15 @@
 	@media only screen and (max-width: 412px) {
 		button {
 		width: 172px;
-		min-width: 172px;
 		height: 120px;
 		}
-
 	}
 
-	@media only screen and (min-width: 413px) and (max-width: 655px) {
+	@media only screen and (min-width: 413px) and (max-width: 658px) {
 		button {
 			width: 45%;
 			min-width: 45%;
 			height: 180px;
 		}
 	}
-
 </style>
