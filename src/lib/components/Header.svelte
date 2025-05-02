@@ -13,8 +13,8 @@
 
 <style>
 	header {
-		width: 218px;
-		height: 158px;
+		width: 160px;
+		height: 120px;
 		display: flex;
 		margin: auto;
 		justify-content: center;
@@ -22,13 +22,14 @@
 
 	.logo-container {
 		position: relative; /* Tarvitaan, jotta painike voidaan sijoittaa kuvan päälle */
-		width: 218px;
-		height: 158px;
+		width: 150px;
+		height: 110px;
 	}
 
 	.logo {
 		width: 100%;
 		height: 100%;
+		padding: 5px;
 	}
 
 	.refresh-button {
@@ -38,8 +39,8 @@
 		transform: translate(-50%, -50%); /* painikkeen sijoittaminen keselle */
 		background-color: transparent; /* Poistaa taustan */
 		border: none; /* Poistaa reunukset */
-		width: 120px;
-		height: 120px;
+		width: 150px;
+		height: 110px;
 		cursor: pointer;
 		opacity: 0; /* Tekee painikkeen näkymättömäksi */
 	}

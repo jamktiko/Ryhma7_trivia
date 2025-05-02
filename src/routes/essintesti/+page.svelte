@@ -141,7 +141,7 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		margin-bottom: 6px;
+		margin-bottom: 5px;
 		font-family: 'Protest Strike', sans-serif;
 	}
 
@@ -184,9 +184,9 @@
 		flex-wrap: wrap;
 		align-items: center;
 		justify-content: center;
-		width: 400px;
-		height: 200px;
-		margin: 30px auto;
+		width: 350px;
+		height: 150px;
+		margin: 20px auto;
 		background-color: rgba(245, 245, 245, 60%);
 		border: 1px solid #411c5e;
 		border-radius: 20px;
@@ -215,9 +215,9 @@
 	#ansbutton2,
 	#ansbutton3,
 	#ansbutton4 {
-		width: 312px;
-		min-width: 312px;
-		height: 226px;
+		width: 280px;
+		min-width: 280px;
+		height: 150px;
 		background-color: var(--button1-color);
 		margin: 8px;
 		border-radius: 30px;
