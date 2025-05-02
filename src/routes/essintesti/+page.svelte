@@ -22,7 +22,7 @@
 
 	// Parametreja voitaisiin myöhemmin tuoda propseina
 	let questionNumber = 6;
-	let totalQuestions = 10;
+	let totalQuestions = 20;
 
 	let totalTime = 15;
 	let timeLeft = totalTime;
@@ -61,7 +61,7 @@
 		<div class="progress-bar" style="width: {progress}%"></div>
 	</div>
 	<div class="question">
-		<p>What is the heaviest insect?</p>
+		<h4 class="questiontext">What is the heaviest insect?</h4>
 	</div>
 	{#if triviaManager.categories}
 		<div class="ccategories">
@@ -184,20 +184,26 @@
 		flex-wrap: wrap;
 		align-items: center;
 		justify-content: center;
-		width: 350px;
-		height: 150px;
+		width: 340px;
+		height: 140px;
 		margin: 20px auto;
 		background-color: rgba(245, 245, 245, 60%);
 		border: 1px solid #411c5e;
 		border-radius: 20px;
 		box-shadow: 2px, 6px, 4px, rgba(0, 0, 0, 25%);
-		font-size: 40px;
 		font-family: 'KoHo', sans-serif;
 		color: #411c5e;
 		text-align: center;
 		box-shadow:
 			2px 2px 4px rgba(0, 0, 0, 25%),
 			inset -3px -3px 4px rgba(0, 0, 0, 25%);
+	}
+	.questiontext {
+		font-size: 30px;
+		font-family: 'KoHo';
+		font-weight: lighter;
+		padding: 0;
+		margin: 0;
 	}
 	.ccategories {
 		max-width: 672px;
@@ -217,7 +223,7 @@
 	#ansbutton4 {
 		width: 280px;
 		min-width: 280px;
-		height: 150px;
+		height: 130px;
 		background-color: var(--button1-color);
 		margin: 8px;
 		border-radius: 30px;
@@ -253,21 +259,60 @@
 		border: none;
 		font-family: 'KoHo', sans-serif;
 	}
+	#ansbutton1:hover {
+		background-color: rgba(160, 198, 207);
+		border: none;
+		font-family: 'KoHo', sans-serif;
+		box-shadow:
+			1px 1px 4px rgba(0, 0, 0, 25%),
+			inset -3px -3px 4px rgba(0, 0, 0, 25%);
+	}
+
+	#ansbutton2:hover {
+		background-color: rgba(192, 155, 173);
+		border: none;
+		font-family: 'KoHo', sans-serif;
+		box-shadow:
+			1px 1px 4px rgba(0, 0, 0, 25%),
+			inset -3px -3px 4px rgba(0, 0, 0, 25%);
+	}
+
+	#ansbutton3:hover {
+		background-color: rgba(65, 28, 94, 35%);
+		border: none;
+		font-family: 'KoHo', sans-serif;
+		box-shadow:
+			1px 1px 4px rgba(0, 0, 0, 25%),
+			inset -3px -3px 4px rgba(0, 0, 0, 25%);
+	}
+
+	#ansbutton4:hover {
+		background-color: rgba(253, 170, 83, 60%);
+		border: none;
+		font-family: 'KoHo', sans-serif;
+		box-shadow:
+			1px 1px 4px rgba(0, 0, 0, 25%),
+			inset -3px -3px 4px rgba(0, 0, 0, 25%);
+	}
 	@media only screen and (max-width: 412px) {
 		.header {
 			margin-left: 23%;
+			margin-bottom: 3px;
 		}
 		.timer {
 			margin-right: 29%;
+			margin-top: 6px;
+			padding: 3px 6px;
 		}
 		.progress-container {
 			width: 55%;
 		}
-		.question {
+		.question,
+		.questiontext {
 			width: 40%;
 			min-width: 40%;
 			height: 110px;
-			font-size: 20px;
+			font-size: 17px;
 			margin: 10px auto;
 		}
 		#ansbutton1,
@@ -281,11 +326,12 @@
 		}
 	}
 	@media only screen and (min-width: 413px) and (max-width: 655px) {
-		.question {
-			width: 65%;
-			min-width: 65%;
-			height: 120px;
-			font-size: 30px;
+		.question,
+		.questiontext {
+			width: 60%;
+			min-width: 60%;
+			height: 100%;
+			font-size: 25px;
 			margin: 20px auto;
 			text-align: center;
 		}
@@ -293,6 +339,8 @@
 		#ansbutton2,
 		#ansbutton3,
 		#ansbutton4 {
+			width: 50%;
+			min-width: 50%;
 			height: 50px;
 			font-size: 25px;
 		}
