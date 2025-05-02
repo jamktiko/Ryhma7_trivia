@@ -46,9 +46,6 @@
 </script>
 
 <!-- HTML tähän. Ei HTML tägiä, ei toimi Sveltessä -->
-<head>
-	<title>MindSpark Trivia</title>
-</head>
 {#if !categorySelected}
 	<div class="header">
 		<div class="question-counter">{questionNumber}/{totalQuestions}</div>
@@ -83,9 +80,6 @@
 		flex-wrap: wrap;
 		align-items: center;
 		justify-content: center;
-	}
-
-	.catcontainer {
 		max-width: 672px;
 		margin: auto;
 	}
@@ -137,11 +131,12 @@
 		margin: 0;
 	}
 	.header {
-		margin-left: 30%;
+		width: 40%;
+		max-width: 40%;
+		margin: 0;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		margin-bottom: 5px;
 		font-family: 'Protest Strike', sans-serif;
 	}
 
@@ -152,7 +147,6 @@
 	}
 
 	.timer {
-		margin-right: 43%;
 		background-color: rgba(65, 28, 94, 30%);
 		color: #4b1d6f;
 		padding: 6px 12px;
@@ -167,8 +161,9 @@
 
 	.progress-container {
 		width: 40%;
-		margin: auto;
-		height: 20px;
+		min-width: 200px;
+		min-height: 20px;
+		margin: 5px auto 10px auto;
 		background-color: #f0eaf9;
 		border-radius: 999px;
 		overflow: hidden;
@@ -185,8 +180,8 @@
 		align-items: center;
 		justify-content: center;
 		width: 340px;
-		height: 140px;
-		margin: 20px auto;
+		height: 100px;
+		margin: 10px auto;
 		background-color: rgba(245, 245, 245, 60%);
 		border: 1px solid #411c5e;
 		border-radius: 20px;
@@ -207,7 +202,7 @@
 	}
 	.ccategories {
 		max-width: 672px;
-		margin: auto;
+		margin: 20px;
 	}
 
 	.categories {
@@ -295,24 +290,13 @@
 			inset -3px -3px 4px rgba(0, 0, 0, 25%);
 	}
 	@media only screen and (max-width: 412px) {
-		.header {
-			margin-left: 23%;
-			margin-bottom: 3px;
-		}
-		.timer {
-			margin-right: 29%;
-			margin-top: 6px;
-			padding: 3px 6px;
-		}
-		.progress-container {
-			width: 55%;
-		}
 		.question,
 		.questiontext {
 			width: 40%;
-			min-width: 40%;
+			min-width: 180px;
 			height: 110px;
-			font-size: 17px;
+			font-size: 20px;
+			padding: 0 10px;
 			margin: 10px auto;
 		}
 		#ansbutton1,
@@ -320,19 +304,20 @@
 		#ansbutton3,
 		#ansbutton4 {
 			width: 50%;
-			min-width: 50%;
+			min-width: 180px;
 			height: 40px;
-			font-size: 15px;
+			font-size: 18px;
 		}
 	}
-	@media only screen and (min-width: 413px) and (max-width: 655px) {
+	@media only screen and (min-width: 412px) and (max-width: 655px) {
 		.question,
 		.questiontext {
-			width: 60%;
-			min-width: 60%;
-			height: 100%;
-			font-size: 25px;
-			margin: 20px auto;
+			width: 40%;
+			min-width: 230px;
+			height: 90px;
+			font-size: 23px;
+			padding: 10px;
+			margin: none;
 			text-align: center;
 		}
 		#ansbutton1,
@@ -342,16 +327,7 @@
 			width: 50%;
 			min-width: 50%;
 			height: 50px;
-			font-size: 25px;
-		}
-		.header {
-			margin-left: 18%;
-		}
-		.timer {
-			margin-right: 21.5%;
-		}
-		.progress-container {
-			width: 65%;
+			font-size: 21px;
 		}
 	}
 	@media only screen and (min-height: 480px) and (max-height: 655px) {
@@ -369,11 +345,12 @@
 		}
 		.question,
 		.questiontext {
-			width: 40%;
-			min-width: 40%;
-			height: 100%;
-			font-size: 25px;
-			margin: 20px auto;
+			width: 30%;
+			min-width: 30%;
+			height: 110px;
+			font-size: 20px;
+			margin: 10px auto;
+			padding-bottom: 10px;
 			text-align: center;
 		}
 	}
@@ -392,12 +369,15 @@
 		}
 		.question,
 		.questiontext {
-			width: 30%;
-			min-width: 30%;
-			height: 60px;
+			width: 25%;
+			min-width: 40px;
+			min-height: 80px;
 			font-size: 15px;
-			margin: 20px auto;
+			margin: auto;
 			text-align: center;
+		}
+		.questiontext {
+			margin: none;
 		}
 	}
 </style>

@@ -73,4 +73,32 @@
 			1px 1px 4px rgba(0, 0, 0, 25%),
 			inset -3px -3px 4px rgba(0, 0, 0, 25%);
 	}
+	@media only screen and (min-width: 412px) and (max-width: 655px) {
+		h1 {
+			font-size: 48px;
+		}
+		h2 {
+			font-size: 40px;
+		}
+		h3 {
+			font-size: 35px;
+		}
+		h4 {
+			font-size: 31px;
+		}
+	}
+	@media only screen and (max-width: 412px) {
+		h1 {
+			font-size: 40px;
+		}
+		h2 {
+			font-size: 35px;
+		}
+		h3 {
+			font-size: 30px;
+		}
+		h4 {
+			font-size: 28px;
+		}
+	}
 </style>
