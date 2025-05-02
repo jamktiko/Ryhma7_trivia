@@ -21,10 +21,12 @@
 </script>
 
 <!-- HTML tähän. Ei HTML tägiä, ei toimi Sveltessä -->
+
 {#if !categorySelected}
+<div class="container">
 	<h1>Welcome to MindSpark!</h1>
 	<h2>Are you ready to test your knowledge?</h2>
-
+</div>
 
 	{#if triviaManager.categories}
 		<div class="catcontainer">
@@ -45,6 +47,13 @@
 {/if}
 
 <style>
+	.container {
+		flex: 1;
+    display: flex;
+    flex-direction: column;
+		justify-content: space-evenly;
+    align-items: center;
+	}
 	.catcontainer {
 		bottom: 0;
 		max-width: 672px;

@@ -7,10 +7,8 @@
 	}
 	let { children }: Props = $props();
 </script>
-
-
 <main>
-	<Header />
+<Header />
 	{@render children()}
 </main>
 
@@ -28,7 +26,7 @@
 	}
 
 
-	:global body {
+	:global html {
 		min-height:100vh; 
 		height:100vh; 
 		max-height:100vh;
@@ -47,14 +45,12 @@
 		display: flex;
     flex-direction: column;
 		align-items: center;
-    justify-content: space-between;
 		width: 100%;
-		min-height:100vh; 
-		height:100vh; 
+		min-height:100vh;
+		height:100vh;
 		max-height:100vh;
 		font-size: 100%;
 		text-align: center;
 		color: #411c5e;
 	}
-
 </style>

@@ -13,11 +13,11 @@
 
 <style>
 	header {
+		flex-shrink: 0;
 		width: 160px;
 		height: 120px;
-		display: flex;
 		margin: auto;
-		justify-content: center;
+		margin-top: 0;
 	}
 
 	.logo-container {
