@@ -15,26 +15,26 @@
 <style>
 	h1 {
 		font-size: 55px;
-		font-family: 'Protest Strike';
+		font-family: 'Protest Strike', sans-serif;
 		padding: 10px;
 		margin: 0;
 	}
 	h2 {
 		font-size: 48px;
-		font-family: 'Protest Strike';
+		font-family: 'Protest Strike', sans-serif;
 		padding: 5px;
 		margin: 0;
 	}
 
 	h3 {
 		font-size: 40px;
-		font-family: 'KoHo';
+		font-family: 'KoHo', sans-serif;
 		padding: 15px;
 		margin: 0;
 	}
 	h4 {
 		font-size: 36px;
-		font-family: 'KoHo';
+		font-family: 'KoHo', sans-serif;
 		font-weight: lighter;
 		padding: 15px 0 40px 0;
 		margin: 0;
@@ -47,7 +47,8 @@
 		margin: 8px;
 		border-radius: 30px;
 		border: none;
-		font-family: 'Protest Strike';
+		font-family: 'Protest Strike', sans-serif;
+		color: var(--buttontext-color);
 		font-size: 32px;
 		background-color: rgba(253, 170, 83, 30%);
 		box-shadow:

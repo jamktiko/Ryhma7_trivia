@@ -354,4 +354,50 @@
 			width: 65%;
 		}
 	}
+	@media only screen and (min-height: 480px) and (max-height: 655px) {
+		#ansbutton1,
+		#ansbutton2,
+		#ansbutton3,
+		#ansbutton4 {
+			width: 40%;
+			min-width: 40%;
+			height: 60px;
+			font-size: 20px;
+		}
+		.ccategories {
+			max-width: 400px;
+		}
+		.question,
+		.questiontext {
+			width: 40%;
+			min-width: 40%;
+			height: 100%;
+			font-size: 25px;
+			margin: 20px auto;
+			text-align: center;
+		}
+	}
+	@media only screen and (max-height: 480px) {
+		#ansbutton1,
+		#ansbutton2,
+		#ansbutton3,
+		#ansbutton4 {
+			width: 120px;
+			min-width: 120px;
+			height: 50px;
+			font-size: 15px;
+		}
+		.ccategories {
+			max-width: 300px;
+		}
+		.question,
+		.questiontext {
+			width: 30%;
+			min-width: 30%;
+			height: 60px;
+			font-size: 15px;
+			margin: 20px auto;
+			text-align: center;
+		}
+	}
 </style>
