@@ -104,7 +104,7 @@
 	}
 
 	@media only screen and (max-width: 655px) {
-	h1 {
+		h1 {
 			font-size: 40px;
 		}
 		h2 {
@@ -117,7 +117,7 @@
 	}
 
 	@media only screen and (max-height: 590px) {
-	h1 {
+		h1 {
 			font-size: 40px;
 		}
 		h2 {
