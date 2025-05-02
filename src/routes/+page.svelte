@@ -45,10 +45,9 @@
 
 <style>
 	.catcontainer {
-		display: flex;
+		display: grid;
 		flex-wrap: wrap;
 		align-items: center;
-		justify-content: center;
 	}
 
 	.catcontainer {

@@ -96,17 +96,4 @@
 		}
 	}
 
-	@media only screen and (max-height: 792px) {
-		button {
-		width: 172px;
-		height: 150px;
-		}
-	}
-
-	@media only screen and (max-height: 745px) {
-		button {
-		width: 172px;
-		height: 120px;
-		}
-	}
 </style>
