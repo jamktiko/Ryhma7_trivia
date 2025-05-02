@@ -24,10 +24,11 @@
 {#if !categorySelected}
 	<h1>Welcome to MindSpark!</h1>
 	<h2>Are you ready to test your knowledge?</h2>
-	<h3>Choose a category!</h3>
+
 
 	{#if triviaManager.categories}
 		<div class="catcontainer">
+			<h3>Choose a category!</h3>
 			<div class="buttoncontainer">
 				{#each triviaManager.categories as category}
 					<Button
@@ -45,21 +46,18 @@
 
 <style>
 	.catcontainer {
-		display: grid;
-		flex-wrap: wrap;
-		align-items: center;
+		bottom: 0;
+		max-width: 672px;
 	}
 
-	.catcontainer {
-		max-width: 672px;
-		margin: auto;
-	}
 	.buttoncontainer {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
 		min-height: 200px;
+		margin-bottom: 10px;
 	}
+
 	.question-container {
 		max-width: 672px;
 		margin: 20px auto;
@@ -116,7 +114,7 @@
 		}
 	}
 
-	@media only screen and (max-height: 590px) {
+	@media only screen and (max-height: 745px) {
 		h1 {
 			font-size: 40px;
 		}
