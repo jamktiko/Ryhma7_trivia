@@ -31,6 +31,7 @@
 		</div>
 	{/if}
 
+	<!-- Tyylit väliaikaisia. Luotu AI:lla vaan jotain, että saa näkyviin -->
 	<div class="answers-container">
 		<!-- Käy läpi taulukon, jonka shuffledAnswers luo ja tulostaa ne for each metodilla. -->
 		{#each triviaManager.shuffledAnswers as answer, i}

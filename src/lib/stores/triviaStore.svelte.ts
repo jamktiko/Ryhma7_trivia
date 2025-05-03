@@ -1,4 +1,14 @@
-// Tyypitys
+//categories: Sports, History, Geography, Animals
+//selectedCategoryId: Valitun kategorian id
+//categorySelected: Seuraa onko kategoria valittu
+//questions: Taulukko fetchatuista kysymyksistä
+//currentQuestionIndex: Seuraa mikä kysymys on menossa
+//currentQuestion: Palauttaa nykyisen kysymyksen
+//shuffledAnswers: Sekoitettu taulukko vastauksista
+//selectedAnswer: Valittu vastaus
+//isAnswerCorrect: Seuraa onko valittu vastaus oikea
+//canSelectAnswer: Seuraa onko vastauksen valinta mahdollista
+
 interface Question {
 	category: string;
 	type: string;
