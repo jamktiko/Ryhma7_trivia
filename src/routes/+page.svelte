@@ -2,6 +2,7 @@
 	import { triviaManager } from '$lib/stores/triviaStore.svelte';
 	import Pisteytys from '$lib/components/Pisteytys.svelte';
 	import CategorySelector from '$lib/components/CategorySelector.svelte';
+	import QuestionAnswer from '$lib/components/QuestionAnswer.svelte';
 
 	//Funktio kategorian valintaan.
 	//Hakee Triviamanagerin API fetchillä datan.
@@ -10,12 +11,10 @@
 	}
 </script>
 
-<!-- Jos isCategorySelected on false triviaStore tiedostossa, 
-tulostaa kategorian valinta näytölle. -->
 {#if !triviaManager.isCategorySelected}
 	<CategorySelector categorySelector={categorySelect} />
 {:else}
-	<!-- Tähän kysymyskomponentti -->
+	<QuestionAnswer />
 {/if}
 
 <!-- Tyylit kommentoitu pois, 

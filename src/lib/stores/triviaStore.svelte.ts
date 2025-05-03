@@ -66,7 +66,7 @@ export const triviaManager = {
 		return triviaObject.categorySelected; // Palauttaa onko kategoria valittu
 	},
 
-	// Sekoittaa vastaukset nykyiselle kysymykselle
+	// Sekoittaa vastaukset nykyiselle kysymykselle, jotta oikea vastaus ei ole aina ensimmäisenä
 	shuffleAnswers() {
 		const currentQuestion = triviaObject.questions[triviaObject.currentQuestionIndex];
 		if (!currentQuestion) return;
@@ -107,7 +107,7 @@ export const triviaManager = {
 			triviaObject.selectedAnswer = null;
 			triviaObject.isAnswerCorrect = null;
 			triviaObject.canSelectAnswer = true;
-		}, 1000);
+		}, 1500);
 	},
 
 	// Fetchaa datan API:sta ja asettaa sen triviaObjectiin

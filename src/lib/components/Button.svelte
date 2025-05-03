@@ -9,8 +9,8 @@
 			| 'ansbutton2-color'
 			| 'ansbutton3-color'
 			| 'ansbutton4-color'
-			| 'success-color' // Add these new colors
-			| 'danger-color';
+			| 'correctans-color'
+			| 'wrongans-color';
 	}
 	let { text, onclick, disabled = false, color }: Props = $props();
 </script>
