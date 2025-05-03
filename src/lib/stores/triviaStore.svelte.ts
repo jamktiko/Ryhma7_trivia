@@ -24,65 +24,54 @@ const triviaObject = $state({
 	canSelectAnswer: true
 });
 
+//Kaikki consolelogit testaamista varten
+
 // Getterit kategoriaa, valittua kategoriaa ja kysymyksiä varten
 export const triviaManager = {
-	// Palauttaa kaikki kategoriat
 	get categories() {
-		return triviaObject.categories;
+		return triviaObject.categories; // Palauttaa kaikki kategoriat
 	},
-	// Palauttaa valitun kategorian ID:n
 	get selectedCategoryId() {
-		return triviaObject.selectedCategoryId;
+		return triviaObject.selectedCategoryId; // Palauttaa valitun kategorian ID:n
 	},
-	// Palauttaa kategoria objektin find metodilla, joka vastaa valittua kategoriaa
-	// Jos ei löydy, palauttaa undefined
 	get selectedCategory() {
 		return triviaObject.categories.find(
-			(category) => category.id === triviaObject.selectedCategoryId
+			(category) => category.id === triviaObject.selectedCategoryId // Palauttaa kategoria objektin find metodilla, joka vastaa valittua kategoriaa
+			// Jos ei löydy, palauttaa undefined
 		);
 	},
-	// Palauttaa kaikki kysymykset
 	get questions() {
-		return triviaObject.questions;
+		return triviaObject.questions; // Palauttaa kaikki kysymykset
 	},
-	// Palauttaa nykyisen kysymyksen indeksin
 	get currentQuestionIndex() {
-		return triviaObject.currentQuestionIndex;
+		return triviaObject.currentQuestionIndex; // Palauttaa nykyisen kysymyksen indeksin
 	},
-	// Palauttaa sekoitetut vastaukset
 	get shuffledAnswers() {
-		return triviaObject.shuffledAnswers;
+		return triviaObject.shuffledAnswers; // Palauttaa sekoitetut vastaukset
 	},
-	// Palauttaa valitun vastauksen
 	get selectedAnswer() {
-		return triviaObject.selectedAnswer;
+		return triviaObject.selectedAnswer; // Palauttaa valitun vastauksen
 	},
-	// Palauttaa vastauksen oikeellisuuden
 	get isAnswerCorrect() {
-		return triviaObject.isAnswerCorrect;
+		return triviaObject.isAnswerCorrect; // Palauttaa vastauksen oikeellisuuden
 	},
-	// Palauttaa voiko valita vastauksen
 	get canSelectAnswer() {
-		return triviaObject.canSelectAnswer;
+		return triviaObject.canSelectAnswer; // Palauttaa voiko valita vastauksen
 	},
-	// Palauttaa nykyisen kysymyksen
 	get currentQuestion() {
-		return triviaObject.questions[triviaObject.currentQuestionIndex];
+		return triviaObject.questions[triviaObject.currentQuestionIndex]; // Palauttaa nykyisen kysymyksen
 	},
 
 	// Sekoittaa vastaukset nykyiselle kysymykselle
 	shuffleAnswers() {
 		const currentQuestion = triviaObject.questions[triviaObject.currentQuestionIndex];
 		if (!currentQuestion) return;
-
 		//Consolelogaa kategorian ja kysymyksen
 		console.log(`Category: ${currentQuestion.category}`);
 		console.log(
 			`Question ${triviaObject.currentQuestionIndex + 1}/${triviaObject.questions.length}`
 		);
 		console.log(`Question: ${currentQuestion.question}`);
-
-		//
 		const allAnswers = [currentQuestion.correct_answer, ...currentQuestion.incorrect_answers];
 		triviaObject.shuffledAnswers = allAnswers.sort(() => Math.random() - 0.5);
 
@@ -93,28 +82,23 @@ export const triviaManager = {
 	selectAnswer(answer: string) {
 		// Estää uuden vastauksen valinnan odotuksen aikana
 		if (!triviaObject.canSelectAnswer) return;
-
 		const currentQuestion = triviaObject.questions[triviaObject.currentQuestionIndex];
 		const isCorrect = answer === currentQuestion.correct_answer;
-
 		// Asettaa valitun vastauksen ja sen oikeellisuuden
 		triviaObject.selectedAnswer = answer;
 		triviaObject.isAnswerCorrect = isCorrect;
 		triviaObject.canSelectAnswer = false;
-
 		console.log(`${answer}`);
 		console.log(`Correct: ${isCorrect}`);
 
-		// Viive ennen siirtymistä seuraavaan kysymykseen
 		setTimeout(() => {
-			// Siirtyy seuraavaan kysymykseen, jos mahdollista
+			// Viive ennen siirtymistä seuraavaan kysymykseen
 			if (triviaObject.currentQuestionIndex < triviaObject.questions.length - 1) {
 				triviaObject.currentQuestionIndex++;
 				this.shuffleAnswers();
 			} else {
 				console.log('completed!');
 			}
-
 			// Nollaa tilan seuraavaa kysymystä varten
 			triviaObject.selectedAnswer = null;
 			triviaObject.isAnswerCorrect = null;
@@ -123,28 +107,28 @@ export const triviaManager = {
 	},
 
 	// Fetchaa datan API:sta ja asettaa sen triviaObjectiin
-	async fetchCategory(categoryId: number): Promise<Question[]> {
+	// Tämä funktio "optimoitu" AI:n avulla. Käytännössä yhdistetty 2 aikasempaa funktiota.
+	async selectCategory(categoryId: number): Promise<boolean> {
+		console.log(`Valittu kategoria: ${categoryId}`);
 		try {
 			// Nollaa kysymyksen indeksin uuden kategorian hakemisen yhteydessä
 			triviaObject.currentQuestionIndex = 0;
-
 			triviaObject.selectedCategoryId = categoryId;
 			const response = await fetch(
 				`https://opentdb.com/api.php?amount=20&category=${categoryId}&difficulty=medium&type=multiple`
 			);
 			const data = await response.json();
 			triviaObject.questions = data.results;
-
 			// Sekoittaa vastaukset ensimmäiselle kysymykselle
 			if (data.results.length > 0) {
 				this.shuffleAnswers();
 			}
-
-			return data.results;
+			console.log(`Haettu ${data.results.length} kysymystä kategorialle ${categoryId}`);
+			return true;
 		} catch (error) {
-			console.error('Error fetching category questions:', error);
+			console.error('Haku ei onnistunut', error);
 			triviaObject.questions = [];
-			return [];
+			return false;
 		}
 	},
 
