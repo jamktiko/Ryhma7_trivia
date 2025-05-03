@@ -20,17 +20,6 @@
 <button class={color} {onclick} {disabled}>{text}</button>
 
 <style>
-	/* Tyylit tähän!!!! */
-	/* :root {
-		--body-color: rgba(130, 79, 157, 30%);
-		--button1-color: rgba(253, 170, 83, 30%);
-		--buttontext-color: #411c5e;
-		--ansbutton1-color: rgba(160, 198, 207, 80%);
-		--ansbutton2-color: rgba(192, 155, 173, 90%);
-		--ansbutton3-color: rgba(65, 28, 94, 30%);
-		--ansbutton4-color: rgba(253, 170, 83, 50%);
-	} */
-
 	button {
 		width: 312px;
 		min-width: 312px;
@@ -91,9 +80,8 @@
 
 	@media only screen and (max-width: 412px) {
 		button {
-		width: 172px;
-		height: 120px;
+			width: 172px;
+			height: 120px;
 		}
 	}
-
 </style>

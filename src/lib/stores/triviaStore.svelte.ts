@@ -16,6 +16,7 @@ const triviaObject = $state({
 		{ id: 27, name: 'Animals' }
 	],
 	selectedCategoryId: null as number | null,
+	categorySelected: false,
 	questions: [] as Question[],
 	currentQuestionIndex: 0,
 	shuffledAnswers: [] as string[],
@@ -60,6 +61,9 @@ export const triviaManager = {
 	},
 	get currentQuestion() {
 		return triviaObject.questions[triviaObject.currentQuestionIndex]; // Palauttaa nykyisen kysymyksen
+	},
+	get isCategorySelected() {
+		return triviaObject.categorySelected; // Palauttaa onko kategoria valittu
 	},
 
 	// Sekoittaa vastaukset nykyiselle kysymykselle
@@ -123,11 +127,14 @@ export const triviaManager = {
 			if (data.results.length > 0) {
 				this.shuffleAnswers();
 			}
+			// Asettaa kategorian valituksi
+			triviaObject.categorySelected = true;
 			console.log(`Haettu ${data.results.length} kysymystä kategorialle ${categoryId}`);
 			return true;
 		} catch (error) {
 			console.error('Haku ei onnistunut', error);
 			triviaObject.questions = [];
+			triviaObject.categorySelected = false;
 			return false;
 		}
 	},

@@ -1,33 +1,28 @@
 <script lang="ts">
-	import Button from '$lib/components/Button.svelte';
 	import { triviaManager } from '$lib/stores/triviaStore.svelte';
 	import Pisteytys from '$lib/components/Pisteytys.svelte';
 	import CategorySelector from '$lib/components/CategorySelector.svelte';
 
-	let categorySelected: boolean = false;
-
 	//Funktio kategorian valintaan.
 	//Hakee Triviamanagerin API fetchillä datan.
 	async function categorySelect(categoryId: number) {
-		categorySelected = await triviaManager.selectCategory(categoryId);
+		await triviaManager.selectCategory(categoryId);
 	}
 </script>
 
-<!-- HTML tähän. Ei HTML tägiä, ei toimi Sveltessä -->
-
-{#if !categorySelected}
-	<div class="container">
-		<h1>Welcome to MindSpark!</h1>
-		<h2>Are you ready to test your knowledge?</h2>
-	</div>
-
-	{#if triviaManager.categories}
-		<CategorySelector onCategorySelect={categorySelect} />
-	{/if}
+<!-- Jos isCategorySelected on false triviaStore tiedostossa, 
+tulostaa kategorian valinta näytölle. -->
+{#if !triviaManager.isCategorySelected}
+	<CategorySelector categorySelector={categorySelect} />
+{:else}
+	<!-- Tähän kysymyskomponentti -->
 {/if}
 
+<!-- Tyylit kommentoitu pois, 
+koska kategororiasta tehty oma komponentti 
+ja tyylit ovat siellä. -->
 <style>
-	.container {
+	/* .container {
 		flex: 1;
 		display: flex;
 		flex-direction: column;
@@ -79,5 +74,5 @@
 			font-size: 28px;
 			padding: 10px 0 5px 0;
 		}
-	}
+	} */
 </style>
