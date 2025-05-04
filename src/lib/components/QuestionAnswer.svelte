@@ -23,7 +23,6 @@
 	</div>
 	<!-- Dekoodaa ja tulostaa kysymyksen luettavaksi -->
 	<h3>{decodeHTML(triviaManager.currentQuestion.question)}</h3>
-
 	<!-- Tulostaa correct / incorrect vastausvalinnan jälkeen -->
 	{#if triviaManager.selectedAnswer !== null}
 		<div class="result-message {triviaManager.isAnswerCorrect ? 'correct' : 'incorrect'}">
@@ -43,6 +42,7 @@
 					disabled={!triviaManager.canSelectAnswer}
 				/>
 			{:else}
+				<!-- Tämä antaa erroria tyypityksesta, mutta toimii silti. Täytyy selvittää myöhemmin -->
 				<Button
 					text={decodeHTML(answer)}
 					color={['ansbutton1-color', 'ansbutton2-color', 'ansbutton3-color', 'ansbutton4-color'][
@@ -75,38 +75,6 @@
 		font-size: 24px;
 		font-family: 'KoHo', sans-serif;
 		margin-bottom: 8px;
-	}
-
-	h3 {
-		background-color: rgba(255, 255, 255, 0.4);
-		padding: 20px;
-		border-radius: 15px;
-		margin-bottom: 30px;
-		font-size: 24px;
-		font-family: 'KoHo', sans-serif;
-		max-width: 600px;
-		text-align: center;
-	}
-
-	/* Feedback message styling */
-	.result-message {
-		font-size: 28px;
-		font-weight: bold;
-		font-family: 'Protest Strike', sans-serif;
-		padding: 10px 20px;
-		border-radius: 10px;
-		margin-bottom: 20px;
-		text-align: center;
-	}
-
-	.correct {
-		color: #048100;
-		background-color: rgba(134, 231, 127, 0.3);
-	}
-
-	.incorrect {
-		color: #810000;
-		background-color: rgba(244, 118, 118, 0.3);
 	}
 
 	.answers-container {
