@@ -22,7 +22,7 @@
 	</div>
 	<div class="points">430</div>
 	<div class="timer">
-		<span class="material-symbols-outlined">timer</span>15s
+		<span class="material-symbols-outlined">timer</span>{triviaManager.ajastin}
 	</div>
 </div>
 <div class="score">

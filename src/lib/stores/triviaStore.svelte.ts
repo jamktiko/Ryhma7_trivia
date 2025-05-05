@@ -36,11 +36,55 @@ const triviaObject = $state({
     score: 0,
     correctAnswers: 0,
     incorrectAnswers: 0,
-    highScore: 0
+    highScore: 0,
+    ajastin: 0 // Ajastin sekunteina
 });
+
+let kulunutAika: number = 0; // Kulunut aika sekunteina
+let ajastinInterval: ReturnType<typeof setInterval> | null = null;
+
+function kaynnistaAjastin() {
+    pysaytaAjastin(); // Varmistetaan, ettei vanhoja ajastimia ole käynnissä
+    triviaObject.ajastin = 25; // Asetetaan ajastin haluttuun sekuntiin
+    kulunutAika = 0; // Nollataan kulunut aika
+
+    ajastinInterval = setInterval(() => {
+        if (triviaObject.ajastin > 0) {
+            triviaObject.ajastin--; // Vähennetään ajastinta yhdellä sekunnilla
+            kulunutAika++; // Lisätään kulunutta aikaa
+        } else {
+            pysaytaAjastin(); // Pysäytetään ajastin, kun aika loppuu
+            console.log('Ajastin päättyi');
+        }
+    }, 1000); // Päivitetään ajastinta sekunnin välein
+}
+
+function pysaytaAjastin() {
+    if (ajastinInterval) {
+        clearInterval(ajastinInterval); // Pysäytetään ajastin
+        ajastinInterval = null;
+    }
+}
+
+function laskepisteet(onkoVastausOikein: boolean) {
+    const maxPisteet = 10;
+    const maxAika = triviaObject.ajastin; // Asetetaan oletusarvo, jos triviaObject.ajastin ei ole määritetty
+    const aikasakko = maxPisteet / maxAika; // Pistevähennys joka sekunnilta
+
+    if (!onkoVastausOikein) {
+        return 0; // Ei pisteitä, jos vastaus on väärin
+    } else if (kulunutAika > maxAika) {
+        return 0; // Ei pisteitä, jos aika menee yli
+    } else {
+        return Math.max(0, Math.floor(maxPisteet - kulunutAika * aikasakko)); // Lasketaan pisteet
+    }
+}
 
 // Getterit kategoriaa, valittua kategoriaa ja kysymyksiä varten
 export const triviaManager = {
+    get ajastin() {
+        return triviaObject.ajastin; // Palauttaa ajastimen arvon
+    },
     get score() {
         return triviaObject.score;
     },
@@ -91,38 +135,42 @@ export const triviaManager = {
         if (!currentQuestion) return;
         const allAnswers = [currentQuestion.correct_answer, ...currentQuestion.incorrect_answers];
         triviaObject.shuffledAnswers = allAnswers.sort(() => Math.random() - 0.5);
+        kaynnistaAjastin(); // Käynnistää ajastimen uuden kysymyksen alkaessa
     },
 
     selectAnswer(answer: string) {
         if (!triviaObject.canSelectAnswer) return;
-
+    
         const currentQuestion = triviaObject.questions[triviaObject.currentQuestionIndex];
         const isCorrect = answer === currentQuestion.correct_answer;
-
+    
         if (isCorrect) {
             triviaObject.correctAnswers++;
-            this.updateScore(10);
+            const pisteet = laskepisteet(true); // Lasketaan pisteet oikeasta vastauksesta
+            triviaObject.score += pisteet; // Päivitetään pistemäärä
         } else {
             triviaObject.incorrectAnswers++;
+            laskepisteet(false); // Ei pisteitä väärästä vastauksesta
         }
-
+    
         triviaObject.selectedAnswer = answer;
         triviaObject.isAnswerCorrect = isCorrect;
         triviaObject.canSelectAnswer = false;
-
+    
+        pysaytaAjastin(); // Pysäytetään ajastin, kun vastaus on valittu
+    
         setTimeout(() => {
-            // Viive ennen siirtymistä seuraavaan kysymykseen
             if (triviaObject.currentQuestionIndex < triviaObject.questions.length - 1) {
                 triviaObject.currentQuestionIndex++;
                 this.shuffleAnswers();
             } else {
-                // removed console.log
+                console.log('Kysely valmis!');
             }
-            // Nollaa tilan seuraavaa kysymystä varten
+    
             triviaObject.selectedAnswer = null;
             triviaObject.isAnswerCorrect = null;
             triviaObject.canSelectAnswer = true;
-        });
+        }, 1500);
     },
 
     updateScore(points: number) {
