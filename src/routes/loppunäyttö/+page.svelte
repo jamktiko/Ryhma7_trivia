@@ -18,14 +18,26 @@
 <h4>You got {triviaManager.correctAnswers}/20 questions right!</h4>
 <h3>Do you want to play again?</h3>
 
-<div>
-	<button id="againbut">Play again!</button>
-</div>
+<Button
+	text="Play again"
+	color="button1-color"
+	onclick={() => {
+		if (triviaManager.selectedCategoryId !== null) {
+			triviaManager.playAgain(triviaManager.selectedCategoryId);
+		} else {
+			goto('/');
+		}
+	}}
+	font="Protest Strike"
+/>
 
 <Button
 	text="Change categories"
 	color="button1-color"
-	onclick={() => goto('/')}
+	onclick={() => {
+		triviaManager.reset();
+		goto('/');
+	}}
 	font="Protest Strike"
 />
 
