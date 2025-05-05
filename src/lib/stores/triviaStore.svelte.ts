@@ -10,12 +10,12 @@
 //canSelectAnswer: Seuraa onko vastauksen valinta mahdollista
 
 interface Question {
-	category: string;
-	type: string;
-	difficulty: string;
-	question: string;
-	correct_answer: string;
-	incorrect_answers: string[];
+    category: string;
+    type: string;
+    difficulty: string;
+    question: string;
+    correct_answer: string;
+    incorrect_answers: string[];
 }
 
 const triviaObject = $state({
@@ -104,18 +104,20 @@ export const triviaManager = {
 		console.log('Sekoitettu vastaukset:', triviaObject.shuffledAnswers);
 	},
 
-	// Käsittelee vastauksen valinnan
-	selectAnswer(answer: string) {
-		// Estää uuden vastauksen valinnan odotuksen aikana
-		if (!triviaObject.canSelectAnswer) return;
-		const currentQuestion = triviaObject.questions[triviaObject.currentQuestionIndex];
-		const isCorrect = answer === currentQuestion.correct_answer;
-		// Asettaa valitun vastauksen ja sen oikeellisuuden
-		triviaObject.selectedAnswer = answer;
-		triviaObject.isAnswerCorrect = isCorrect;
-		triviaObject.canSelectAnswer = false;
-		console.log(`${answer}`);
-		console.log(`Correct: ${isCorrect}`);
+    startQuestion() {
+        triviaObject.currentQuestionIndex++;
+        this.shuffleAnswers();
+    },
+    // Käsittelee vastauksen valinnan
+    selectAnswer(answer: string) {
+        // Estää uuden vastauksen valinnan odotuksen aikana
+        if (!triviaObject.canSelectAnswer) return;
+        const currentQuestion = triviaObject.questions[triviaObject.currentQuestionIndex];
+        const isCorrect = answer === currentQuestion.correct_answer;
+        // Asettaa valitun vastauksen ja sen oikeellisuuden
+        triviaObject.selectedAnswer = answer;
+        triviaObject.isAnswerCorrect = isCorrect;
+        triviaObject.canSelectAnswer = false;
 
 		setTimeout(() => {
 			// Viive ennen siirtymistä seuraavaan kysymykseen
@@ -141,43 +143,57 @@ export const triviaManager = {
 		}
 	},
 
-	// Fetchaa datan API:sta ja asettaa sen triviaObjectiin
-	// Tämä funktio "optimoitu" AI:n avulla. Käytännössä yhdistetty 2 aikasempaa funktiota.
-	async selectCategory(categoryId: number): Promise<boolean> {
-		console.log(`Valittu kategoria: ${categoryId}`);
-		try {
-			// Nollaa kysymyksen indeksin uuden kategorian hakemisen yhteydessä
-			triviaObject.currentQuestionIndex = 0;
-			triviaObject.selectedCategoryId = categoryId;
-			const response = await fetch(
-				`https://opentdb.com/api.php?amount=20&category=${categoryId}&difficulty=medium&type=multiple`
-			);
-			const data = await response.json();
-			triviaObject.questions = data.results;
-			// Sekoittaa vastaukset ensimmäiselle kysymykselle
-			if (data.results.length > 0) {
-				this.shuffleAnswers();
-			}
-			// Asettaa kategorian valituksi
-			triviaObject.categorySelected = true;
-			console.log(`Haettu ${data.results.length} kysymystä kategorialle ${categoryId}`);
-			return true;
-		} catch (error) {
-			console.error('Haku ei onnistunut', error);
-			triviaObject.questions = [];
-			triviaObject.categorySelected = false;
-			return false;
-		}
-	},
+        setTimeout(() => {
+            // Viive ennen siirtymistä seuraavaan kysymykseen
+            if (triviaObject.currentQuestionIndex < triviaObject.questions.length - 1) {
+                triviaObject.currentQuestionIndex++;
+                this.shuffleAnswers();
+            } else {
+                console.log('completed!');
+            }
+            // Nollaa tilan seuraavaa kysymystä varten
+            triviaObject.selectedAnswer = null;
+            triviaObject.isAnswerCorrect = null;
+            triviaObject.canSelectAnswer = true;
+        }, 1500);
+    },
 
-	// Resettaa kaiken tarvittavan uutta peliä varten
-	reset() {
-		triviaObject.selectedCategoryId = null;
-		triviaObject.questions = [];
-		triviaObject.currentQuestionIndex = 0;
-		triviaObject.shuffledAnswers = [];
-		triviaObject.selectedAnswer = null;
-		triviaObject.isAnswerCorrect = null;
-		triviaObject.canSelectAnswer = true;
-	}
+    // Fetchaa datan API:sta ja asettaa sen triviaObjectiin
+    // Tämä funktio "optimoitu" AI:n avulla. Käytännössä yhdistetty 2 aikasempaa funktiota.
+    async selectCategory(categoryId: number): Promise<boolean> {
+        console.log(`Valittu kategoria: ${categoryId}`);
+        try {
+            // Nollaa kysymyksen indeksin uuden kategorian hakemisen yhteydessä
+            triviaObject.currentQuestionIndex = 0;
+            triviaObject.selectedCategoryId = categoryId;
+            const response = await fetch(
+                `https://opentdb.com/api.php?amount=20&category=${categoryId}&difficulty=medium&type=multiple`
+            );
+            const data = await response.json();
+            triviaObject.questions = data.results;
+            // Sekoittaa vastaukset ensimmäiselle kysymykselle
+            if (data.results.length > 0) {
+                this.shuffleAnswers();
+            }
+            // Asettaa kategorian valituksi
+            triviaObject.categorySelected = true;
+            console.log(`Haettu ${data.results.length} kysymystä kategorialle ${categoryId}`);
+            return true;
+        } catch (error) {
+            console.error('Haku ei onnistunut', error);
+            triviaObject.questions = [];
+            triviaObject.categorySelected = false;
+            return false;
+        }
+    },
+
+    reset() {
+        triviaObject.selectedCategoryId = null;
+        triviaObject.questions = [];
+        triviaObject.currentQuestionIndex = 0;
+        triviaObject.shuffledAnswers = [];
+        triviaObject.selectedAnswer = null;
+        triviaObject.isAnswerCorrect = null;
+        triviaObject.canSelectAnswer = true;
+    }
 };

@@ -1,6 +1,8 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte';
 	import { triviaManager } from '$lib/stores/triviaStore.svelte';
+	
+
 
 	function answerSelector(answer: string) {
 		triviaManager.selectAnswer(answer);
