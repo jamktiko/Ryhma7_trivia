@@ -4,9 +4,18 @@
 	import { goto } from '$app/navigation';
 </script>
 
-<h1>Oh no!</h1>
-<h2>You don’t have a spark mind!</h2>
+{#if triviaManager.correctAnswers < 5}
+	<h1>Oh no!</h1>
+	<h2>You don’t have a spark mind!</h2>
+{:else if triviaManager.correctAnswers < 15}
+	<h1>You did ok</h1>
+	<h2>But you can do better!</h2>
+{:else if triviaManager.correctAnswers >= 15}
+	<h1>Wow!</h1>
+	<h2>You have a spark mind!</h2>
+{/if}
 <h4>You scored {triviaManager.score} points!</h4>
+<h4>You got {triviaManager.correctAnswers}/20 questions right!</h4>
 <h3>Do you want to play again?</h3>
 
 <div>
@@ -44,7 +53,7 @@
 		font-size: 36px;
 		font-family: 'KoHo', sans-serif;
 		font-weight: lighter;
-		padding: 15px 0 40px 0;
+		padding: 15px 0 10px 0;
 		margin: 0;
 	}
 
