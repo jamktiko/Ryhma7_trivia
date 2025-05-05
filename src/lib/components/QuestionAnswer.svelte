@@ -83,7 +83,7 @@
 <style>
 	.question-container {
 		max-width: 672px;
-		margin: auto;
+		margin: 3px auto auto auto;
 		padding: 5px;
 		display: flex;
 		flex-direction: column;
@@ -110,7 +110,7 @@
 	.header {
 		width: 40%;
 		max-width: 40%;
-		margin: 5px auto auto;
+		margin-bottom: none;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -118,12 +118,11 @@
 	}
 
 	.question-counter {
-		font-weight: 700;
 		font-size: 1.5rem;
 		color: #4b1d6f;
 	}
 	.points {
-		font-size: 2rem;
+		font-size: 1.6rem;
 		color: #4b1d6f;
 		padding-left: 30px;
 	}
@@ -132,7 +131,7 @@
 		color: #4b1d6f;
 		padding: 6px 12px;
 		border-radius: 999px;
-		font-weight: 500;
+		font-weight: 600;
 		display: flex;
 		align-items: center;
 		gap: 6px;
@@ -144,7 +143,7 @@
 		width: 40%;
 		min-width: 200px;
 		min-height: 20px;
-		margin: 5px auto 10px auto;
+		margin: 5px;
 		background-color: #f0eaf9;
 		border-radius: 999px;
 		overflow: hidden;
@@ -163,7 +162,7 @@
 		justify-content: center;
 		width: 450px;
 		height: auto;
-		min-height: 100px;
+		min-height: 80px;
 		margin: 10px auto;
 		background-color: rgba(245, 245, 245, 60%);
 		border: 1px solid #411c5e;
@@ -196,11 +195,19 @@
 	.correct {
 		background-color: rgba(46, 204, 113, 0.3);
 		color: #27ae60;
+		font-family: 'KoHo', sans-serif;
+		font-size: 1.2rem;
+		margin: auto;
+		padding: 2px 10px;
 	}
 
 	.incorrect {
 		background-color: rgba(231, 76, 60, 0.3);
 		color: #c0392b;
+		font-family: 'KoHo', sans-serif;
+		font-size: 1.2rem;
+		margin: auto;
+		padding: 2px 10px;
 	}
 
 	@media only screen and (max-width: 412px) {
