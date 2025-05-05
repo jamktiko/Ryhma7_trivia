@@ -12,7 +12,7 @@
         pysaytaAjastin(); // Pysäytetään ajastin, kun komponentti poistetaan
     });
 
-    function kaynnistaAjastin() {
+     export function kaynnistaAjastin() {
         pysaytaAjastin(); // Varmistetaan, ettei vanhoja ajastimia ole käynnissä
         ajastin = 15; // Asetetaan ajastin 15 sekuntiin
         kulunutAika = 0;
@@ -31,14 +31,14 @@
         }, 1000); // Päivitetään ajastinta sekunnin välein
     }
 
-    function pysaytaAjastin() {
+     export function pysaytaAjastin() {
         if (ajastinInterval) {
             clearInterval(ajastinInterval);
             ajastinInterval = null;
         }
     }
 
-    function laskepisteet(onkovastausoikein: boolean) {
+   export function laskepisteet (onkovastausoikein: boolean) {
         const maxpisteet = 100;
         const maxaika = 15; // Maksimiaika sekunteina
         const aikasakko = maxpisteet / maxaika; // Pistevähennys joka sekunilta
