@@ -104,10 +104,6 @@ export const triviaManager = {
 		console.log('Sekoitettu vastaukset:', triviaObject.shuffledAnswers);
 	},
 
-	startQuestion() {
-		triviaObject.currentQuestionIndex++;
-		this.shuffleAnswers();
-	},
 	// Käsittelee vastauksen valinnan
 	selectAnswer(answer: string) {
 		// Estää uuden vastauksen valinnan odotuksen aikana
