@@ -17,14 +17,32 @@
 	}
 </script>
 
+<!-- Ajastin ja kysymysnumero -->
+<div class="header">
+	<div class="question-counter">
+		{triviaManager.currentQuestionIndex + 1}/{triviaManager.questions.length}
+	</div>
+	<div class="timer">
+		<span class="material-symbols-outlined">timer</span>15s
+	</div>
+</div>
+
+<!-- Progress bar -->
+<div class="progress-container">
+	<div class="progress-bar" style="width: 100%"></div>
+</div>
+
 <div class="question-container">
 	<div class="question-info">
-		<!-- Tulostaa kategorian nimen ja kysymyksen numeron. -->
+		<!-- Tulostaa kategorian nimen -->
 		<div class="category-name">{triviaManager.currentQuestion.category}</div>
-		<div>Question {triviaManager.currentQuestionIndex + 1} / {triviaManager.questions.length}</div>
 	</div>
+
 	<!-- Dekoodaa ja tulostaa kysymyksen luettavaksi -->
-	<h3>{decodeHTML(triviaManager.currentQuestion.question)}</h3>
+	<div class="question">
+		<h4 class="questiontext">{decodeHTML(triviaManager.currentQuestion.question)}</h4>
+	</div>
+
 	<!-- Tulostaa correct / incorrect vastausvalinnan jälkeen -->
 	{#if triviaManager.selectedAnswer !== null}
 		<div class="result-message {triviaManager.isAnswerCorrect ? 'correct' : 'incorrect'}">
@@ -32,9 +50,8 @@
 		</div>
 	{/if}
 
-	<!-- Tyylit väliaikaisia. Luotu AI:lla vaan jotain, että saa näkyviin -->
+	<!-- Käy läpi taulukon, jonka shuffledAnswers luo ja tulostaa ne for each metodilla. -->
 	<div class="answers-container">
-		<!-- Käy läpi taulukon, jonka shuffledAnswers luo ja tulostaa ne for each metodilla. -->
 		{#each triviaManager.shuffledAnswers as answer, i}
 			{#if answer === triviaManager.selectedAnswer}
 				<Button
@@ -86,11 +103,144 @@
 		justify-content: center;
 	}
 
-	@media only screen and (max-width: 655px) {
-		h3 {
+	.header {
+		width: 40%;
+		max-width: 40%;
+		margin: 0 auto;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		font-family: 'Protest Strike', sans-serif;
+	}
+
+	.question-counter {
+		font-weight: 700;
+		font-size: 1.5rem;
+		color: #4b1d6f;
+	}
+
+	.timer {
+		background-color: rgba(65, 28, 94, 30%);
+		color: #4b1d6f;
+		padding: 6px 12px;
+		border-radius: 999px;
+		font-weight: 500;
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		font-size: 0.9rem;
+		font-family: 'KoHo', sans-serif;
+	}
+
+	.progress-container {
+		width: 40%;
+		min-width: 200px;
+		min-height: 20px;
+		margin: 5px auto 10px auto;
+		background-color: #f0eaf9;
+		border-radius: 999px;
+		overflow: hidden;
+	}
+
+	.progress-bar {
+		height: 100%;
+		background-color: #4b1d6f;
+		transition: width 0.1s linear;
+	}
+
+	.question {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+		width: 340px;
+		height: auto;
+		min-height: 100px;
+		margin: 10px auto;
+		background-color: rgba(245, 245, 245, 60%);
+		border: 1px solid #411c5e;
+		border-radius: 20px;
+		font-family: 'KoHo', sans-serif;
+		color: #411c5e;
+		text-align: center;
+		box-shadow:
+			2px 2px 4px rgba(0, 0, 0, 25%),
+			inset -3px -3px 4px rgba(0, 0, 0, 25%);
+		padding: 15px;
+	}
+
+	.questiontext {
+		font-size: 30px;
+		font-family: 'KoHo';
+		font-weight: lighter;
+		padding: 0;
+		margin: 0;
+	}
+
+	.result-message {
+		font-size: 24px;
+		font-weight: bold;
+		padding: 10px 20px;
+		margin: 10px 0;
+		border-radius: 10px;
+		text-transform: uppercase;
+	}
+
+	.correct {
+		background-color: rgba(46, 204, 113, 0.3);
+		color: #27ae60;
+	}
+
+	.incorrect {
+		background-color: rgba(231, 76, 60, 0.3);
+		color: #c0392b;
+	}
+
+	@media only screen and (max-width: 412px) {
+		.question,
+		.questiontext {
+			width: 90%;
+			min-width: 180px;
+			height: auto;
+			font-size: 20px;
+			padding: 10px;
+			margin: 10px auto;
+		}
+
+		.header {
+			width: 90%;
+			max-width: 90%;
+		}
+
+		.progress-container {
+			width: 80%;
+		}
+	}
+
+	@media only screen and (min-width: 412px) and (max-width: 655px) {
+		.question,
+		.questiontext {
+			width: 80%;
+			min-width: 230px;
+			height: auto;
+			font-size: 23px;
+			padding: 10px;
+			text-align: center;
+		}
+
+		.header {
+			width: 80%;
+			max-width: 80%;
+		}
+
+		.progress-container {
+			width: 70%;
+		}
+
+		/* h3 {
 			font-size: 18px;
 			padding: 15px;
-		}
+		} */
 
 		.category-name {
 			font-size: 20px;
@@ -99,6 +249,33 @@
 		.result-message {
 			font-size: 22px;
 			padding: 8px 16px;
+		}
+	}
+
+	@media only screen and (min-height: 480px) and (max-height: 655px) {
+		.question,
+		.questiontext {
+			width: 80%;
+			min-width: 30%;
+			height: auto;
+			min-height: 110px;
+			font-size: 20px;
+			margin: 10px auto;
+			padding: 10px;
+			text-align: center;
+		}
+	}
+
+	@media only screen and (max-height: 480px) {
+		.question,
+		.questiontext {
+			width: 80%;
+			min-width: 40px;
+			min-height: 80px;
+			font-size: 15px;
+			margin: auto;
+			padding: 10px;
+			text-align: center;
 		}
 	}
 </style>
