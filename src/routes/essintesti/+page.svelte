@@ -22,7 +22,7 @@
 
 	// Parametreja voitaisiin myöhemmin tuoda propseina
 	let questionNumber = 6;
-	let totalQuestions = 10;
+	let totalQuestions = 20;
 
 	let totalTime = 15;
 	let timeLeft = totalTime;
@@ -46,9 +46,6 @@
 </script>
 
 <!-- HTML tähän. Ei HTML tägiä, ei toimi Sveltessä -->
-<head>
-	<title>MindSpark Trivia</title>
-</head>
 {#if !categorySelected}
 	<div class="header">
 		<div class="question-counter">{questionNumber}/{totalQuestions}</div>
@@ -61,7 +58,7 @@
 		<div class="progress-bar" style="width: {progress}%"></div>
 	</div>
 	<div class="question">
-		<p>What is the heaviest insect?</p>
+		<h4 class="questiontext">What is the heaviest insect?</h4>
 	</div>
 	{#if triviaManager.categories}
 		<div class="ccategories">
@@ -83,9 +80,6 @@
 		flex-wrap: wrap;
 		align-items: center;
 		justify-content: center;
-	}
-
-	.catcontainer {
 		max-width: 672px;
 		margin: auto;
 	}
@@ -137,11 +131,12 @@
 		margin: 0;
 	}
 	.header {
-		margin-left: 30%;
+		width: 40%;
+		max-width: 40%;
+		margin: 0;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		margin-bottom: 6px;
 		font-family: 'Protest Strike', sans-serif;
 	}
 
@@ -152,7 +147,6 @@
 	}
 
 	.timer {
-		margin-right: 43%;
 		background-color: rgba(65, 28, 94, 30%);
 		color: #4b1d6f;
 		padding: 6px 12px;
@@ -167,8 +161,9 @@
 
 	.progress-container {
 		width: 40%;
-		margin: auto;
-		height: 20px;
+		min-width: 200px;
+		min-height: 20px;
+		margin: 5px auto 10px auto;
 		background-color: #f0eaf9;
 		border-radius: 999px;
 		overflow: hidden;
@@ -184,14 +179,13 @@
 		flex-wrap: wrap;
 		align-items: center;
 		justify-content: center;
-		width: 400px;
-		height: 200px;
-		margin: 30px auto;
+		width: 340px;
+		height: 100px;
+		margin: 10px auto;
 		background-color: rgba(245, 245, 245, 60%);
 		border: 1px solid #411c5e;
 		border-radius: 20px;
 		box-shadow: 2px, 6px, 4px, rgba(0, 0, 0, 25%);
-		font-size: 40px;
 		font-family: 'KoHo', sans-serif;
 		color: #411c5e;
 		text-align: center;
@@ -199,9 +193,16 @@
 			2px 2px 4px rgba(0, 0, 0, 25%),
 			inset -3px -3px 4px rgba(0, 0, 0, 25%);
 	}
+	.questiontext {
+		font-size: 30px;
+		font-family: 'KoHo';
+		font-weight: lighter;
+		padding: 0;
+		margin: 0;
+	}
 	.ccategories {
 		max-width: 672px;
-		margin: auto;
+		margin: 20px;
 	}
 
 	.categories {
@@ -215,9 +216,9 @@
 	#ansbutton2,
 	#ansbutton3,
 	#ansbutton4 {
-		width: 312px;
-		min-width: 312px;
-		height: 226px;
+		width: 280px;
+		min-width: 280px;
+		height: 130px;
 		background-color: var(--button1-color);
 		margin: 8px;
 		border-radius: 30px;
@@ -253,21 +254,49 @@
 		border: none;
 		font-family: 'KoHo', sans-serif;
 	}
+	#ansbutton1:hover {
+		background-color: rgba(160, 198, 207);
+		border: none;
+		font-family: 'KoHo', sans-serif;
+		box-shadow:
+			1px 1px 4px rgba(0, 0, 0, 25%),
+			inset -3px -3px 4px rgba(0, 0, 0, 25%);
+	}
+
+	#ansbutton2:hover {
+		background-color: rgba(192, 155, 173);
+		border: none;
+		font-family: 'KoHo', sans-serif;
+		box-shadow:
+			1px 1px 4px rgba(0, 0, 0, 25%),
+			inset -3px -3px 4px rgba(0, 0, 0, 25%);
+	}
+
+	#ansbutton3:hover {
+		background-color: rgba(65, 28, 94, 35%);
+		border: none;
+		font-family: 'KoHo', sans-serif;
+		box-shadow:
+			1px 1px 4px rgba(0, 0, 0, 25%),
+			inset -3px -3px 4px rgba(0, 0, 0, 25%);
+	}
+
+	#ansbutton4:hover {
+		background-color: rgba(253, 170, 83, 60%);
+		border: none;
+		font-family: 'KoHo', sans-serif;
+		box-shadow:
+			1px 1px 4px rgba(0, 0, 0, 25%),
+			inset -3px -3px 4px rgba(0, 0, 0, 25%);
+	}
 	@media only screen and (max-width: 412px) {
-		.header {
-			margin-left: 23%;
-		}
-		.timer {
-			margin-right: 29%;
-		}
-		.progress-container {
-			width: 55%;
-		}
-		.question {
+		.question,
+		.questiontext {
 			width: 40%;
-			min-width: 40%;
+			min-width: 180px;
 			height: 110px;
 			font-size: 20px;
+			padding: 0 10px;
 			margin: 10px auto;
 		}
 		#ansbutton1,
@@ -275,35 +304,80 @@
 		#ansbutton3,
 		#ansbutton4 {
 			width: 50%;
-			min-width: 50%;
+			min-width: 180px;
 			height: 40px;
-			font-size: 15px;
+			font-size: 18px;
 		}
 	}
-	@media only screen and (min-width: 413px) and (max-width: 655px) {
-		.question {
-			width: 65%;
-			min-width: 65%;
-			height: 120px;
-			font-size: 30px;
-			margin: 20px auto;
+	@media only screen and (min-width: 412px) and (max-width: 655px) {
+		.question,
+		.questiontext {
+			width: 40%;
+			min-width: 230px;
+			height: 90px;
+			font-size: 23px;
+			padding: 10px;
+			margin: none;
 			text-align: center;
 		}
 		#ansbutton1,
 		#ansbutton2,
 		#ansbutton3,
 		#ansbutton4 {
+			width: 50%;
+			min-width: 50%;
 			height: 50px;
-			font-size: 25px;
+			font-size: 21px;
 		}
-		.header {
-			margin-left: 18%;
+	}
+	@media only screen and (min-height: 480px) and (max-height: 655px) {
+		#ansbutton1,
+		#ansbutton2,
+		#ansbutton3,
+		#ansbutton4 {
+			width: 40%;
+			min-width: 40%;
+			height: 60px;
+			font-size: 20px;
 		}
-		.timer {
-			margin-right: 21.5%;
+		.ccategories {
+			max-width: 400px;
 		}
-		.progress-container {
-			width: 65%;
+		.question,
+		.questiontext {
+			width: 30%;
+			min-width: 30%;
+			height: 110px;
+			font-size: 20px;
+			margin: 10px auto;
+			padding-bottom: 10px;
+			text-align: center;
+		}
+	}
+	@media only screen and (max-height: 480px) {
+		#ansbutton1,
+		#ansbutton2,
+		#ansbutton3,
+		#ansbutton4 {
+			width: 120px;
+			min-width: 120px;
+			height: 50px;
+			font-size: 15px;
+		}
+		.ccategories {
+			max-width: 300px;
+		}
+		.question,
+		.questiontext {
+			width: 25%;
+			min-width: 40px;
+			min-height: 80px;
+			font-size: 15px;
+			margin: auto;
+			text-align: center;
+		}
+		.questiontext {
+			margin: none;
 		}
 	}
 </style>

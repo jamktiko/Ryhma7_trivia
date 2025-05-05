@@ -8,8 +8,8 @@
 	let { children }: Props = $props();
 </script>
 
-<Header />
 <main>
+	<Header />
 	{@render children()}
 </main>
 
@@ -22,21 +22,34 @@
 		--ansbutton2-color: rgba(192, 155, 173, 90%);
 		--ansbutton3-color: rgba(65, 28, 94, 30%);
 		--ansbutton4-color: rgba(253, 170, 83, 50%);
-		--wrongans-color: #F47676;
-		--correctans-color: #86E77F;
+		--wrongans-color: #f47676;
+		--correctans-color: #86e77f;
 	}
 
+	:global html {
+		min-height: 100vh;
+		height: 100vh;
+		max-height: 100vh;
+	}
 	:global body {
+		min-height: 100vh;
+		height: 100vh;
+		max-height: 100vh;
 		margin: 0;
 		padding: 0;
 		background-color: var(--body-color);
+		overflow: hidden; /*Doesn't allow scrolling, but can also hide things at the bottom without correct settings*/
 	}
 	main {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 		width: 100%;
-		height: 100%;
+		min-height: 100vh;
+		height: 100vh;
+		max-height: 100vh;
 		font-size: 100%;
 		text-align: center;
 		color: #411c5e;
 	}
-
 </style>
