@@ -39,8 +39,6 @@ const triviaObject = $state({
 	highScore: 0
 });
 
-//Kaikki consolelogit testaamista varten
-
 // Getterit kategoriaa, valittua kategoriaa ja kysymyksiä varten
 export const triviaManager = {
 	get score() {
@@ -91,14 +89,8 @@ export const triviaManager = {
 	shuffleAnswers() {
 		const currentQuestion = triviaObject.questions[triviaObject.currentQuestionIndex];
 		if (!currentQuestion) return;
-		console.log(`Category: ${currentQuestion.category}`);
-		console.log(
-			`Question ${triviaObject.currentQuestionIndex + 1}/${triviaObject.questions.length}`
-		);
-		console.log(`Question: ${currentQuestion.question}`);
 		const allAnswers = [currentQuestion.correct_answer, ...currentQuestion.incorrect_answers];
 		triviaObject.shuffledAnswers = allAnswers.sort(() => Math.random() - 0.5);
-		console.log('Sekoitettu vastaukset:', triviaObject.shuffledAnswers);
 	},
 
 	selectAnswer(answer: string) {
@@ -124,13 +116,13 @@ export const triviaManager = {
 				triviaObject.currentQuestionIndex++;
 				this.shuffleAnswers();
 			} else {
-				console.log('completed!');
+				// removed console.log
 			}
 			// Nollaa tilan seuraavaa kysymystä varten
 			triviaObject.selectedAnswer = null;
 			triviaObject.isAnswerCorrect = null;
 			triviaObject.canSelectAnswer = true;
-		}, 1500);
+		}, 1000);
 	},
 
 	updateScore(points: number) {
@@ -172,11 +164,8 @@ export const triviaManager = {
 		triviaObject.selectedAnswer = null;
 		triviaObject.isAnswerCorrect = null;
 		triviaObject.canSelectAnswer = true;
-
-		// Add resets for score-related variables
 		triviaObject.score = 0;
 		triviaObject.correctAnswers = 0;
 		triviaObject.incorrectAnswers = 0;
-		// Note: We usually don't reset highScore as it persists across games
 	}
 };

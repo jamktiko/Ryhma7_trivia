@@ -10,10 +10,9 @@
 
 <div class="container">
 	<div>
-	<h1>Welcome to MindSpark!</h1>
-	<h2>Are you ready to test your knowledge?</h2>
-</div>
-
+		<h1>Welcome to MindSpark!</h1>
+		<h2>Are you ready to test your knowledge?</h2>
+	</div>
 </div>
 <div class="catcontainer">
 	<h3>Choose a category!</h3>
@@ -25,6 +24,7 @@
 				text={category.name}
 				color="button1-color"
 				onclick={() => categorySelector(category.id)}
+				font="Protest Strike"
 			/>
 		{/each}
 	</div>
