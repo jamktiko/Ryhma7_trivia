@@ -29,6 +29,7 @@
 				color="button1-color"
 				onclick={() => categorySelector(category.id)}
 				font="Protest Strike"
+				fontSize="32px"
 			/>
 		{/each}
 	</div>
