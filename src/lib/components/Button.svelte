@@ -3,6 +3,7 @@
 		text: string;
 		onclick?: () => void;
 		disabled?: boolean;
+		font?: string; // New prop for font customization
 		color:
 			| 'button1-color'
 			| 'ansbutton1-color'
@@ -12,12 +13,10 @@
 			| 'correctans-color'
 			| 'wrongans-color';
 	}
-	let { text, onclick, disabled = false, color }: Props = $props();
+	let { text, onclick, disabled = false, color, font = 'Protest Strike' }: Props = $props();
 </script>
 
-<!-- Hakasulkeissa oleva teksti propsien importaamista varten eri komponentteihin. -->
-<!-- Kertoo mitä buttonin tulisi sisältää -->
-<button class={color} {onclick} {disabled}>{text}</button>
+<button class={color} style={`font-family: ${font}`} {onclick} {disabled}>{text}</button>
 
 <style>
 	button {
@@ -27,7 +26,6 @@
 		margin: 8px;
 		border-radius: 30px;
 		border: none;
-		font-family: 'Protest Strike';
 		font-size: 32px;
 		color: var(--buttontext-color);
 		box-shadow:

@@ -1,8 +1,6 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte';
 	import { triviaManager } from '$lib/stores/triviaStore.svelte';
-	
-
 
 	function answerSelector(answer: string) {
 		triviaManager.selectAnswer(answer);
@@ -26,7 +24,9 @@
 		<span class="material-symbols-outlined">timer</span>15s
 	</div>
 </div>
-
+<div class="score">
+	<h3>Score: {triviaManager.score}</h3>
+</div>
 <!-- Progress bar -->
 <div class="progress-container">
 	<div class="progress-bar" style="width: 100%"></div>
@@ -71,6 +71,7 @@
 							: i === 2
 								? 'ansbutton3-color'
 								: 'ansbutton4-color'}
+					font="KoHo"
 					onclick={() => answerSelector(answer)}
 					disabled={!triviaManager.canSelectAnswer}
 				/>
