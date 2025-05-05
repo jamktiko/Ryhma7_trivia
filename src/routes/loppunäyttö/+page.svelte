@@ -33,20 +33,17 @@
 />
 
 <style>
-	.scoretext {
-		margin: 8px 5px 38px;
-	}
 	h1 {
-		font-size: 55px;
+		font-size: 50px;
 		font-family: 'Protest Strike', sans-serif;
-		padding: 10px;
-		margin: 0;
+		padding-top: 10px;
+		margin: auto;
 	}
 	h2 {
-		font-size: 48px;
+		font-size: 45px;
 		font-family: 'Protest Strike', sans-serif;
-		padding: 5px;
-		margin: 0;
+		padding-bottom: 10px;
+		margin: auto;
 	}
 
 	h3 {
@@ -61,6 +58,9 @@
 		font-weight: lighter;
 		margin: 0;
 		padding-bottom: 8px;
+	}
+	.scoretext {
+		margin: 8px 5px 38px;
 	}
 	button {
 		width: 312px;
