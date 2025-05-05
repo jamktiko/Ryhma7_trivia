@@ -158,6 +158,24 @@ export const triviaManager = {
 		}
 	},
 
+	async playAgain(selectedCategoryId: number) {
+		this.reset();
+		triviaObject.categorySelected = true;
+		triviaObject.selectedCategoryId = selectedCategoryId;
+		try {
+			const response = await fetch(
+				`https://opentdb.com/api.php?amount=20&category=${selectedCategoryId}&difficulty=medium&type=multiple`
+			);
+			const data = await response.json();
+			triviaObject.questions = data.results || [];
+			this.shuffleAnswers();
+			goto('/');
+		} catch (error) {
+			console.error('Failed to fetch questions for replay', error);
+			goto('/');
+		}
+	},
+
 	reset() {
 		triviaObject.selectedCategoryId = null;
 		triviaObject.questions = [];
@@ -169,5 +187,6 @@ export const triviaManager = {
 		triviaObject.score = 0;
 		triviaObject.correctAnswers = 0;
 		triviaObject.incorrectAnswers = 0;
+		triviaObject.categorySelected = false;
 	}
 };
