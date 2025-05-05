@@ -74,18 +74,14 @@ export const triviaManager = {
 	shuffleAnswers() {
 		const currentQuestion = triviaObject.questions[triviaObject.currentQuestionIndex];
 		if (!currentQuestion) return;
-
 		//Consolelogaa kategorian ja kysymyksen
 		console.log(`Category: ${currentQuestion.category}`);
 		console.log(
 			`Question ${triviaObject.currentQuestionIndex + 1}/${triviaObject.questions.length}`
 		);
 		console.log(`Question: ${currentQuestion.question}`);
-
-		//
 		const allAnswers = [currentQuestion.correct_answer, ...currentQuestion.incorrect_answers];
 		triviaObject.shuffledAnswers = allAnswers.sort(() => Math.random() - 0.5);
-
 		console.log('Sekoitettu vastaukset:', triviaObject.shuffledAnswers);
 	},
 
@@ -93,15 +89,12 @@ export const triviaManager = {
 	selectAnswer(answer: string) {
 		// Estää uuden vastauksen valinnan odotuksen aikana
 		if (!triviaObject.canSelectAnswer) return;
-
 		const currentQuestion = triviaObject.questions[triviaObject.currentQuestionIndex];
 		const isCorrect = answer === currentQuestion.correct_answer;
-
 		// Asettaa valitun vastauksen ja sen oikeellisuuden
 		triviaObject.selectedAnswer = answer;
 		triviaObject.isAnswerCorrect = isCorrect;
 		triviaObject.canSelectAnswer = false;
-
 		console.log(`${answer}`);
 		console.log(`Correct: ${isCorrect}`);
 
@@ -114,7 +107,6 @@ export const triviaManager = {
 			} else {
 				console.log('completed!');
 			}
-
 			// Nollaa tilan seuraavaa kysymystä varten
 			triviaObject.selectedAnswer = null;
 			triviaObject.isAnswerCorrect = null;
@@ -127,19 +119,16 @@ export const triviaManager = {
 		try {
 			// Nollaa kysymyksen indeksin uuden kategorian hakemisen yhteydessä
 			triviaObject.currentQuestionIndex = 0;
-
 			triviaObject.selectedCategoryId = categoryId;
 			const response = await fetch(
 				`https://opentdb.com/api.php?amount=20&category=${categoryId}&difficulty=medium&type=multiple`
 			);
 			const data = await response.json();
 			triviaObject.questions = data.results;
-
 			// Sekoittaa vastaukset ensimmäiselle kysymykselle
 			if (data.results.length > 0) {
 				this.shuffleAnswers();
 			}
-
 			return data.results;
 		} catch (error) {
 			console.error('Error fetching category questions:', error);

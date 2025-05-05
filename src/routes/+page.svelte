@@ -2,9 +2,10 @@
 	import Button from '$lib/components/Button.svelte';
 	import { triviaManager } from '$lib/stores/triviaStore.svelte';
 	import Pisteytys from '$lib/components/Pisteytys.svelte';
+	import { fade } from 'svelte/transition';
 
 	let categorySelected: boolean = false;
-	let kategoriaValittu: boolean = false; // Define the missing variable
+	let score: number = 0;
 
 	//Funktio kategorian valintaan. Consolelogit testausta varten.
 	//Hakee Triviamanagerin API fetchillä datan.
@@ -22,9 +23,11 @@
 
 <!-- HTML tähän. Ei HTML tägiä, ei toimi Sveltessä -->
 {#if !categorySelected}
-	<h1>Welcome to MindSpark!</h1>
-	<h2>Are you ready to test your knowledge?</h2>
-	<h3>Choose a category!</h3>
+	<div transition:fade={{ duration: 300 }}>
+		<h1>Welcome to MindSpark!</h1>
+		<h2>Are you ready to test your knowledge?</h2>
+		<h3>Choose a category!</h3>
+	</div>
 
 	{#if triviaManager.categories}
 		<div class="catcontainer">
@@ -105,7 +108,7 @@
 	}
 
 	@media only screen and (max-width: 655px) {
-	h1 {
+		h1 {
 			font-size: 40px;
 		}
 		h2 {
@@ -118,7 +121,7 @@
 	}
 
 	@media only screen and (max-height: 590px) {
-	h1 {
+		h1 {
 			font-size: 40px;
 		}
 		h2 {
