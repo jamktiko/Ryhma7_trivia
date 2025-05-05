@@ -21,9 +21,9 @@
 
 <style>
 	button {
-		width: 312px;
-		min-width: 312px;
-		height: 188px;
+		width: 272px;
+		min-width: 272px;
+		height: 128px;
 		margin: 8px;
 		border-radius: 30px;
 		border: none;
@@ -74,14 +74,14 @@
 		button {
 			width: 45%;
 			min-width: 45%;
-			height: 180px;
+			height: 128px;
 		}
 	}
 
 	@media only screen and (max-width: 412px) {
 		button {
 			width: 172px;
-			height: 120px;
+			height: 128px;
 		}
 	}
 </style>

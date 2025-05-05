@@ -9,11 +9,13 @@
 </script>
 
 <div class="container">
+	<div>
 	<h1>Welcome to MindSpark!</h1>
 	<h2>Are you ready to test your knowledge?</h2>
-	<h3>Choose a category!</h3>
+</div>
 </div>
 <div class="catcontainer">
+	<h3>Choose a category!</h3>
 	<div class="buttoncontainer">
 		<!-- Käy läpi triviaManager storessa olevan kategoriataulukon for each metodilla -->
 		<!-- renderoi jokaisen taulukon kategorian Button komponentissa -->
@@ -60,7 +62,7 @@
 		flex-wrap: wrap;
 		justify-content: center;
 		min-height: 200px;
-		margin-bottom: 10px;
+		margin-bottom: 60px;
 	}
 
 	h3 {
