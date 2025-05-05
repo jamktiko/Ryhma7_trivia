@@ -20,6 +20,7 @@
 	<div class="question-counter">
 		{triviaManager.currentQuestionIndex + 1}/{triviaManager.questions.length}
 	</div>
+	<div class="points">430</div>
 	<div class="timer">
 		<span class="material-symbols-outlined">timer</span>15s
 	</div>
@@ -83,22 +84,21 @@
 <style>
 	.question-container {
 		max-width: 672px;
-		margin: 20px auto;
-		padding: 10px;
+		margin: auto;
+		padding: 5px;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 	}
 
 	.question-info {
-		margin-bottom: 20px;
 		text-align: center;
 	}
 
 	.category-name {
-		font-size: 24px;
-		font-family: 'KoHo', sans-serif;
-		margin-bottom: 8px;
+		font-size: 30px;
+		font-family: 'Protest Strike', sans-serif;
+		margin: auto;
 	}
 
 	.answers-container {
@@ -111,7 +111,7 @@
 	.header {
 		width: 40%;
 		max-width: 40%;
-		margin: 0 auto;
+		margin: 5px auto auto;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -123,7 +123,11 @@
 		font-size: 1.5rem;
 		color: #4b1d6f;
 	}
-
+	.points {
+		font-size: 2rem;
+		color: #4b1d6f;
+		padding-left: 30px;
+	}
 	.timer {
 		background-color: rgba(65, 28, 94, 30%);
 		color: #4b1d6f;
@@ -158,7 +162,7 @@
 		flex-wrap: wrap;
 		align-items: center;
 		justify-content: center;
-		width: 340px;
+		width: 450px;
 		height: auto;
 		min-height: 100px;
 		margin: 10px auto;
@@ -175,8 +179,7 @@
 	}
 
 	.questiontext {
-		font-size: 30px;
-		font-family: 'KoHo';
+		font-size: 24px;
 		font-weight: lighter;
 		padding: 0;
 		margin: 0;
