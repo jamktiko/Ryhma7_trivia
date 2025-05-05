@@ -110,14 +110,16 @@
 	@media only screen and (max-width: 658px) {
 		button {
 			width: 45%;
-			min-width: 45%;
+			min-width: 150px;
 			height: 128px;
 		}
 	}
 
 	@media only screen and (max-width: 412px) {
+
 		button {
-			width: 172px;
+			width: 45%;
+			min-width: 150px;
 			height: 128px;
 		}
 	}
