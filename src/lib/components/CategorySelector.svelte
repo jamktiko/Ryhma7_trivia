@@ -18,8 +18,8 @@
 <div class="objcontainer">
 <h4>Choose the quiz category you want to play. You will be presented with 20 questions and your objective is to answer them correctly as fast as possible to get the maximum amount of points</h4>
 </div>
-</div>
 <button onclick={() => goto('/loppunäyttö')}>Loppunäyttö</button>
+</div>
 <div class="catcontainer">
 	<h3>Choose a category!</h3>
 	<div class="buttoncontainer">
@@ -93,7 +93,7 @@
 
 	
 	@media only screen and (max-width: 840px) {
-		.objcontainer {
+				.objcontainer {
 		display: none;
 	}
 	}
