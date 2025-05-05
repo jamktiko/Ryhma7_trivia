@@ -32,13 +32,26 @@ const triviaObject = $state({
 	shuffledAnswers: [] as string[],
 	selectedAnswer: null as string | null,
 	isAnswerCorrect: null as boolean | null,
-	canSelectAnswer: true
+	canSelectAnswer: true,
+	score: 0,
+	correctAnswers: 0,
+	incorrectAnswers: 0,
+	highScore: 0
 });
 
 //Kaikki consolelogit testaamista varten
 
 // Getterit kategoriaa, valittua kategoriaa ja kysymyksiä varten
 export const triviaManager = {
+	get score() {
+		return triviaObject.score; // Palauttaa pistemäärän
+	},
+	get correctAnswers() {
+		return triviaObject.correctAnswers; // Palauttaa oikeiden vastausten määrän
+	},
+	get incorrectAnswers() {
+		return triviaObject.incorrectAnswers; // Palauttaa väärien vastausten määrän
+	},
 	get categories() {
 		return triviaObject.categories; // Palauttaa kaikki kategoriat
 	},
@@ -117,6 +130,15 @@ export const triviaManager = {
 			triviaObject.isAnswerCorrect = null;
 			triviaObject.canSelectAnswer = true;
 		}, 1500);
+	},
+	updateScore(points: number) {
+		// Add the points to the score
+		triviaObject.score += points;
+
+		// Update high score if needed
+		if (triviaObject.score > triviaObject.highScore) {
+			triviaObject.highScore = triviaObject.score;
+		}
 	},
 
 	// Fetchaa datan API:sta ja asettaa sen triviaObjectiin
