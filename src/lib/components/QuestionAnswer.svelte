@@ -61,12 +61,16 @@
 					disabled={!triviaManager.canSelectAnswer}
 				/>
 			{:else}
-				<!-- Tämä antaa erroria tyypityksesta, mutta toimii silti. Täytyy selvittää myöhemmin -->
+				<!-- Tulostaa buttonin värin ehdollisesti, riippuen kysymysnumerosta -->
 				<Button
 					text={decodeHTML(answer)}
-					color={['ansbutton1-color', 'ansbutton2-color', 'ansbutton3-color', 'ansbutton4-color'][
-						i
-					]}
+					color={i === 0
+						? 'ansbutton1-color'
+						: i === 1
+							? 'ansbutton2-color'
+							: i === 2
+								? 'ansbutton3-color'
+								: 'ansbutton4-color'}
 					onclick={() => answerSelector(answer)}
 					disabled={!triviaManager.canSelectAnswer}
 				/>
