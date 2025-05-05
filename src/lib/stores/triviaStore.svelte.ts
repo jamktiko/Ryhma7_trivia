@@ -39,8 +39,6 @@ const triviaState = $state({
 	highScore: 0
 });
 
-//Kaikki consolelogit testaamista varten
-
 // Getterit kategoriaa, valittua kategoriaa ja kysymyksiä varten
 export const triviaManager = {
 	get score() {
@@ -91,6 +89,7 @@ export const triviaManager = {
 	shuffleAnswers() {
 		const currentQuestion = triviaState.questions[triviaState.currentQuestionIndex];
 		if (!currentQuestion) return;
+<<<<<<< HEAD
 		console.log(`Category: ${currentQuestion.category}`);
 		console.log(
 			`Question ${triviaState.currentQuestionIndex + 1}/${triviaState.questions.length}`
@@ -99,6 +98,10 @@ export const triviaManager = {
 		const allAnswers = [currentQuestion.correct_answer, ...currentQuestion.incorrect_answers];
 		triviaState.shuffledAnswers = allAnswers.sort(() => Math.random() - 0.5);
 		console.log('Sekoitettu vastaukset:', triviaState.shuffledAnswers);
+=======
+		const allAnswers = [currentQuestion.correct_answer, ...currentQuestion.incorrect_answers];
+		triviaObject.shuffledAnswers = allAnswers.sort(() => Math.random() - 0.5);
+>>>>>>> dev
 	},
 
 	selectAnswer(answer: string) {
@@ -124,13 +127,20 @@ export const triviaManager = {
 				triviaState.currentQuestionIndex++;
 				this.shuffleAnswers();
 			} else {
-				console.log('completed!');
+				// removed console.log
 			}
 			// Nollaa tilan seuraavaa kysymystä varten
+<<<<<<< HEAD
 			triviaState.selectedAnswer = null;
 			triviaState.isAnswerCorrect = null;
 			triviaState.canSelectAnswer = true;
 		});
+=======
+			triviaObject.selectedAnswer = null;
+			triviaObject.isAnswerCorrect = null;
+			triviaObject.canSelectAnswer = true;
+		}, 1000);
+>>>>>>> dev
 	},
 
 	updateScore(points: number) {
@@ -172,11 +182,8 @@ export const triviaManager = {
 		triviaObject.selectedAnswer = null;
 		triviaObject.isAnswerCorrect = null;
 		triviaObject.canSelectAnswer = true;
-
-		// Add resets for score-related variables
 		triviaObject.score = 0;
 		triviaObject.correctAnswers = 0;
 		triviaObject.incorrectAnswers = 0;
-		// Note: We usually don't reset highScore as it persists across games
 	}
 };
