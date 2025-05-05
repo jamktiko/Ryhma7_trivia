@@ -104,18 +104,30 @@ export const triviaManager = {
 		console.log('Sekoitettu vastaukset:', triviaObject.shuffledAnswers);
 	},
 
+	startQuestion() {
+		triviaObject.currentQuestionIndex++;
+		this.shuffleAnswers();
+	},
 	// Käsittelee vastauksen valinnan
 	selectAnswer(answer: string) {
 		// Estää uuden vastauksen valinnan odotuksen aikana
 		if (!triviaObject.canSelectAnswer) return;
+
 		const currentQuestion = triviaObject.questions[triviaObject.currentQuestionIndex];
 		const isCorrect = answer === currentQuestion.correct_answer;
+
+		// Update score tracking
+		if (isCorrect) {
+			triviaObject.correctAnswers++;
+			this.updateScore(10); // Add 10 points for correct answer
+		} else {
+			triviaObject.incorrectAnswers++;
+		}
+
 		// Asettaa valitun vastauksen ja sen oikeellisuuden
 		triviaObject.selectedAnswer = answer;
 		triviaObject.isAnswerCorrect = isCorrect;
 		triviaObject.canSelectAnswer = false;
-		console.log(`${answer}`);
-		console.log(`Correct: ${isCorrect}`);
 
 		setTimeout(() => {
 			// Viive ennen siirtymistä seuraavaan kysymykseen
@@ -170,7 +182,6 @@ export const triviaManager = {
 		}
 	},
 
-	// Resettaa kaiken tarvittavan uutta peliä varten
 	reset() {
 		triviaObject.selectedCategoryId = null;
 		triviaObject.questions = [];
@@ -179,5 +190,8 @@ export const triviaManager = {
 		triviaObject.selectedAnswer = null;
 		triviaObject.isAnswerCorrect = null;
 		triviaObject.canSelectAnswer = true;
+		triviaObject.score = 0;
+		triviaObject.correctAnswers = 0;
+		triviaObject.incorrectAnswers = 0;
 	}
 };
