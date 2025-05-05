@@ -10,14 +10,13 @@
 
 <div class="container">
 	<div>
-	<h1>Welcome to MindSpark!</h1>
-	<h2>Are you ready to test your knowledge?</h2>
-</div>
+		<h1>Welcome to MindSpark!</h1>
+		<h2>Are you ready to test your knowledge?</h2>
+	</div>
 
 <div class="objcontainer">
 <h4>Choose the quiz category you want to play. You will be presented with 20 questions and your objective is to answer them correctly as fast as possible to get the maximum amount of points</h4>
 </div>
-
 </div>
 <div class="catcontainer">
 	<h3>Choose a category!</h3>
@@ -29,6 +28,7 @@
 				text={category.name}
 				color="button1-color"
 				onclick={() => categorySelector(category.id)}
+				font="Protest Strike"
 			/>
 		{/each}
 	</div>
