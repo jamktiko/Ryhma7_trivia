@@ -13,6 +13,7 @@
 	<h1>Welcome to MindSpark!</h1>
 	<h2>Are you ready to test your knowledge?</h2>
 </div>
+
 </div>
 <div class="catcontainer">
 	<h3>Choose a category!</h3>
@@ -62,7 +63,7 @@
 		flex-wrap: wrap;
 		justify-content: center;
 		min-height: 200px;
-		margin-bottom: 60px;
+		margin-bottom: 20px;
 	}
 
 	h3 {
