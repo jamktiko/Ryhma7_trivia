@@ -88,6 +88,13 @@
 		margin: 0;
 	}
 
+	
+	@media only screen and (max-width: 840px) {
+		.objcontainer {
+		display: none;
+	}
+	}
+
 	@media only screen and (max-width: 655px) {
 		h1 {
 			font-size: 40px;
@@ -112,5 +119,11 @@
 			font-size: 28px;
 			padding: 10px 0 5px 0;
 		}
+	}
+
+	@media only screen and (max-height: 670px) {
+		.objcontainer {
+		display: none;
+	}
 	}
 </style>

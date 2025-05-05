@@ -117,7 +117,7 @@
 
 	@media only screen and (max-width: 412px) {
 		button {
-			width: 172px;
+			width: 45%;
 			height: 128px;
 		}
 	}
