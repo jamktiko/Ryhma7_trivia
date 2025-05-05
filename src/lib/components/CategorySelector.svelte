@@ -14,6 +14,10 @@
 	<h2>Are you ready to test your knowledge?</h2>
 </div>
 
+<div class="objcontainer">
+<h4>Choose the quiz category you want to play. You will be presented with 20 questions and your objective is to answer them correctly as fast as possible to get the maximum amount of points</h4>
+</div>
+
 </div>
 <div class="catcontainer">
 	<h3>Choose a category!</h3>
@@ -66,10 +70,21 @@
 		margin-bottom: 20px;
 	}
 
+	.objcontainer {
+		width: 800px;
+	}
+
 	h3 {
 		font-size: 40px;
 		font-family: 'KoHo';
 		padding: 30px 0 5px 0;
+		margin: 0;
+	}
+
+	h4 {
+		font-size: 20px;
+		font-family: "Koho";
+		padding: 0;
 		margin: 0;
 	}
 
