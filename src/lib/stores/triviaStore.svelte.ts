@@ -8,7 +8,7 @@
 //selectedAnswer: Valittu vastaus
 //isAnswerCorrect: Seuraa onko valittu vastaus oikea
 //canSelectAnswer: Seuraa onko vastauksen valinta mahdollista
-
+import { goto } from '$app/navigation';
 interface Question {
 	category: string;
 	type: string;
@@ -115,13 +115,15 @@ export const triviaManager = {
 			if (triviaObject.currentQuestionIndex < triviaObject.questions.length - 1) {
 				triviaObject.currentQuestionIndex++;
 				this.shuffleAnswers();
+
+				// Nollaa tilan seuraavaa kysymystä varten
+				triviaObject.selectedAnswer = null;
+				triviaObject.isAnswerCorrect = null;
+				triviaObject.canSelectAnswer = true;
 			} else {
-				// removed console.log
+				// Navigate to the loppunäyttö page when questions are exhausted
+				goto('/loppunäyttö');
 			}
-			// Nollaa tilan seuraavaa kysymystä varten
-			triviaObject.selectedAnswer = null;
-			triviaObject.isAnswerCorrect = null;
-			triviaObject.canSelectAnswer = true;
 		}, 1000);
 	},
 

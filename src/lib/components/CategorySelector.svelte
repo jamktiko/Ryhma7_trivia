@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte';
 	import { triviaManager } from '$lib/stores/triviaStore.svelte';
+	import { goto } from '$app/navigation';
 
 	interface Props {
 		categorySelector: (categoryId: number) => Promise<void>;
@@ -14,6 +15,7 @@
 		<h2>Are you ready to test your knowledge?</h2>
 	</div>
 </div>
+<button onclick={() => goto('/loppunäyttö')}>Loppunäyttö</button>
 <div class="catcontainer">
 	<h3>Choose a category!</h3>
 	<div class="buttoncontainer">

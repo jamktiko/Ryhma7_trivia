@@ -7,7 +7,7 @@
 <header>
 	<div class="logo-container">
 		<img src="logo.png" alt="MindSpark logo" class="logo" />
-		<button class="refresh-button" on:click={sivunpaivitus}>⟳</button>
+		<button class="refresh-button" onclick={sivunpaivitus}>⟳</button>
 	</div>
 </header>
 

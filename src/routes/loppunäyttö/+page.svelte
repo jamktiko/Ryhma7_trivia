@@ -1,16 +1,24 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte';
+	import { triviaManager } from '$lib/stores/triviaStore.svelte';
+	import { goto } from '$app/navigation';
 </script>
 
 <h1>Oh no!</h1>
 <h2>You don’t have a spark mind!</h2>
-<h4>You scored X points!</h4>
+<h4>You scored {triviaManager.score} points!</h4>
 <h3>Do you want to play again?</h3>
 
 <div>
 	<button id="againbut">Play again!</button>
 </div>
-<button id="changecatbut">Change categories</button>
+
+<Button
+	text="Change categories"
+	color="button1-color"
+	onclick={() => goto('/')}
+	font="Protest Strike"
+/>
 
 <style>
 	h1 {

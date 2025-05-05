@@ -20,22 +20,20 @@
 	<div class="question-counter">
 		{triviaManager.currentQuestionIndex + 1}/{triviaManager.questions.length}
 	</div>
-	<div class="points">430</div>
+	<div class="points">Score: {triviaManager.score}</div>
 	<div class="timer">
 		<span class="material-symbols-outlined">timer</span>15s
 	</div>
 </div>
-<div class="score">
-	<h3>Score: {triviaManager.score}</h3>
-</div>
+
 <!-- Progress bar -->
 <div class="progress-container">
 	<div class="progress-bar" style="width: 100%"></div>
 </div>
 
+<!-- Tulostaa kategorian nimen -->
 <div class="question-container">
 	<div class="question-info">
-		<!-- Tulostaa kategorian nimen -->
 		<div class="category-name">{triviaManager.currentQuestion.category}</div>
 	</div>
 
@@ -60,6 +58,7 @@
 					color={triviaManager.isAnswerCorrect ? 'correctans-color' : 'wrongans-color'}
 					onclick={() => answerSelector(answer)}
 					disabled={!triviaManager.canSelectAnswer}
+					font="KoHo"
 				/>
 			{:else}
 				<!-- Tulostaa buttonin värin ehdollisesti, riippuen kysymysnumerosta -->
