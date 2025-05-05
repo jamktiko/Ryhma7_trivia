@@ -87,7 +87,7 @@ export const triviaManager = {
 	},
 	get isCategorySelected() {
 		return triviaObject.categorySelected; // Palauttaa onko kategoria valittu
-	},
+	}
 
 	// Sekoittaa vastaukset nykyiselle kysymykselle, jotta oikea vastaus ei ole aina ensimmäisenä
 	shuffleAnswers() {
