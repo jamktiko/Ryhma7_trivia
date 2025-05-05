@@ -98,6 +98,12 @@
 	}
 	}
 
+	@media only screen and (max-width: 500px) {
+		.buttoncontainer {
+		margin-bottom: 45px;
+	}
+	}
+
 	@media only screen and (max-width: 655px) {
 		h1 {
 			font-size: 40px;
