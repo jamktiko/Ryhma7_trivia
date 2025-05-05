@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte';
 	import { triviaManager } from '$lib/stores/triviaStore.svelte';
+	import { goto } from '$app/navigation';
 
 	interface Props {
 		categorySelector: (categoryId: number) => Promise<void>;
@@ -17,6 +18,7 @@
 <div class="objcontainer">
 <h4>Choose the quiz category you want to play. You will be presented with 20 questions and your objective is to answer them correctly as fast as possible to get the maximum amount of points</h4>
 </div>
+<button onclick={() => goto('/loppunäyttö')}>Loppunäyttö</button>
 </div>
 <div class="catcontainer">
 	<h3>Choose a category!</h3>
