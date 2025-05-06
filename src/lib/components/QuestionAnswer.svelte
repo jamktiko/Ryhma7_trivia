@@ -22,7 +22,7 @@
 	</div>
 	<div class="points">Score: {triviaManager.score}</div>
 	<div class="timer">
-		<span class="material-symbols-outlined">timer</span>15s
+		<span class="material-symbols-outlined">timer</span>{triviaManager.ajastin}
 	</div>
 </div>
 
@@ -43,11 +43,13 @@
 	</div>
 
 	<!-- Tulostaa correct / incorrect vastausvalinnan jälkeen -->
-	{#if triviaManager.selectedAnswer !== null}
-		<div class="result-message {triviaManager.isAnswerCorrect ? 'correct' : 'incorrect'}">
-			{triviaManager.isAnswerCorrect ? 'Correct!' : 'Incorrect!'}
-		</div>
-	{/if}
+	<div class="result-message-container">
+		{#if triviaManager.selectedAnswer !== null}
+			<div class="result-message {triviaManager.isAnswerCorrect ? 'correct' : 'incorrect'}">
+				{triviaManager.isAnswerCorrect ? 'Correct!' : 'Incorrect!'}
+			</div>
+		{/if}
+	</div>
 
 	<!-- Käy läpi taulukon, jonka shuffledAnswers luo ja tulostaa ne for each metodilla. -->
 	<div class="answers-container">
@@ -88,7 +90,7 @@
 	.question-container {
 		max-width: 672px;
 		height: 100%;
-		margin: 3px auto auto auto;
+		margin: 2px auto auto auto;
 		padding: 5px;
 		display: flex;
 		flex-direction: column;
@@ -100,7 +102,7 @@
 	}
 
 	.category-name {
-		font-size: 30px;
+		font-size: 25px;
 		font-family: 'Protest Strike', sans-serif;
 		margin: auto;
 	}
@@ -120,6 +122,7 @@
 		width: 40%;
 		max-width: 40%;
 		margin-bottom: none;
+		padding-top: 10px;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -171,6 +174,7 @@
 		justify-content: center;
 		width: 450px;
 		height: auto;
+		max-height: 180px;
 		min-height: 80px;
 		margin: 10px auto;
 		background-color: rgba(245, 245, 245, 60%);
@@ -192,31 +196,35 @@
 		margin: 0;
 	}
 
+	.result-message-container {
+		height: 40px; /* Reserve space for the result message */
+		display: flex;
+		align-items: center; /* Vertically center the message */
+		justify-content: center; /* Horizontally center the message */
+	}
+
 	.result-message {
-		font-size: 24px;
-		font-weight: bold;
-		padding: 10px 20px;
-		margin: 10px 0;
+		margin: 0; /* Remove any margin to prevent shifting */
+		padding: 2px 10px;
 		border-radius: 10px;
+		font-size: 18px;
+		font-weight: bold;
 		text-transform: uppercase;
+		font-family: 'KoHo', sans-serif;
+		opacity: 0; /* Start hidden */
+		transition: opacity 0.3s ease-in-out; /* Smooth fade-in effect */
 	}
 
 	.correct {
 		background-color: rgba(46, 204, 113, 0.3);
 		color: #27ae60;
-		font-family: 'KoHo', sans-serif;
-		font-size: 1.2rem;
-		margin: auto;
-		padding: 2px 10px;
+		opacity: 1;
 	}
 
 	.incorrect {
 		background-color: rgba(231, 76, 60, 0.3);
 		color: #c0392b;
-		font-family: 'KoHo', sans-serif;
-		font-size: 1.2rem;
-		margin: auto;
-		padding: 2px 10px;
+		opacity: 1;
 	}
 
 	@media only screen and (max-width: 412px) {
@@ -275,13 +283,15 @@
 		}
 	}
 
-	@media only screen and (min-height: 480px) and (max-height: 655px) {
+	@media only screen and (max-height: 655px) {
 		.question,
 		.questiontext {
-			width: 80%;
-			min-width: 30%;
+			width: auto;
+			max-width: 400px;
+			min-width: 200px;
 			height: auto;
-			min-height: 110px;
+			max-height: 110px;
+			min-height: 60px;
 			font-size: 20px;
 			margin: 10px auto;
 			padding: 10px;
@@ -292,9 +302,9 @@
 	@media only screen and (max-height: 480px) {
 		.question,
 		.questiontext {
-			width: 80%;
+			width: 70%;
 			min-width: 40px;
-			min-height: 80px;
+			min-height: 50px;
 			font-size: 15px;
 			margin: auto;
 			padding: 10px;
