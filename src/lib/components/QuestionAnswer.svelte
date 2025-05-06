@@ -27,9 +27,11 @@
 </div>
 
 <!-- Progress bar -->
-<div class="progress-container">
-	<div class="progress-bar" style="width: 100%"></div>
-</div>
+{#if triviaManager.canSelectAnswer}
+	<div class="progress-container">
+		<div class="progress-bar" style="width: 100%"></div>
+	</div>
+{/if}
 
 <!-- Tulostaa kategorian nimen -->
 <div class="question-container">

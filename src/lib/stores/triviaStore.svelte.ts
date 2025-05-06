@@ -50,6 +50,9 @@ export const triviaManager = {
 	get incorrectAnswers() {
 		return triviaObject.incorrectAnswers;
 	},
+	get highScore() {
+		return triviaObject.highScore;
+	},
 	get categories() {
 		return triviaObject.categories;
 	},

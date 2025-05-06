@@ -1,13 +1,11 @@
 <script lang="ts">
-	function sivunpaivitus() {
-		window.location.reload(); // Päivittää sivun
-	}
+	import { goto } from '$app/navigation';
 </script>
 
 <header>
 	<div class="logo-container">
 		<img src="logo.png" alt="MindSpark logo" class="logo" />
-		<button class="refresh-button" onclick={sivunpaivitus}>⟳</button>
+		<button class="refresh-button" onclick={() => goto('/')}>⟳</button>
 	</div>
 </header>
 
