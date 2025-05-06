@@ -66,6 +66,7 @@
 	.catcontainer {
 		bottom: 0;
 		max-width: 672px;
+		padding-bottom: 20px;
 	}
 
 	.buttoncontainer {
@@ -73,7 +74,6 @@
 		flex-wrap: wrap;
 		justify-content: center;
 		min-height: 200px;
-		margin-bottom: 20px;
 	}
 
 	.objcontainer {

@@ -15,8 +15,10 @@
 	}
 </script>
 
+<div class="container">
 <!-- Ajastin ja kysymysnumero -->
-<div class="header">
+<div class="header-container">
+	<div class="header">
 	<div class="question-counter">
 		{triviaManager.currentQuestionIndex + 1}/{triviaManager.questions.length}
 	</div>
@@ -26,17 +28,20 @@
 	</div>
 </div>
 
+
 <!-- Progress bar -->
 <div class="progress-container">
-	<div class="progress-bar" style="width: 100%"></div>
+	<div class="progress-bar"></div>
+</div>
 </div>
 
+<div>
 <!-- Tulostaa kategorian nimen -->
-<div class="question-container">
-	<div class="question-info">
-		<div class="category-name">{triviaManager.currentQuestion.category}</div>
-	</div>
+		<div class="question-info">
+			<div class="category-name">{triviaManager.currentQuestion.category}</div>
+			</div>
 
+			<div class="question-container">
 	<!-- Dekoodaa ja tulostaa kysymyksen luettavaksi -->
 	<div class="question">
 		<h4 class="questiontext">{decodeHTML(triviaManager.currentQuestion.question)}</h4>
@@ -63,8 +68,7 @@
 		{/if}
 	</div>
 
-	<!-- Käy läpi taulukon, jonka shuffledAnswers luo ja tulostaa ne for each metodilla. -->
-	<div class="answers-container">
+		<div class="answers-box">
 		{#each triviaManager.shuffledAnswers as answer, i}
 			{#if answer === triviaManager.selectedAnswer}
 				<Button
@@ -86,21 +90,35 @@
 							: i === 2
 								? 'ansbutton3-color'
 								: 'ansbutton4-color'}
-					font="KoHo"
-					fontSize="26px"
-					onclick={() => answerSelector(answer)}
-					disabled={!triviaManager.canSelectAnswer}
-				/>
-			{/if}
-		{/each}
+						font="KoHo"
+						fontSize="26px"
+						onclick={() => answerSelector(answer)}
+						disabled={!triviaManager.canSelectAnswer}
+					/>
+				{/if}
+			{/each}
+		</div>
 	</div>
-</div>
 
 <style>
+	.container {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-evenly;
+		align-items: center;
+		max-width: 672px;
+		width: 672px;
+	}
+
+	.header-container {
+		width: 100%;
+	}
+
 	.question-container {
 		max-width: 672px;
-		margin: 2px auto auto auto;
-		padding: 5px;
+		margin: 0px;
+		padding: 0px;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -117,15 +135,21 @@
 	}
 
 	.answers-container {
+		margin-top: auto;
+		max-width: 672px;
+		bottom: 0px;
+		padding-bottom: 20px;
+	}
+
+	.answers-box {
 		display: flex;
 		flex-wrap: wrap;
-		align-items: center;
 		justify-content: center;
 	}
 
 	.header {
-		width: 40%;
-		max-width: 40%;
+		width: 100%;
+		max-width: 100%;
 		margin-bottom: none;
 		display: flex;
 		justify-content: space-between;
@@ -156,7 +180,7 @@
 	}
 
 	.progress-container {
-		width: 40%;
+		width: 100%;
 		min-width: 200px;
 		min-height: 20px;
 		margin: 5px;
@@ -166,7 +190,8 @@
 	}
 
 	.progress-bar {
-		height: 100%;
+		height: 20px;
+		width: 100%;
 		background-color: #4b1d6f;
 		transition: width 0.1s linear;
 	}
