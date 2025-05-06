@@ -21,42 +21,44 @@
 </div>
 <h3>Do you want to play again?</h3>
 
-<Button
-	text="Play again"
-	color="button1-color"
-	onclick={() => {
-		if (triviaManager.selectedCategoryId !== null) {
-			triviaManager.playAgain(triviaManager.selectedCategoryId);
-		} else {
-			goto('/');
-		}
-	}}
-	font="Protest Strike"
-	fontSize="28px"
-/>
+<div class="button-container">
+	<Button
+		text="Play again"
+		color="button1-color"
+		onclick={() => {
+			if (triviaManager.selectedCategoryId !== null) {
+				triviaManager.playAgain(triviaManager.selectedCategoryId);
+			} else {
+				goto('/');
+			}
+		}}
+		font="Protest Strike"
+		fontSize="28px"
+	/>
 
-<Button
-	text="Change categories"
-	color="button1-color"
-	onclick={() => {
-		triviaManager.reset();
-		goto('/');
-	}}
-	font="Protest Strike"
-	fontSize="28px"
-/>
+	<Button
+		text="Change categories"
+		color="button1-color"
+		onclick={() => {
+			triviaManager.reset();
+			goto('/');
+		}}
+		font="Protest Strike"
+		fontSize="28px"
+	/>
+</div>
 
 <style>
 	h1 {
-		font-size: 50px;
+		font-size: 46px;
 		font-family: 'Protest Strike', sans-serif;
-		padding-top: 10px;
+		padding-top: 15px;
 		margin: auto;
 	}
 	h2 {
-		font-size: 45px;
+		font-size: 40px;
 		font-family: 'Protest Strike', sans-serif;
-		padding-bottom: 10px;
+		padding-bottom: 5px;
 		margin: auto;
 	}
 
@@ -74,7 +76,7 @@
 		padding-bottom: 8px;
 	}
 	.scoretext {
-		margin: 8px 5px 5px;
+		margin: 5px auto 30px;
 	}
 	@media only screen and (min-width: 412px) and (max-width: 655px) {
 		h1 {
