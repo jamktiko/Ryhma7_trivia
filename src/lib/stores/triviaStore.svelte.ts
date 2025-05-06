@@ -44,18 +44,20 @@ const triviaObject = $state({
 let ajastinInterval: ReturnType<typeof setInterval> | null = null;
 
 function kaynnistaAjastin() {
-    pysaytaAjastin(); // Varmistetaan, ettei vanhoja ajastimia ole käynnissä
-    triviaObject.ajastin = 20; // Asetetaan ajastin haluttuun sekuntiin
-   
-    ajastinInterval = setInterval(() => {
-        if (triviaObject.ajastin > 0) {
-            triviaObject.ajastin--; // Vähennetään ajastinta yhdellä sekunnilla
-            
-        } else {
-            pysaytaAjastin(); // Pysäytetään ajastin, kun aika loppuu
-            console.log('Ajastin päättyi');
-        }
-    }, 1000); // Päivitetään ajastinta sekunnin välein
+	pysaytaAjastin(); // Varmistetaan, ettei vanhoja ajastimia ole käynnissä
+	triviaObject.ajastin = 20; // Asetetaan ajastin haluttuun sekuntiin
+	
+	ajastinInterval = setInterval(() => {
+		if (triviaObject.ajastin > 0) {
+			triviaObject.ajastin--; // Vähennetään ajastinta yhdellä sekunnilla
+			
+		} else {
+			pysaytaAjastin(); // Pysäytetään ajastin, kun aika loppuu
+			if (triviaObject.canSelectAnswer) {
+				triviaManager.timeOut();
+			}
+		}
+	}, 1000); // Päivitetään ajastinta sekunnin välein
 }
 
 function pysaytaAjastin() {
@@ -140,98 +142,123 @@ export const triviaManager = {
         kaynnistaAjastin(); // Käynnistää ajastimen uuden kysymyksen alkaessa
     },
 
-    selectAnswer(answer: string) {
-        if (!triviaObject.canSelectAnswer) return;
+	timeOut() {
+		triviaObject.selectedAnswer = 'TIMEOUT';
+		triviaObject.isAnswerCorrect = false;
+		triviaObject.canSelectAnswer = false;
 
-        const currentQuestion = triviaObject.questions[triviaObject.currentQuestionIndex];
-        const isCorrect = answer === currentQuestion.correct_answer;
+		setTimeout(() => {
+			if (triviaObject.currentQuestionIndex < triviaObject.questions.length - 1) {
+				triviaObject.currentQuestionIndex++;
+				this.shuffleAnswers();
+			} else {
+				goto('/loppunäyttö');
+			}
+			triviaObject.selectedAnswer = null;
+			triviaObject.isAnswerCorrect = null;
+			triviaObject.canSelectAnswer = true;
+		}, 1000);
+	},
 
-        if (isCorrect) {
-            triviaObject.correctAnswers++;
-            const pisteet = laskepisteet(true); // Lasketaan pisteet oikeasta vastauksesta
-            triviaObject.score += pisteet; // Päivitetään pistemäärä
-        } else {
-            triviaObject.incorrectAnswers++;
-            laskepisteet(false); // Ei pisteitä väärästä vastauksesta
-        }
-        triviaObject.selectedAnswer = answer;
-        triviaObject.isAnswerCorrect = isCorrect;
-        triviaObject.canSelectAnswer = false;
-        pysaytaAjastin(); // Pysäytetään ajastin, kun vastaus on valittu
-        setTimeout(() => {
-            if (triviaObject.currentQuestionIndex < triviaObject.questions.length - 1) {
-                triviaObject.currentQuestionIndex++;
-                this.shuffleAnswers();
-            } else {
-                goto('/loppunäyttö');
-            }
+	selectAnswer(answer: string) {
+		if (!triviaObject.canSelectAnswer) return;
+		const currentQuestion = triviaObject.questions[triviaObject.currentQuestionIndex];
+		const isCorrect = answer === currentQuestion.correct_answer;
+		if (isCorrect) {
+			triviaObject.correctAnswers++;
+			const pisteet = laskepisteet(true); // Lasketaan pisteet oikeasta vastauksesta
+			triviaObject.score += pisteet;
+			if (triviaObject.score > triviaObject.highScore) {
+				// Päivitetään pistemäärä ja highscore
+				triviaObject.highScore = triviaObject.score;
+			}
+		} else {
+			triviaObject.incorrectAnswers++;
+			laskepisteet(false); // Ei pisteitä väärästä vastauksesta
+		}
+		triviaObject.selectedAnswer = answer;
+		triviaObject.isAnswerCorrect = isCorrect;
+		triviaObject.canSelectAnswer = false;
+		pysaytaAjastin(); // Pysäytetään ajastin, kun vastaus on valittu
+		setTimeout(() => {
+			if (triviaObject.currentQuestionIndex < triviaObject.questions.length - 1) {
+				triviaObject.currentQuestionIndex++;
+				this.shuffleAnswers();
+			} else {
+				goto('/loppunäyttö');
+			}
+			triviaObject.selectedAnswer = null;
+			triviaObject.isAnswerCorrect = null;
+			triviaObject.canSelectAnswer = true;
+		}, 1000);
+	},
 
-            triviaObject.selectedAnswer = null;
-            triviaObject.isAnswerCorrect = null;
-            triviaObject.canSelectAnswer = true;
-        }, 1000);
-    },
+	async selectCategory(categoryId: number): Promise<boolean> {
+		console.log(`Valittu kategoria: ${categoryId}`);
+		try {
+			triviaObject.currentQuestionIndex = 0;
+			triviaObject.selectedCategoryId = categoryId;
+			const response = await fetch(
+				`https://opentdb.com/api.php?amount=20&category=${categoryId}&difficulty=medium&type=multiple`
+			);
+			const data = await response.json();
+			triviaObject.questions = data.results;
+			if (data.results.length > 0) {
+				this.shuffleAnswers();
+			}
+			triviaObject.categorySelected = true;
+			console.log(`Haettu ${data.results.length} kysymystä kategorialle ${categoryId}`);
+			return true;
+		} catch (error) {
+			console.error('Haku ei onnistunut', error);
+			triviaObject.questions = [];
+			triviaObject.categorySelected = false;
+			return false;
+		}
+	},
 
-    updateScore(points: number) {
-        triviaObject.score += points;
-        if (triviaObject.score > triviaObject.highScore) {
-            triviaObject.highScore = triviaObject.score;
-        }
-    },
+	async playAgain(selectedCategoryId: number) {
+		pysaytaAjastin();
+		triviaObject.categorySelected = true;
+		triviaObject.selectedCategoryId = selectedCategoryId;
+		triviaObject.questions = [];
+		triviaObject.currentQuestionIndex = 0;
+		triviaObject.shuffledAnswers = [];
+		triviaObject.selectedAnswer = null;
+		triviaObject.isAnswerCorrect = null;
+		triviaObject.canSelectAnswer = true;
+		triviaObject.score = 0;
+		triviaObject.correctAnswers = 0;
+		triviaObject.incorrectAnswers = 0;
+		//Tämä litania resettaa pelin lukuunottamatta kategoriaa
+		// Ei toiminut joka kerta jos kutsuu reset() funktiota
+		// ja asetti sen jälkeen vielä erikseen categorySelected trueksi.
+		try {
+			const response = await fetch(
+				`https://opentdb.com/api.php?amount=20&category=${selectedCategoryId}&difficulty=medium&type=multiple`
+			);
+			const data = await response.json();
+			triviaObject.questions = data.results || [];
+			this.shuffleAnswers();
+			goto('/');
+		} catch (error) {
+			console.error('Failed to fetch questions for replay', error);
+			goto('/');
+		}
+	},
 
-    async selectCategory(categoryId: number): Promise<boolean> {
-        console.log(`Valittu kategoria: ${categoryId}`);
-        try {
-            triviaObject.currentQuestionIndex = 0;
-            triviaObject.selectedCategoryId = categoryId;
-            const response = await fetch(
-                `https://opentdb.com/api.php?amount=20&category=${categoryId}&difficulty=medium&type=multiple`
-            );
-            const data = await response.json();
-            triviaObject.questions = data.results;
-            if (data.results.length > 0) {
-                this.shuffleAnswers();
-            }
-            triviaObject.categorySelected = true;
-            console.log(`Haettu ${data.results.length} kysymystä kategorialle ${categoryId}`);
-            return true;
-        } catch (error) {
-            console.error('Haku ei onnistunut', error);
-            triviaObject.questions = [];
-            triviaObject.categorySelected = false;
-            return false;
-        }
-    },
-
-    async playAgain(selectedCategoryId: number) {
-        this.reset();
-        triviaObject.categorySelected = true;
-        triviaObject.selectedCategoryId = selectedCategoryId;
-        try {
-            const response = await fetch(
-                `https://opentdb.com/api.php?amount=20&category=${selectedCategoryId}&difficulty=medium&type=multiple`
-            );
-            const data = await response.json();
-            triviaObject.questions = data.results || [];
-            this.shuffleAnswers();
-            goto('/');
-        } catch (error) {
-            console.error('Failed to fetch questions for replay', error);
-            goto('/');
-        }
-    },
-
-    reset() {
-        triviaObject.selectedCategoryId = null;
-        triviaObject.questions = [];
-        triviaObject.currentQuestionIndex = 0;
-        triviaObject.shuffledAnswers = [];
-        triviaObject.selectedAnswer = null;
-        triviaObject.isAnswerCorrect = null;
-        triviaObject.canSelectAnswer = true;
-        triviaObject.score = 0;
-        triviaObject.correctAnswers = 0;
-        triviaObject.incorrectAnswers = 0;
-        triviaObject.categorySelected = false;
-    }
+	reset() {
+		pysaytaAjastin();
+		triviaObject.selectedCategoryId = null;
+		triviaObject.questions = [];
+		triviaObject.currentQuestionIndex = 0;
+		triviaObject.shuffledAnswers = [];
+		triviaObject.selectedAnswer = null;
+		triviaObject.isAnswerCorrect = null;
+		triviaObject.canSelectAnswer = true;
+		triviaObject.score = 0;
+		triviaObject.correctAnswers = 0;
+		triviaObject.incorrectAnswers = 0;
+		triviaObject.categorySelected = false;
+	}
 };

@@ -15,28 +15,32 @@
 	}
 </script>
 
-<!-- Ajastin ja kysymysnumero -->
-<div class="header">
-	<div class="question-counter">
-		{triviaManager.currentQuestionIndex + 1}/{triviaManager.questions.length}
-	</div>
-	<div class="points">Score: {triviaManager.score}</div>
-	<div class="timer">
-		<span class="material-symbols-outlined">timer</span>{triviaManager.ajastin}
-	</div>
-</div>
+<div class="container">
+	<!-- Ajastin ja kysymysnumero -->
+	<div class="header-container">
+		<div class="header">
+			<div class="question-counter">
+				{triviaManager.currentQuestionIndex + 1}/{triviaManager.questions.length}
+			</div>
+			<div class="points">Score: {triviaManager.score}</div>
+			<div class="timer">
+				<span class="material-symbols-outlined">timer</span>{triviaManager.ajastin}
+			</div>
+		</div>
 
-<!-- Progress bar -->
-<div class="progress-container">
-	<div class="progress-bar" style="width: 100%"></div>
+		<!-- Progress bar -->
+		<div class="progress-container">
+			<div class="progress-bar"></div>
+		</div>
+	</div>
 </div>
 
 <!-- Tulostaa kategorian nimen -->
-<div class="question-container">
-	<div class="question-info">
-		<div class="category-name">{triviaManager.currentQuestion.category}</div>
-	</div>
+<div class="question-info">
+	<div class="category-name">{triviaManager.currentQuestion.category}</div>
+</div>
 
+<div class="question-container">
 	<!-- Dekoodaa ja tulostaa kysymyksen luettavaksi -->
 	<div class="question">
 		<h4 class="questiontext">{decodeHTML(triviaManager.currentQuestion.question)}</h4>
@@ -45,14 +49,25 @@
 	<!-- Tulostaa correct / incorrect vastausvalinnan jälkeen -->
 	<div class="result-message-container">
 		{#if triviaManager.selectedAnswer !== null}
-			<div class="result-message {triviaManager.isAnswerCorrect ? 'correct' : 'incorrect'}">
-				{triviaManager.isAnswerCorrect ? 'Correct!' : 'Incorrect!'}
+			<div
+				class="result-message {triviaManager.selectedAnswer === 'TIMEOUT'
+					? 'timeout'
+					: triviaManager.isAnswerCorrect
+						? 'correct'
+						: 'incorrect'}"
+			>
+				{#if triviaManager.selectedAnswer === 'TIMEOUT'}
+					Ran out of time!
+				{:else if triviaManager.isAnswerCorrect}
+					Correct!
+				{:else}
+					Incorrect!
+				{/if}
 			</div>
 		{/if}
 	</div>
 
-	<!-- Käy läpi taulukon, jonka shuffledAnswers luo ja tulostaa ne for each metodilla. -->
-	<div class="answers-container">
+	<div class="answers-box">
 		{#each triviaManager.shuffledAnswers as answer, i}
 			{#if answer === triviaManager.selectedAnswer}
 				<Button
@@ -85,10 +100,24 @@
 </div>
 
 <style>
+	.container {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-evenly;
+		align-items: center;
+		max-width: 672px;
+		width: 672px;
+	}
+
+	.header-container {
+		width: 100%;
+	}
+
 	.question-container {
 		max-width: 672px;
-		margin: 2px auto auto auto;
-		padding: 5px;
+		margin: 0px;
+		padding: 0px;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -105,15 +134,21 @@
 	}
 
 	.answers-container {
+		margin-top: auto;
+		max-width: 672px;
+		bottom: 0px;
+		padding-bottom: 20px;
+	}
+
+	.answers-box {
 		display: flex;
 		flex-wrap: wrap;
-		align-items: center;
 		justify-content: center;
 	}
 
 	.header {
-		width: 40%;
-		max-width: 40%;
+		width: 100%;
+		max-width: 100%;
 		margin-bottom: none;
 		display: flex;
 		justify-content: space-between;
@@ -144,7 +179,7 @@
 	}
 
 	.progress-container {
-		width: 40%;
+		width: 100%;
 		min-width: 200px;
 		min-height: 20px;
 		margin: 5px;
@@ -154,7 +189,8 @@
 	}
 
 	.progress-bar {
-		height: 100%;
+		height: 20px;
+		width: 100%;
 		background-color: #4b1d6f;
 		transition: width 0.1s linear;
 	}
@@ -215,6 +251,12 @@
 	.incorrect {
 		background-color: rgba(231, 76, 60, 0.3);
 		color: #c0392b;
+		opacity: 1;
+	}
+
+	.timeout {
+		background-color: rgba(241, 196, 15, 0.3);
+		color: #d35400;
 		opacity: 1;
 	}
 
