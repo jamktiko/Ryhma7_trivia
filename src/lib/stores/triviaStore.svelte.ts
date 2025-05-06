@@ -9,6 +9,7 @@
 //isAnswerCorrect: Seuraa onko valittu vastaus oikea
 //canSelectAnswer: Seuraa onko vastauksen valinta mahdollista
 import { goto } from '$app/navigation';
+
 interface Question {
 	category: string;
 	type: string;
@@ -90,6 +91,9 @@ export const triviaManager = {
 	},
 	get score() {
 		return triviaObject.score;
+	},
+	get highScore() {
+		return triviaObject.highScore; // Palauttaa korkein pistemäärä
 	},
 	get correctAnswers() {
 		return triviaObject.correctAnswers;
