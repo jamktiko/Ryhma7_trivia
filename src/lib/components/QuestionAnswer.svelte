@@ -45,8 +45,20 @@
 	<!-- Tulostaa correct / incorrect vastausvalinnan jälkeen -->
 	<div class="result-message-container">
 		{#if triviaManager.selectedAnswer !== null}
-			<div class="result-message {triviaManager.isAnswerCorrect ? 'correct' : 'incorrect'}">
-				{triviaManager.isAnswerCorrect ? 'Correct!' : 'Incorrect!'}
+			<div
+				class="result-message {triviaManager.selectedAnswer === 'TIMEOUT'
+					? 'timeout'
+					: triviaManager.isAnswerCorrect
+						? 'correct'
+						: 'incorrect'}"
+			>
+				{#if triviaManager.selectedAnswer === 'TIMEOUT'}
+					Ran out of time!
+				{:else if triviaManager.isAnswerCorrect}
+					Correct!
+				{:else}
+					Incorrect!
+				{/if}
 			</div>
 		{/if}
 	</div>
@@ -215,6 +227,12 @@
 	.incorrect {
 		background-color: rgba(231, 76, 60, 0.3);
 		color: #c0392b;
+		opacity: 1;
+	}
+
+	.timeout {
+		background-color: rgba(241, 196, 15, 0.3);
+		color: #d35400;
 		opacity: 1;
 	}
 

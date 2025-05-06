@@ -15,10 +15,13 @@
 		<h2>Are you ready to test your knowledge?</h2>
 	</div>
 
-<div class="objcontainer">
-<h4>Choose the quiz category you want to play. You will be presented with 20 questions and your objective is to answer them correctly as fast as possible to get the maximum amount of points</h4>
-</div>
-<button onclick={() => goto('/loppunäyttö')}>Loppunäyttö</button>
+	<div class="objcontainer">
+		<h4>
+			Choose the quiz category you want to play. You will be presented with 20 questions and your
+			objective is to answer them correctly as fast as possible to get the maximum amount of points
+		</h4>
+	</div>
+	<button onclick={() => goto('/loppunäyttö')}>Loppunäyttö</button>
 </div>
 <div class="catcontainer">
 	<h3>Choose a category!</h3>
@@ -86,16 +89,15 @@
 
 	h4 {
 		font-size: 20px;
-		font-family: "Koho";
+		font-family: 'Koho';
 		padding: 0;
 		margin: 0;
 	}
 
-	
 	@media only screen and (max-width: 840px) {
-				.objcontainer {
-		display: none;
-	}
+		.objcontainer {
+			display: none;
+		}
 	}
 
 	@media only screen and (max-width: 655px) {
@@ -126,7 +128,7 @@
 
 	@media only screen and (max-height: 670px) {
 		.objcontainer {
-		display: none;
-	}
+			display: none;
+		}
 	}
 </style>

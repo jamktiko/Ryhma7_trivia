@@ -48,14 +48,15 @@ function kaynnistaAjastin() {
 	pysaytaAjastin(); // Varmistetaan, ettei vanhoja ajastimia ole käynnissä
 	triviaObject.ajastin = 20; // Asetetaan ajastin haluttuun sekuntiin
 	kulunutAika = 0; // Nollataan kulunut aika
-
 	ajastinInterval = setInterval(() => {
 		if (triviaObject.ajastin > 0) {
 			triviaObject.ajastin--; // Vähennetään ajastinta yhdellä sekunnilla
 			kulunutAika++; // Lisätään kulunutta aikaa
 		} else {
 			pysaytaAjastin(); // Pysäytetään ajastin, kun aika loppuu
-			console.log('Ajastin päättyi');
+			if (triviaObject.canSelectAnswer) {
+				triviaManager.timeOut();
+			}
 		}
 	}, 1000); // Päivitetään ajastinta sekunnin välein
 }
@@ -145,16 +146,36 @@ export const triviaManager = {
 		kaynnistaAjastin(); // Käynnistää ajastimen uuden kysymyksen alkaessa
 	},
 
+	timeOut() {
+		triviaObject.selectedAnswer = 'TIMEOUT';
+		triviaObject.isAnswerCorrect = false;
+		triviaObject.canSelectAnswer = false;
+
+		setTimeout(() => {
+			if (triviaObject.currentQuestionIndex < triviaObject.questions.length - 1) {
+				triviaObject.currentQuestionIndex++;
+				this.shuffleAnswers();
+			} else {
+				goto('/loppunäyttö');
+			}
+			triviaObject.selectedAnswer = null;
+			triviaObject.isAnswerCorrect = null;
+			triviaObject.canSelectAnswer = true;
+		}, 1000);
+	},
+
 	selectAnswer(answer: string) {
 		if (!triviaObject.canSelectAnswer) return;
-
 		const currentQuestion = triviaObject.questions[triviaObject.currentQuestionIndex];
 		const isCorrect = answer === currentQuestion.correct_answer;
-
 		if (isCorrect) {
 			triviaObject.correctAnswers++;
 			const pisteet = laskepisteet(true); // Lasketaan pisteet oikeasta vastauksesta
-			triviaObject.score += pisteet; // Päivitetään pistemäärä
+			triviaObject.score += pisteet;
+			if (triviaObject.score > triviaObject.highScore) {
+				// Päivitetään pistemäärä ja highscore
+				triviaObject.highScore = triviaObject.score;
+			}
 		} else {
 			triviaObject.incorrectAnswers++;
 			laskepisteet(false); // Ei pisteitä väärästä vastauksesta
@@ -170,18 +191,10 @@ export const triviaManager = {
 			} else {
 				goto('/loppunäyttö');
 			}
-
 			triviaObject.selectedAnswer = null;
 			triviaObject.isAnswerCorrect = null;
 			triviaObject.canSelectAnswer = true;
 		}, 1000);
-	},
-
-	updateScore(points: number) {
-		triviaObject.score += points;
-		if (triviaObject.score > triviaObject.highScore) {
-			triviaObject.highScore = triviaObject.score;
-		}
 	},
 
 	async selectCategory(categoryId: number): Promise<boolean> {
@@ -227,6 +240,7 @@ export const triviaManager = {
 	},
 
 	reset() {
+		pysaytaAjastin();
 		triviaObject.selectedCategoryId = null;
 		triviaObject.questions = [];
 		triviaObject.currentQuestionIndex = 0;
