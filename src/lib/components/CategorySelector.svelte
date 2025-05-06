@@ -18,7 +18,6 @@
 <div class="objcontainer">
 <h4>Choose the quiz category you want to play. You will be presented with 20 questions and your objective is to answer them correctly as fast as possible to get the maximum amount of points</h4>
 </div>
-<button onclick={() => goto('/loppunäyttö')}>Loppunäyttö</button>
 </div>
 <div class="catcontainer">
 	<h3>Choose a category!</h3>
@@ -63,6 +62,7 @@
 	.catcontainer {
 		bottom: 0;
 		max-width: 672px;
+		padding-bottom: 20px;
 	}
 
 	.buttoncontainer {
@@ -70,7 +70,6 @@
 		flex-wrap: wrap;
 		justify-content: center;
 		min-height: 200px;
-		margin-bottom: 20px;
 	}
 
 	.objcontainer {

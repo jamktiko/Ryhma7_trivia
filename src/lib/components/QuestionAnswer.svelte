@@ -51,6 +51,7 @@
 
 	<!-- Käy läpi taulukon, jonka shuffledAnswers luo ja tulostaa ne for each metodilla. -->
 	<div class="answers-container">
+		<div class="answers-box">
 		{#each triviaManager.shuffledAnswers as answer, i}
 			{#if answer === triviaManager.selectedAnswer}
 				<Button
@@ -81,10 +82,12 @@
 		{/each}
 	</div>
 </div>
+</div>
 
 <style>
 	.question-container {
 		max-width: 672px;
+		height: 100%;
 		margin: 3px auto auto auto;
 		padding: 5px;
 		display: flex;
@@ -103,9 +106,13 @@
 	}
 
 	.answers-container {
+		margin-top: auto;
+		bottom: 0px;
+	}
+
+	.answers-box {
 		display: flex;
 		flex-wrap: wrap;
-		align-items: center;
 		justify-content: center;
 	}
 
