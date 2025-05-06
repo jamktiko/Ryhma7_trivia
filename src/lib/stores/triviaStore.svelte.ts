@@ -159,25 +159,22 @@ export const triviaManager = {
 			triviaObject.incorrectAnswers++;
 			laskepisteet(false); // Ei pisteitä väärästä vastauksesta
 		}
-
 		triviaObject.selectedAnswer = answer;
 		triviaObject.isAnswerCorrect = isCorrect;
 		triviaObject.canSelectAnswer = false;
-
 		pysaytaAjastin(); // Pysäytetään ajastin, kun vastaus on valittu
-
 		setTimeout(() => {
 			if (triviaObject.currentQuestionIndex < triviaObject.questions.length - 1) {
 				triviaObject.currentQuestionIndex++;
 				this.shuffleAnswers();
 			} else {
-				console.log('Kysely valmis!');
+				goto('/loppunäyttö');
 			}
 
 			triviaObject.selectedAnswer = null;
 			triviaObject.isAnswerCorrect = null;
 			triviaObject.canSelectAnswer = true;
-		}, 1500);
+		}, 1000);
 	},
 
 	updateScore(points: number) {
