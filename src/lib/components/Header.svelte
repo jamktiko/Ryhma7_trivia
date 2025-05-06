@@ -12,16 +12,16 @@
 <style>
 	header {
 		flex-shrink: 0;
-		width: 160px;
-		height: 120px;
+		width: 120px;
+		height: 80px;
 		margin: auto;
 		margin-top: 0;
 	}
 
 	.logo-container {
 		position: relative; /* Tarvitaan, jotta painike voidaan sijoittaa kuvan päälle */
-		width: 150px;
-		height: 110px;
+		width: 120px;
+		height: 80px;
 	}
 
 	.logo {
@@ -37,8 +37,8 @@
 		transform: translate(-50%, -50%); /* painikkeen sijoittaminen keselle */
 		background-color: transparent; /* Poistaa taustan */
 		border: none; /* Poistaa reunukset */
-		width: 150px;
-		height: 110px;
+		width: 120px;
+		height: 80px;
 		cursor: pointer;
 		opacity: 0; /* Tekee painikkeen näkymättömäksi */
 	}

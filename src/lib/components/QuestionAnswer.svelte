@@ -22,7 +22,7 @@
 	</div>
 	<div class="points">Score: {triviaManager.score}</div>
 	<div class="timer">
-		<span class="material-symbols-outlined">timer</span>15s
+		<span class="material-symbols-outlined">timer</span>{triviaManager.ajastin}
 	</div>
 </div>
 
@@ -45,11 +45,13 @@
 	</div>
 
 	<!-- Tulostaa correct / incorrect vastausvalinnan jälkeen -->
-	{#if triviaManager.selectedAnswer !== null}
-		<div class="result-message {triviaManager.isAnswerCorrect ? 'correct' : 'incorrect'}">
-			{triviaManager.isAnswerCorrect ? 'Correct!' : 'Incorrect!'}
-		</div>
-	{/if}
+	<div class="result-message-container">
+		{#if triviaManager.selectedAnswer !== null}
+			<div class="result-message {triviaManager.isAnswerCorrect ? 'correct' : 'incorrect'}">
+				{triviaManager.isAnswerCorrect ? 'Correct!' : 'Incorrect!'}
+			</div>
+		{/if}
+	</div>
 
 	<!-- Käy läpi taulukon, jonka shuffledAnswers luo ja tulostaa ne for each metodilla. -->
 	<div class="answers-container">
@@ -61,7 +63,7 @@
 					onclick={() => answerSelector(answer)}
 					disabled={!triviaManager.canSelectAnswer}
 					font="KoHo"
-					fontSize="28px"
+					fontSize="26px"
 				/>
 			{:else}
 				<!-- Tulostaa buttonin värin ehdollisesti, riippuen kysymysnumerosta -->
@@ -75,7 +77,7 @@
 								? 'ansbutton3-color'
 								: 'ansbutton4-color'}
 					font="KoHo"
-					fontSize="28px"
+					fontSize="26px"
 					onclick={() => answerSelector(answer)}
 					disabled={!triviaManager.canSelectAnswer}
 				/>
@@ -87,7 +89,7 @@
 <style>
 	.question-container {
 		max-width: 672px;
-		margin: 3px auto auto auto;
+		margin: 2px auto auto auto;
 		padding: 5px;
 		display: flex;
 		flex-direction: column;
@@ -99,7 +101,7 @@
 	}
 
 	.category-name {
-		font-size: 30px;
+		font-size: 25px;
 		font-family: 'Protest Strike', sans-serif;
 		margin: auto;
 	}
@@ -187,31 +189,35 @@
 		margin: 0;
 	}
 
+	.result-message-container {
+		height: 40px; /* Reserve space for the result message */
+		display: flex;
+		align-items: center; /* Vertically center the message */
+		justify-content: center; /* Horizontally center the message */
+	}
+
 	.result-message {
-		font-size: 24px;
-		font-weight: bold;
-		padding: 10px 20px;
-		margin: 10px 0;
+		margin: 0; /* Remove any margin to prevent shifting */
+		padding: 2px 10px;
 		border-radius: 10px;
+		font-size: 18px;
+		font-weight: bold;
 		text-transform: uppercase;
+		font-family: 'KoHo', sans-serif;
+		opacity: 0; /* Start hidden */
+		transition: opacity 0.3s ease-in-out; /* Smooth fade-in effect */
 	}
 
 	.correct {
 		background-color: rgba(46, 204, 113, 0.3);
 		color: #27ae60;
-		font-family: 'KoHo', sans-serif;
-		font-size: 1.2rem;
-		margin: auto;
-		padding: 2px 10px;
+		opacity: 1;
 	}
 
 	.incorrect {
 		background-color: rgba(231, 76, 60, 0.3);
 		color: #c0392b;
-		font-family: 'KoHo', sans-serif;
-		font-size: 1.2rem;
-		margin: auto;
-		padding: 2px 10px;
+		opacity: 1;
 	}
 
 	@media only screen and (max-width: 412px) {
