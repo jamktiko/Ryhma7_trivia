@@ -28,30 +28,30 @@
 <h3>Do you want to play again?</h3>
 
 <div class="button-container">
-    <Button
-        text="Play again"
-        color="button1-color"
-        onclick={() => {
-            if (triviaManager.selectedCategoryId !== null) {
-                triviaManager.playAgain(triviaManager.selectedCategoryId);
-            } else {
-                goto('/');
-            }
-        }}
-        font="Protest Strike"
-        fontSize="28px"
-    />
+	<Button
+		text="Change categories"
+		color="button2-color"
+		onclick={() => {
+			triviaManager.reset();
+			goto('/');
+		}}
+		font="Protest Strike"
+		fontSize="32px"
+	/>
 
-    <Button
-        text="Change categories"
-        color="button1-color"
-        onclick={() => {
-            triviaManager.reset();
-            goto('/');
-        }}
-        font="Protest Strike"
-        fontSize="28px"
-    />
+	<Button
+		text="Play again"
+		color="button1-color"
+		onclick={() => {
+			if (triviaManager.selectedCategoryId !== null) {
+				triviaManager.playAgain(triviaManager.selectedCategoryId);
+			} else {
+				goto('/');
+			}
+		}}
+		font="Protest Strike"
+		fontSize="40px"
+	/>
 </div>
 
 <style>
