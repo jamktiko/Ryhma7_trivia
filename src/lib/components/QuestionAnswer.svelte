@@ -133,13 +133,6 @@
 		margin: auto;
 	}
 
-	.answers-container {
-		margin-top: auto;
-		max-width: 672px;
-		bottom: 0px;
-		padding-bottom: 20px;
-	}
-
 	.answers-box {
 		display: flex;
 		flex-wrap: wrap;

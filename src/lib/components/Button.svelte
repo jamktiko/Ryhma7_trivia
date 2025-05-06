@@ -4,7 +4,7 @@
 		onclick?: () => void;
 		disabled?: boolean;
 		font?: string;
-		fontSize?: string; // New prop for font size
+		fontSize?: string;
 		color:
 			| 'button1-color'
 			| 'button2-color'
@@ -21,12 +21,15 @@
 		disabled = false,
 		color,
 		font = 'Protest Strike',
-		fontSize = '32px' // Default is 32px
+		fontSize = '32px'
 	}: Props = $props();
 </script>
 
-<button class={color} style={`font-family: ${font}; font-size: ${fontSize};`} {onclick} {disabled}
-	>{text}</button
+<button
+	class={color}
+	style={`font-family: ${font}; --button-font-size: ${fontSize};`}
+	{onclick}
+	{disabled}>{text}</button
 >
 
 <style>
@@ -37,6 +40,7 @@
 		margin: 8px;
 		border-radius: 30px;
 		border: none;
+		font-size: var(--button-font-size);
 		color: var(--buttontext-color);
 		box-shadow:
 			2px 2px 4px rgba(0, 0, 0, 25%),
@@ -133,6 +137,7 @@
 			width: 45%;
 			min-width: 150px;
 			height: 128px;
+			font-size: calc(var(--button-font-size) * 0.75);
 		}
 	}
 
@@ -141,6 +146,7 @@
 			width: 45%;
 			min-width: 150px;
 			height: 128px;
+			font-size: calc(var(--button-font-size) * 0.55);
 		}
 	}
 </style>

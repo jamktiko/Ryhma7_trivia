@@ -11,47 +11,46 @@
 import { goto } from '$app/navigation';
 
 interface Question {
-	category: string;
-	type: string;
-	difficulty: string;
-	question: string;
-	correct_answer: string;
-	incorrect_answers: string[];
+    category: string;
+    type: string;
+    difficulty: string;
+    question: string;
+    correct_answer: string;
+    incorrect_answers: string[];
 }
 
 const triviaObject = $state({
-	categories: [
-		{ id: 21, name: 'Sports' },
-		{ id: 23, name: 'History' },
-		{ id: 22, name: 'Geography' },
-		{ id: 27, name: 'Animals' }
-	],
-	selectedCategoryId: null as number | null,
-	categorySelected: false,
-	questions: [] as Question[],
-	currentQuestionIndex: 0,
-	shuffledAnswers: [] as string[],
-	selectedAnswer: null as string | null,
-	isAnswerCorrect: null as boolean | null,
-	canSelectAnswer: true,
-	score: 0,
-	correctAnswers: 0,
-	incorrectAnswers: 0,
-	highScore: 0,
-	ajastin: 0 // Ajastin sekunteina
+    categories: [
+        { id: 21, name: 'Sports' },
+        { id: 23, name: 'History' },
+        { id: 22, name: 'Geography' },
+        { id: 27, name: 'Animals' }
+    ],
+    selectedCategoryId: null as number | null,
+    categorySelected: false,
+    questions: [] as Question[],
+    currentQuestionIndex: 0,
+    shuffledAnswers: [] as string[],
+    selectedAnswer: null as string | null,
+    isAnswerCorrect: null as boolean | null,
+    canSelectAnswer: true,
+    score: 0,
+    correctAnswers: 0,
+    incorrectAnswers: 0,
+    highScore: 0,
+    ajastin: 0 // Ajastin sekunteina
 });
 
-let kulunutAika: number = 0; // Kulunut aika sekunteina
 let ajastinInterval: ReturnType<typeof setInterval> | null = null;
 
 function kaynnistaAjastin() {
 	pysaytaAjastin(); // Varmistetaan, ettei vanhoja ajastimia ole käynnissä
 	triviaObject.ajastin = 20; // Asetetaan ajastin haluttuun sekuntiin
-	kulunutAika = 0; // Nollataan kulunut aika
+	
 	ajastinInterval = setInterval(() => {
 		if (triviaObject.ajastin > 0) {
 			triviaObject.ajastin--; // Vähennetään ajastinta yhdellä sekunnilla
-			kulunutAika++; // Lisätään kulunutta aikaa
+			
 		} else {
 			pysaytaAjastin(); // Pysäytetään ajastin, kun aika loppuu
 			if (triviaObject.canSelectAnswer) {
@@ -62,89 +61,86 @@ function kaynnistaAjastin() {
 }
 
 function pysaytaAjastin() {
-	if (ajastinInterval) {
-		clearInterval(ajastinInterval); // Pysäytetään ajastin
-		ajastinInterval = null;
-	}
+    if (ajastinInterval) {
+        clearInterval(ajastinInterval); // Pysäytetään ajastin
+        ajastinInterval = null;
+    }
 }
-
-function laskepisteet(onkoVastausOikein: boolean) {
-	const maxPisteet = 10;
-	const pistevahennus = 1; // Pistevähennys joka sekunnilta
-
-	if (!onkoVastausOikein) {
-		return 0; // Ei pisteitä, jos vastaus on väärin
-	} else if (kulunutAika > triviaObject.ajastin) {
-		return 0; // Ei pisteitä, jos aika menee yli
-	} else if (kulunutAika <= 5) {
-		return maxPisteet; // Ei vähennystä ensimmäisen viiden sekunnin aikana
-	} else {
-		// Vähennetään pisteitä jokaiselta sekunnilta viiden sekunnin jälkeen
-		const kulunutAikaVahennykseen = kulunutAika - 5; // Vähennys alkaa vasta 5 sekunnin jälkeen
-		return Math.max(0, maxPisteet - kulunutAikaVahennykseen * pistevahennus);
+	function laskepisteet(onkoVastausOikein: boolean) {
+		const maxPisteet = 15; // Täydet pisteet
+		const minAjastin = 0; // Aika nollaantuu
+	
+		if (!onkoVastausOikein) {
+			return 0; // Ei pisteitä, jos vastaus on väärin
+		} else if (triviaObject.ajastin <= minAjastin) {
+			return 0; // Ei pisteitä, jos aika on loppunut
+		} else if (triviaObject.ajastin > 14) {
+			return maxPisteet; // Täydet pisteet, jos aikaa on yli 14 sekuntia
+		} else {
+			// Lasketaan pisteet ajan perusteella, mitä nopeammin vastaa, sitä enemmän pisteitä
+			return Math.max(0, triviaObject.ajastin); // Pisteet vastaavat jäljellä olevaa aikaa
+		}
 	}
-}
-
 // Getterit kategoriaa, valittua kategoriaa ja kysymyksiä varten
 export const triviaManager = {
-	get ajastin() {
-		return triviaObject.ajastin; // Palauttaa ajastimen arvon
-	},
-	get score() {
-		return triviaObject.score;
-	},
-	get highScore() {
-		return triviaObject.highScore; // Palauttaa korkein pistemäärä
-	},
-	get correctAnswers() {
-		return triviaObject.correctAnswers;
-	},
-	get incorrectAnswers() {
-		return triviaObject.incorrectAnswers;
-	},
-	get categories() {
-		return triviaObject.categories;
-	},
-	get selectedCategoryId() {
-		return triviaObject.selectedCategoryId;
-	},
-	get selectedCategory() {
-		return triviaObject.categories.find(
-			(category) => category.id === triviaObject.selectedCategoryId
-		);
-	},
-	get questions() {
-		return triviaObject.questions;
-	},
-	get currentQuestionIndex() {
-		return triviaObject.currentQuestionIndex;
-	},
-	get shuffledAnswers() {
-		return triviaObject.shuffledAnswers;
-	},
-	get selectedAnswer() {
-		return triviaObject.selectedAnswer;
-	},
-	get isAnswerCorrect() {
-		return triviaObject.isAnswerCorrect;
-	},
-	get canSelectAnswer() {
-		return triviaObject.canSelectAnswer;
-	},
-	get currentQuestion() {
-		return triviaObject.questions[triviaObject.currentQuestionIndex];
-	},
-	get isCategorySelected() {
-		return triviaObject.categorySelected;
-	},
+    get ajastin() {
+        return triviaObject.ajastin; // Palauttaa ajastimen arvon
+    },
+    get score() {
+        return triviaObject.score;
+    },
+    get highScore() {
+        return triviaObject.highScore; // Palauttaa korkein pistemäärä
+    },
+    get correctAnswers() {
+        return triviaObject.correctAnswers;
+    },
+    get incorrectAnswers() {
+        return triviaObject.incorrectAnswers;
+    },
+    get categories() {
+        return triviaObject.categories;
+    },
+    get selectedCategoryId() {
+        return triviaObject.selectedCategoryId;
+    },
+    get selectedCategory() {
+        return triviaObject.categories.find(
+            (category) => category.id === triviaObject.selectedCategoryId
+        );
+    },
+    get questions() {
+        return triviaObject.questions;
+    },
+    get currentQuestionIndex() {
+        return triviaObject.currentQuestionIndex;
+    },
+    get shuffledAnswers() {
+        return triviaObject.shuffledAnswers;
+    },
+    get selectedAnswer() {
+        return triviaObject.selectedAnswer;
+    },
+    get isAnswerCorrect() {
+        return triviaObject.isAnswerCorrect;
+    },
+    get canSelectAnswer() {
+        return triviaObject.canSelectAnswer;
+    },
+    get currentQuestion() {
+        return triviaObject.questions[triviaObject.currentQuestionIndex];
+    },
+    get isCategorySelected() {
+        return triviaObject.categorySelected;
+    },
 
-	shuffleAnswers() {
-		const currentQuestion = triviaObject.questions[triviaObject.currentQuestionIndex];
-		if (!currentQuestion) return;
-		const allAnswers = [currentQuestion.correct_answer, ...currentQuestion.incorrect_answers];
-		triviaObject.shuffledAnswers = allAnswers.sort(() => Math.random() - 0.5);
-		kaynnistaAjastin(); // Käynnistää ajastimen uuden kysymyksen alkaessa
-	},
+    shuffleAnswers() {
+        const currentQuestion = triviaObject.questions[triviaObject.currentQuestionIndex];
+        if (!currentQuestion) return;
+        const allAnswers = [currentQuestion.correct_answer, ...currentQuestion.incorrect_answers];
+        triviaObject.shuffledAnswers = allAnswers.sort(() => Math.random() - 0.5);
+        kaynnistaAjastin(); // Käynnistää ajastimen uuden kysymyksen alkaessa
+    },
 
 	timeOut() {
 		triviaObject.selectedAnswer = 'TIMEOUT';
