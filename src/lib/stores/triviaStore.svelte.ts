@@ -222,9 +222,21 @@ export const triviaManager = {
 	},
 
 	async playAgain(selectedCategoryId: number) {
-		this.reset();
+		pysaytaAjastin();
 		triviaObject.categorySelected = true;
 		triviaObject.selectedCategoryId = selectedCategoryId;
+		triviaObject.questions = [];
+		triviaObject.currentQuestionIndex = 0;
+		triviaObject.shuffledAnswers = [];
+		triviaObject.selectedAnswer = null;
+		triviaObject.isAnswerCorrect = null;
+		triviaObject.canSelectAnswer = true;
+		triviaObject.score = 0;
+		triviaObject.correctAnswers = 0;
+		triviaObject.incorrectAnswers = 0;
+		//Tämä litania resettaa pelin lukuunottamatta kategoriaa
+		// Ei toiminut joka kerta jos kutsuu reset() funktiota
+		// ja asetti sen jälkeen vielä erikseen categorySelected trueksi.
 		try {
 			const response = await fetch(
 				`https://opentdb.com/api.php?amount=20&category=${selectedCategoryId}&difficulty=medium&type=multiple`

@@ -34,6 +34,7 @@
 		</div>
 	</div>
 </div>
+
 <!-- Tulostaa kategorian nimen -->
 <div class="question-info">
 	<div class="category-name">{triviaManager.currentQuestion.category}</div>
