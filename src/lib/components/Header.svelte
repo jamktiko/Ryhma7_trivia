@@ -1,13 +1,18 @@
 <script lang="ts">
-	function sivunpaivitus() {
-		window.location.reload(); // Päivittää sivun
-	}
+	import { goto } from '$app/navigation';
+	import { triviaManager } from '$lib/stores/triviaStore.svelte';
 </script>
 
 <header>
 	<div class="logo-container">
 		<img src="logo.png" alt="MindSpark logo" class="logo" />
-		<button class="refresh-button" onclick={sivunpaivitus}>⟳</button>
+		<button
+			class="refresh-button"
+			onclick={() => {
+				triviaManager.reset();
+				goto('/');
+			}}>⟳</button
+		>
 	</div>
 </header>
 
