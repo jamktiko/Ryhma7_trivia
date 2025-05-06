@@ -45,7 +45,7 @@ let ajastinInterval: ReturnType<typeof setInterval> | null = null;
 
 function kaynnistaAjastin() {
     pysaytaAjastin(); // Varmistetaan, ettei vanhoja ajastimia ole käynnissä
-    triviaObject.ajastin = 25; // Asetetaan ajastin haluttuun sekuntiin
+    triviaObject.ajastin = 20; // Asetetaan ajastin haluttuun sekuntiin
     kulunutAika = 0; // Nollataan kulunut aika
 
     ajastinInterval = setInterval(() => {
@@ -68,15 +68,18 @@ function pysaytaAjastin() {
 
 function laskepisteet(onkoVastausOikein: boolean) {
     const maxPisteet = 10;
-    const maxAika = triviaObject.ajastin; // Asetetaan oletusarvo, jos triviaObject.ajastin ei ole määritetty
-    const aikasakko = maxPisteet / maxAika; // Pistevähennys joka sekunnilta
+    const pistevahennus = 1; // Pistevähennys joka sekunnilta
 
     if (!onkoVastausOikein) {
         return 0; // Ei pisteitä, jos vastaus on väärin
-    } else if (kulunutAika > maxAika) {
+    } else if (kulunutAika > triviaObject.ajastin) {
         return 0; // Ei pisteitä, jos aika menee yli
+    } else if (kulunutAika <= 5) {
+        return maxPisteet; // Ei vähennystä ensimmäisen viiden sekunnin aikana
     } else {
-        return Math.max(0, Math.floor(maxPisteet - kulunutAika * aikasakko)); // Lasketaan pisteet
+        // Vähennetään pisteitä jokaiselta sekunnilta viiden sekunnin jälkeen
+        const kulunutAikaVahennykseen = kulunutAika - 5; // Vähennys alkaa vasta 5 sekunnin jälkeen
+        return Math.max(0, maxPisteet - kulunutAikaVahennykseen * pistevahennus);
     }
 }
 
