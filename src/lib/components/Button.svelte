@@ -3,7 +3,8 @@
 		text: string;
 		onclick?: () => void;
 		disabled?: boolean;
-		font?: string; // New prop for font customization
+		font?: string;
+		fontSize?: string; // New prop for font size
 		color:
 			| 'button1-color'
 			| 'ansbutton1-color'
@@ -13,10 +14,19 @@
 			| 'correctans-color'
 			| 'wrongans-color';
 	}
-	let { text, onclick, disabled = false, color, font = 'Protest Strike' }: Props = $props();
+	let {
+		text,
+		onclick,
+		disabled = false,
+		color,
+		font = 'Protest Strike',
+		fontSize = '32px' // Default is 32px
+	}: Props = $props();
 </script>
 
-<button class={color} style={`font-family: ${font}`} {onclick} {disabled}>{text}</button>
+<button class={color} style={`font-family: ${font}; font-size: ${fontSize};`} {onclick} {disabled}
+	>{text}</button
+>
 
 <style>
 	button {
@@ -26,7 +36,6 @@
 		margin: 8px;
 		border-radius: 30px;
 		border: none;
-		font-size: 32px;
 		color: var(--buttontext-color);
 		box-shadow:
 			2px 2px 4px rgba(0, 0, 0, 25%),
@@ -110,14 +119,16 @@
 	@media only screen and (max-width: 658px) {
 		button {
 			width: 45%;
-			min-width: 45%;
+			min-width: 150px;
 			height: 128px;
 		}
 	}
 
 	@media only screen and (max-width: 412px) {
+
 		button {
-			width: 172px;
+			width: 45%;
+			min-width: 150px;
 			height: 128px;
 		}
 	}

@@ -19,8 +19,5 @@
 	<QuestionAnswer />
 {/if}
 
-<!-- Tyylit kommentoitu pois, 
-koska kategororiasta tehty oma komponentti 
-ja tyylit ovat siellä. -->
 <style>
 </style>

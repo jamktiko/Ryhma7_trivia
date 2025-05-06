@@ -8,7 +8,7 @@
 //selectedAnswer: Valittu vastaus
 //isAnswerCorrect: Seuraa onko valittu vastaus oikea
 //canSelectAnswer: Seuraa onko vastauksen valinta mahdollista
-
+import { goto } from '$app/navigation';
 interface Question {
     category: string;
     type: string;
@@ -37,7 +37,7 @@ const triviaObject = $state({
     correctAnswers: 0,
     incorrectAnswers: 0,
     highScore: 0,
-    ajastin: 0 // Ajastin sekunteina
+    ajastin: 0, // Ajastin sekunteina
 });
 
 let kulunutAika: number = 0; // Kulunut aika sekunteina
@@ -204,16 +204,36 @@ export const triviaManager = {
         }
     },
 
-    reset() {
-        triviaObject.selectedCategoryId = null;
-        triviaObject.questions = [];
-        triviaObject.currentQuestionIndex = 0;
-        triviaObject.shuffledAnswers = [];
-        triviaObject.selectedAnswer = null;
-        triviaObject.isAnswerCorrect = null;
-        triviaObject.canSelectAnswer = true;
-        triviaObject.score = 0;
-        triviaObject.correctAnswers = 0;
-        triviaObject.incorrectAnswers = 0;
-    }
+
+	async playAgain(selectedCategoryId: number) {
+		this.reset();
+		triviaObject.categorySelected = true;
+		triviaObject.selectedCategoryId = selectedCategoryId;
+		try {
+			const response = await fetch(
+				`https://opentdb.com/api.php?amount=20&category=${selectedCategoryId}&difficulty=medium&type=multiple`
+			);
+			const data = await response.json();
+			triviaObject.questions = data.results || [];
+			this.shuffleAnswers();
+			goto('/');
+		} catch (error) {
+			console.error('Failed to fetch questions for replay', error);
+			goto('/');
+		}
+	},
+
+	reset() {
+		triviaObject.selectedCategoryId = null;
+		triviaObject.questions = [];
+		triviaObject.currentQuestionIndex = 0;
+		triviaObject.shuffledAnswers = [];
+		triviaObject.selectedAnswer = null;
+		triviaObject.isAnswerCorrect = null;
+		triviaObject.canSelectAnswer = true;
+		triviaObject.score = 0;
+		triviaObject.correctAnswers = 0;
+		triviaObject.incorrectAnswers = 0;
+		triviaObject.categorySelected = false;
+	}
 };

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte';
 	import { triviaManager } from '$lib/stores/triviaStore.svelte';
+	import { goto } from '$app/navigation';
 
 	interface Props {
 		categorySelector: (categoryId: number) => Promise<void>;
@@ -13,6 +14,11 @@
 		<h1>Welcome to MindSpark!</h1>
 		<h2>Are you ready to test your knowledge?</h2>
 	</div>
+
+<div class="objcontainer">
+<h4>Choose the quiz category you want to play. You will be presented with 20 questions and your objective is to answer them correctly as fast as possible to get the maximum amount of points</h4>
+</div>
+<button onclick={() => goto('/loppunäyttö')}>Loppunäyttö</button>
 </div>
 <div class="catcontainer">
 	<h3>Choose a category!</h3>
@@ -25,6 +31,7 @@
 				color="button1-color"
 				onclick={() => categorySelector(category.id)}
 				font="Protest Strike"
+				fontSize="32px"
 			/>
 		{/each}
 	</div>
@@ -66,11 +73,29 @@
 		margin-bottom: 20px;
 	}
 
+	.objcontainer {
+		width: 800px;
+	}
+
 	h3 {
 		font-size: 40px;
 		font-family: 'KoHo';
 		padding: 30px 0 5px 0;
 		margin: 0;
+	}
+
+	h4 {
+		font-size: 20px;
+		font-family: "Koho";
+		padding: 0;
+		margin: 0;
+	}
+
+	
+	@media only screen and (max-width: 840px) {
+				.objcontainer {
+		display: none;
+	}
 	}
 
 	@media only screen and (max-width: 655px) {
@@ -97,5 +122,11 @@
 			font-size: 28px;
 			padding: 10px 0 5px 0;
 		}
+	}
+
+	@media only screen and (max-height: 670px) {
+		.objcontainer {
+		display: none;
+	}
 	}
 </style>
