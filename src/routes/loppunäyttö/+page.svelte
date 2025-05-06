@@ -23,6 +23,17 @@
 
 <div class="button-container">
 	<Button
+		text="Change categories"
+		color="button2-color"
+		onclick={() => {
+			triviaManager.reset();
+			goto('/');
+		}}
+		font="Protest Strike"
+		fontSize="32px"
+	/>
+
+	<Button
 		text="Play again"
 		color="button1-color"
 		onclick={() => {
@@ -33,18 +44,7 @@
 			}
 		}}
 		font="Protest Strike"
-		fontSize="28px"
-	/>
-
-	<Button
-		text="Change categories"
-		color="button1-color"
-		onclick={() => {
-			triviaManager.reset();
-			goto('/');
-		}}
-		font="Protest Strike"
-		fontSize="28px"
+		fontSize="40px"
 	/>
 </div>
 

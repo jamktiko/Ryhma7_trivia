@@ -7,6 +7,7 @@
 		fontSize?: string; // New prop for font size
 		color:
 			| 'button1-color'
+			| 'button2-color'
 			| 'ansbutton1-color'
 			| 'ansbutton2-color'
 			| 'ansbutton3-color'
@@ -49,6 +50,17 @@
 	.button1-color:hover {
 		cursor: pointer;
 		background-color: rgba(253, 170, 83, 40%);
+		box-shadow:
+			1px 1px 4px rgba(0, 0, 0, 25%),
+			inset -3px -3px 4px rgba(0, 0, 0, 25%);
+	}
+	.button2-color {
+		background-color: var(--button2-color);
+	}
+
+	.button2-color:hover {
+		cursor: pointer;
+		background-color: rgba(253, 170, 83, 25%);
 		box-shadow:
 			1px 1px 4px rgba(0, 0, 0, 25%),
 			inset -3px -3px 4px rgba(0, 0, 0, 25%);
@@ -125,7 +137,6 @@
 	}
 
 	@media only screen and (max-width: 412px) {
-
 		button {
 			width: 45%;
 			min-width: 150px;
