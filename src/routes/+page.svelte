@@ -13,7 +13,9 @@
 
 {#if !triviaManager.isCategorySelected}
 	<CategorySelector categorySelector={categorySelect} />
-{:else}
+{:else} 
+<!-- Näytetään ajastin ja kysymys-vastauskomponentti, kun kategoria on valittu -->
+
 	<QuestionAnswer />
 {/if}
 
