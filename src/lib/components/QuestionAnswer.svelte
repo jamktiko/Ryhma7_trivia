@@ -16,32 +16,30 @@
 </script>
 
 <div class="container">
-<!-- Ajastin ja kysymysnumero -->
-<div class="header-container">
-	<div class="header">
-	<div class="question-counter">
-		{triviaManager.currentQuestionIndex + 1}/{triviaManager.questions.length}
-	</div>
-	<div class="points">Score: {triviaManager.score}</div>
-	<div class="timer">
-		<span class="material-symbols-outlined">timer</span>{triviaManager.ajastin}
-	</div>
-</div>
-
-
-<!-- Progress bar -->
-<div class="progress-container">
-	<div class="progress-bar"></div>
-</div>
-</div>
-
-<div>
-<!-- Tulostaa kategorian nimen -->
-		<div class="question-info">
-			<div class="category-name">{triviaManager.currentQuestion.category}</div>
+	<!-- Ajastin ja kysymysnumero -->
+	<div class="header-container">
+		<div class="header">
+			<div class="question-counter">
+				{triviaManager.currentQuestionIndex + 1}/{triviaManager.questions.length}
 			</div>
+			<div class="points">Score: {triviaManager.score}</div>
+			<div class="timer">
+				<span class="material-symbols-outlined">timer</span>{triviaManager.ajastin}
+			</div>
+		</div>
 
-			<div class="question-container">
+		<!-- Progress bar -->
+		<div class="progress-container">
+			<div class="progress-bar"></div>
+		</div>
+	</div>
+</div>
+<!-- Tulostaa kategorian nimen -->
+<div class="question-info">
+	<div class="category-name">{triviaManager.currentQuestion.category}</div>
+</div>
+
+<div class="question-container">
 	<!-- Dekoodaa ja tulostaa kysymyksen luettavaksi -->
 	<div class="question">
 		<h4 class="questiontext">{decodeHTML(triviaManager.currentQuestion.question)}</h4>
@@ -68,7 +66,7 @@
 		{/if}
 	</div>
 
-		<div class="answers-box">
+	<div class="answers-box">
 		{#each triviaManager.shuffledAnswers as answer, i}
 			{#if answer === triviaManager.selectedAnswer}
 				<Button
@@ -90,15 +88,15 @@
 							: i === 2
 								? 'ansbutton3-color'
 								: 'ansbutton4-color'}
-						font="KoHo"
-						fontSize="26px"
-						onclick={() => answerSelector(answer)}
-						disabled={!triviaManager.canSelectAnswer}
-					/>
-				{/if}
-			{/each}
-		</div>
+					font="KoHo"
+					fontSize="26px"
+					onclick={() => answerSelector(answer)}
+					disabled={!triviaManager.canSelectAnswer}
+				/>
+			{/if}
+		{/each}
 	</div>
+</div>
 
 <style>
 	.container {
