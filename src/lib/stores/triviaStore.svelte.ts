@@ -37,6 +37,7 @@ const triviaObject = $state({
 	score: 0,
 	correctAnswers: 0,
 	incorrectAnswers: 0,
+	totalAnswers: 0,
 	highScores: {} as Record<number, number>, // jokaiselle kategorialle oma highscore
 	ajastin: 0 // Ajastin sekunteina
 });
@@ -82,16 +83,19 @@ function laskepisteet(onkoVastausOikein: boolean) {
 	}
 }
 
-// Getterit kategoriaa, valittua kategoriaa ja kysymyksiä varten
+// Getterit
 export const triviaManager = {
+	get totalAnswers() {
+		return triviaObject.totalAnswers;
+	},
 	get ajastin() {
-		return triviaObject.ajastin; // Palauttaa ajastimen arvon
+		return triviaObject.ajastin;
 	},
 	get score() {
 		return triviaObject.score;
 	},
 	get highScore() {
-		return triviaObject.highScores; // Palauttaa korkein pistemäärä
+		return triviaObject.highScores;
 	},
 	get correctAnswers() {
 		return triviaObject.correctAnswers;
@@ -136,6 +140,7 @@ export const triviaManager = {
 	},
 
 	shuffleAnswers() {
+		//sekoittaa vastaukset, että ovat satunnaisessa järjestyksessä
 		const currentQuestion = triviaObject.questions[triviaObject.currentQuestionIndex];
 		if (!currentQuestion) return;
 		const allAnswers = [currentQuestion.correct_answer, ...currentQuestion.incorrect_answers];
@@ -147,7 +152,6 @@ export const triviaManager = {
 		triviaObject.selectedAnswer = 'TIMEOUT';
 		triviaObject.isAnswerCorrect = false;
 		triviaObject.canSelectAnswer = false;
-
 		setTimeout(() => {
 			if (triviaObject.currentQuestionIndex < triviaObject.questions.length - 1) {
 				triviaObject.currentQuestionIndex++;
@@ -173,6 +177,7 @@ export const triviaManager = {
 			triviaObject.correctAnswers++;
 			const pisteet = laskepisteet(true); // Lasketaan pisteet oikeasta vastauksesta
 			triviaObject.score += pisteet;
+			//Päivittää highscoren jos tarve
 			if (triviaObject.score > (triviaObject.highScores[triviaObject.selectedCategoryId!] || 0)) {
 				triviaObject.highScores[triviaObject.selectedCategoryId!] = triviaObject.score;
 			}
