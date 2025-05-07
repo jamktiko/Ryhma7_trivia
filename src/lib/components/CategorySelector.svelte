@@ -1,46 +1,79 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte';
 	import { triviaManager } from '$lib/stores/triviaStore.svelte';
-	import { goto } from '$app/navigation';
 
 	interface Props {
 		categorySelector: (categoryId: number) => Promise<void>;
 	}
 	let { categorySelector }: Props = $props();
+
+	// vaihda false trueksi, niin latausnäyttö pysyy kokoajan
+	let isLoading = $state(false);
+
+	async function selectCategory(categoryId: number) {
+		isLoading = true;
+		await categorySelector(categoryId);
+		isLoading = false;
+	}
 </script>
 
-<div class="container">
-	<div>
-		<h1>Welcome to MindSpark!</h1>
-		<h2>Are you ready to test your knowledge?</h2>
-	</div>
+{#if !isLoading && !triviaManager.isCategorySelected}
+	<div class="container">
+		<div>
+			<h1>Welcome to MindSpark!</h1>
+			<h2>Are you ready to test your knowledge?</h2>
+		</div>
 
-	<div class="objcontainer">
-		<h4>
-			Choose the quiz category you want to play. You will be presented with 20 questions and your
-			objective is to answer them correctly as fast as possible to get the maximum amount of points
-		</h4>
+		<div class="objcontainer">
+			<h4>
+				Choose the quiz category you want to play. You will be presented with 20 questions and your
+				objective is to answer them correctly as fast as possible to get the maximum amount of
+				points
+			</h4>
+		</div>
 	</div>
-	<button onclick={() => goto('/loppunäyttö')}>Loppunäyttö</button>
-</div>
-<div class="catcontainer">
-	<h3>Choose a category!</h3>
-	<div class="buttoncontainer">
-		<!-- Käy läpi triviaManager storessa olevan kategoriataulukon for each metodilla -->
-		<!-- renderoi jokaisen taulukon kategorian Button komponentissa -->
-		{#each triviaManager.categories as category}
-			<Button
-				text={category.name}
-				color="button1-color"
-				onclick={() => categorySelector(category.id)}
-				font="Protest Strike"
-				fontSize="32px"
-			/>
-		{/each}
+	<div class="catcontainer">
+		<h3>Choose a category!</h3>
+		<div class="buttoncontainer">
+			{#each triviaManager.categories as category}
+				<Button
+					text={category.name}
+					color="button1-color"
+					onclick={() => selectCategory(category.id)}
+					font="Protest Strike"
+					fontSize="32px"
+				/>
+			{/each}
+		</div>
 	</div>
-</div>
+{:else}
+	<div class="container">
+		<h1>Your game is loading</h1>
+		<span class="loader"></span>
+		<h2>Please wait a moment.</h2>
+	</div>
+{/if}
 
 <style>
+	.loader {
+		width: 48px;
+		height: 48px;
+		border: 5px solid #fff;
+		border-bottom-color: transparent;
+		border-radius: 50%;
+		display: inline-block;
+		box-sizing: border-box;
+		animation: rotation 1s linear infinite;
+	}
+
+	@keyframes rotation {
+		0% {
+			transform: rotate(0deg);
+		}
+		100% {
+			transform: rotate(360deg);
+		}
+	}
 	.container {
 		flex: 1;
 		display: flex;
