@@ -38,20 +38,21 @@ const triviaObject = $state({
     correctAnswers: 0,
     incorrectAnswers: 0,
     highScores: {} as Record<number, number>, // jokaiselle kategorialle oma highscore
-    ajastin: 0 // Ajastin sekunteina
+    ajastin: 0, // Ajastin sekunteina
+    progress: 0 // Progress barin tila prosentteina
 });
-
-
 
 let ajastinInterval: ReturnType<typeof setInterval> | null = null;
 
 function kaynnistaAjastin() {
     pysaytaAjastin(); // Varmistetaan, ettei vanhoja ajastimia ole käynnissä
     triviaObject.ajastin = 20; // Asetetaan ajastin haluttuun sekuntiin
+    triviaObject.progress = 0; // Nollataan progress bar
 
     ajastinInterval = setInterval(() => {
         if (triviaObject.ajastin > 0) {
             triviaObject.ajastin--; // Vähennetään ajastinta yhdellä sekunnilla
+            triviaObject.progress = ((triviaObject.ajastin) / 20) * 100; // Päivitetään progress bar
         } else {
             pysaytaAjastin(); // Pysäytetään ajastin, kun aika loppuu
             if (triviaObject.canSelectAnswer) {
@@ -83,8 +84,6 @@ function laskepisteet(onkoVastausOikein: boolean) {
         return Math.max(0, triviaObject.ajastin); // Pisteet vastaavat jäljellä olevaa aikaa
     }
 }
-
-
 
 // Getterit kategoriaa, valittua kategoriaa ja kysymyksiä varten
 export const triviaManager = {
@@ -138,6 +137,9 @@ export const triviaManager = {
     get isCategorySelected() {
         return triviaObject.categorySelected;
     },
+    get progress() {
+        return triviaObject.progress; // Palauttaa progress barin arvon
+    },
 
     shuffleAnswers() {
         const currentQuestion = triviaObject.questions[triviaObject.currentQuestionIndex];
@@ -179,7 +181,6 @@ export const triviaManager = {
             triviaObject.score += pisteet;
             if (triviaObject.score > (triviaObject.highScores[triviaObject.selectedCategoryId!] || 0)) {
                 triviaObject.highScores[triviaObject.selectedCategoryId!] = triviaObject.score;
-               
             }
         } else {
             triviaObject.incorrectAnswers++;
@@ -273,5 +274,6 @@ export const triviaManager = {
         triviaObject.correctAnswers = 0;
         triviaObject.incorrectAnswers = 0;
         triviaObject.categorySelected = false;
+        triviaObject.progress = 0; // Nollataan progress bar
     }
 };
