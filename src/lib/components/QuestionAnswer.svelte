@@ -1,7 +1,6 @@
 <script lang="ts">
-    import Button from '$lib/components/Button.svelte';
-    import { triviaManager } from '$lib/stores/triviaStore.svelte';
-    import { onMount } from 'svelte';
+	import Button from '$lib/components/Button.svelte';
+	import { triviaManager } from '$lib/stores/triviaStore.svelte';
 
     function answerSelector(answer: string) {
         triviaManager.selectAnswer(answer);
@@ -16,91 +15,98 @@
     }
 </script>
 
-<div class="container">
-    <!-- Ajastin ja kysymysnumero -->
-    <div class="header-container">
-        <div class="header">
-            <div class="question-counter">
-                {triviaManager.currentQuestionIndex + 1}/{triviaManager.questions.length}
-            </div>
-            <div class="points">Score: {triviaManager.score}</div>
-            <div class="timer">
-                <span class="material-symbols-outlined">timer</span>{triviaManager.ajastin}
-            </div>
-        </div>
+{#if triviaManager.totalAnswers !== 20}
+	<!-- Näytetään ajastin ja kysymys-vastauskomponentti, kun kategoria on valittu -->
+	<div class="container">
+		<!-- Ajastin ja kysymysnumero -->
+		<div class="header-container">
+			<div class="header">
+				<div class="question-counter">
+					{triviaManager.currentQuestionIndex + 1}/{triviaManager.questions.length}
+				</div>
+				<div class="points">Score: {triviaManager.score}</div>
+				<div class="timer">
+					<span class="material-symbols-outlined">timer</span>{triviaManager.ajastin}
+				</div>
+			</div>
 
-        <!-- Progress bar -->
-		<div class="progress-bar">
-			{#key triviaManager.currentQuestionIndex}
-				<div class="progress"></div>
-			{/key}
+			<!-- Progress bar -->
+			<div class="progress-container">
+				<div class="progress-bar" style="width: {(triviaManager.ajastin / 20) * 100}%;"></div>
+			</div>
 		</div>
-    </div>
-</div>
+	</div>
 
-<!-- Tulostaa kategorian nimen -->
-<div class="question-info">
-    <div class="category-name">{triviaManager.currentQuestion.category}</div>
-</div>
+	<!-- Tulostaa kategorian nimen -->
+	<div class="question-info">
+		<div class="category-name">{triviaManager.currentQuestion.category}</div>
+	</div>
 
-<div class="question-container">
-    <!-- Dekoodaa ja tulostaa kysymyksen luettavaksi -->
-    <div class="question">
-        <h4 class="questiontext">{decodeHTML(triviaManager.currentQuestion.question)}</h4>
-    </div>
+	<div class="question-container">
+		<!-- Dekoodaa ja tulostaa kysymyksen luettavaksi -->
+		<div class="question">
+			<h4 class="questiontext">{decodeHTML(triviaManager.currentQuestion.question)}</h4>
+		</div>
 
-    <!-- Tulostaa correct / incorrect vastausvalinnan jälkeen -->
-    <div class="result-message-container">
-        {#if triviaManager.selectedAnswer !== null}
-            <div
-                class="result-message {triviaManager.selectedAnswer === 'TIMEOUT'
-                    ? 'timeout'
-                    : triviaManager.isAnswerCorrect
-                        ? 'correct'
-                        : 'incorrect'}"
-            >
-                {#if triviaManager.selectedAnswer === 'TIMEOUT'}
-                    Ran out of time!
-                {:else if triviaManager.isAnswerCorrect}
-                    Correct!
-                {:else}
-                    Incorrect!
-                {/if}
-            </div>
-        {/if}
-    </div>
+		<!-- Tulostaa correct / incorrect vastausvalinnan jälkeen -->
+		<div class="result-message-container">
+			{#if triviaManager.selectedAnswer !== null}
+				<div
+					class="result-message {triviaManager.selectedAnswer === 'TIMEOUT'
+						? 'timeout'
+						: triviaManager.isAnswerCorrect
+							? 'correct'
+							: 'incorrect'}"
+				>
+					{#if triviaManager.selectedAnswer === 'TIMEOUT'}
+						Ran out of time!
+					{:else if triviaManager.isAnswerCorrect}
+						Correct!
+					{:else}
+						Incorrect!
+					{/if}
+				</div>
+			{/if}
+		</div>
 
-    <div class="answers-box">
-        {#each triviaManager.shuffledAnswers as answer, i}
-            {#if answer === triviaManager.selectedAnswer}
-                <Button
-                    text={decodeHTML(answer)}
-                    color={triviaManager.isAnswerCorrect ? 'correctans-color' : 'wrongans-color'}
-                    onclick={() => answerSelector(answer)}
-                    disabled={!triviaManager.canSelectAnswer}
-                    font="KoHo"
-                    fontSize="26px"
-                />
-            {:else}
-                <!-- Tulostaa buttonin värin ehdollisesti, riippuen kysymysnumerosta -->
-                <Button
-                    text={decodeHTML(answer)}
-                    color={i === 0
-                        ? 'ansbutton1-color'
-                        : i === 1
-                            ? 'ansbutton2-color'
-                            : i === 2
-                                ? 'ansbutton3-color'
-                                : 'ansbutton4-color'}
-                    font="KoHo"
-                    fontSize="26px"
-                    onclick={() => answerSelector(answer)}
-                    disabled={!triviaManager.canSelectAnswer}
-                />
-            {/if}
-        {/each}
-    </div>
-</div>
+		<div class="answers-box">
+			{#each triviaManager.shuffledAnswers as answer, i}
+				{#if answer === triviaManager.selectedAnswer}
+					<Button
+						text={decodeHTML(answer)}
+						color={triviaManager.isAnswerCorrect ? 'correctans-color' : 'wrongans-color'}
+						onclick={() => answerSelector(answer)}
+						disabled={!triviaManager.canSelectAnswer}
+						font="KoHo"
+						fontSize="26px"
+					/>
+				{:else}
+					<!-- Tulostaa buttonin värin ehdollisesti, riippuen kysymysnumerosta -->
+					<Button
+						text={decodeHTML(answer)}
+						color={i === 0
+							? 'ansbutton1-color'
+							: i === 1
+								? 'ansbutton2-color'
+								: i === 2
+									? 'ansbutton3-color'
+									: 'ansbutton4-color'}
+						font="KoHo"
+						fontSize="26px"
+						onclick={() => answerSelector(answer)}
+						disabled={!triviaManager.canSelectAnswer}
+					/>
+				{/if}
+			{/each}
+		</div>
+	</div>
+{:else}
+	<div class="container">
+		<h1>Getting your score</h1>
+		<span class="loader"></span>
+		<h2>Please wait a moment...</h2>
+	</div>
+{/if}
 
 <style>
     .progress-bar {
@@ -331,6 +337,11 @@
 			min-width: 40px;
 			min-height: 80px;
 			margin: auto;
+		}
+
+		.questiontext {
+			text-align: center;
+			font-size: 15px;
 		}
 
 		.questiontext {
