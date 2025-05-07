@@ -47,7 +47,7 @@
 			<h4>
 				Choose the quiz category you want to play. You will be presented with 20 questions and your
 				objective is to answer them correctly as fast as possible to get the maximum amount of
-				points
+				points.
 			</h4>
 		</div>
 	</div>
@@ -143,7 +143,7 @@
 	}
 
 	.objcontainer {
-		width: 800px;
+		width: 600px;
 	}
 
 	h3 {

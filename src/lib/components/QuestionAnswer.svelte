@@ -78,7 +78,7 @@
 						onclick={() => answerSelector(answer)}
 						disabled={!triviaManager.canSelectAnswer}
 						font="KoHo"
-						fontSize="26px"
+						fontSize="24px"
 					/>
 				{:else}
 					<!-- Tulostaa buttonin värin ehdollisesti, riippuen kysymysnumerosta -->
@@ -92,7 +92,7 @@
 									? 'ansbutton3-color'
 									: 'ansbutton4-color'}
 						font="KoHo"
-						fontSize="26px"
+						fontSize="24px"
 						onclick={() => answerSelector(answer)}
 						disabled={!triviaManager.canSelectAnswer}
 					/>
