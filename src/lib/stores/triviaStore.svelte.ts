@@ -41,8 +41,7 @@ const triviaObject = $state({
     ajastin: 0 // Ajastin sekunteina
 });
 
-// highscoret ladataan sovelluksen käynnistyessä
-loadHighScores();
+
 
 let ajastinInterval: ReturnType<typeof setInterval> | null = null;
 
@@ -85,18 +84,7 @@ function laskepisteet(onkoVastausOikein: boolean) {
     }
 }
 
-//  highscoret tallennetaan selaimen localStorageen
-function saveHighScores() {
-    localStorage.setItem('highScores', JSON.stringify(triviaObject.highScores));
-}
 
-// Ladataan highscoret selaimen localStoragesta
-function loadHighScores() {
-    const savedScores = localStorage.getItem('highScores');
-    if (savedScores) {
-        triviaObject.highScores = JSON.parse(savedScores);
-    }
-}
 
 // Getterit kategoriaa, valittua kategoriaa ja kysymyksiä varten
 export const triviaManager = {
@@ -191,7 +179,7 @@ export const triviaManager = {
             triviaObject.score += pisteet;
             if (triviaObject.score > (triviaObject.highScores[triviaObject.selectedCategoryId!] || 0)) {
                 triviaObject.highScores[triviaObject.selectedCategoryId!] = triviaObject.score;
-                saveHighScores(); // Tallennetaan highscore pysyvästi
+               
             }
         } else {
             triviaObject.incorrectAnswers++;
