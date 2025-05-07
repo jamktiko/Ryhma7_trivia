@@ -15,89 +15,98 @@
 	}
 </script>
 
-<div class="container">
-	<!-- Ajastin ja kysymysnumero -->
-	<div class="header-container">
-		<div class="header">
-			<div class="question-counter">
-				{triviaManager.currentQuestionIndex + 1}/{triviaManager.questions.length}
+{#if triviaManager.totalAnswers !== 20}
+	<!-- Näytetään ajastin ja kysymys-vastauskomponentti, kun kategoria on valittu -->
+	<div class="container">
+		<!-- Ajastin ja kysymysnumero -->
+		<div class="header-container">
+			<div class="header">
+				<div class="question-counter">
+					{triviaManager.currentQuestionIndex + 1}/{triviaManager.questions.length}
+				</div>
+				<div class="points">Score: {triviaManager.score}</div>
+				<div class="timer">
+					<span class="material-symbols-outlined">timer</span>{triviaManager.ajastin}
+				</div>
 			</div>
-			<div class="points">Score: {triviaManager.score}</div>
-			<div class="timer">
-				<span class="material-symbols-outlined">timer</span>{triviaManager.ajastin}
+
+			<!-- Progress bar -->
+			<div class="progress-container">
+				<div class="progress-bar" style="width: {(triviaManager.ajastin / 20) * 100}%;"></div>
 			</div>
 		</div>
+	</div>
 
-		<!-- Progress bar -->
-		<div class="progress-container">
-			<div class="progress-bar"></div>
+	<!-- Tulostaa kategorian nimen -->
+	<div class="question-info">
+		<div class="category-name">{triviaManager.currentQuestion.category}</div>
+	</div>
+
+	<div class="question-container">
+		<!-- Dekoodaa ja tulostaa kysymyksen luettavaksi -->
+		<div class="question">
+			<h4 class="questiontext">{decodeHTML(triviaManager.currentQuestion.question)}</h4>
 		</div>
-	</div>
-</div>
 
-<!-- Tulostaa kategorian nimen -->
-<div class="question-info">
-	<div class="category-name">{triviaManager.currentQuestion.category}</div>
-</div>
-
-<div class="question-container">
-	<!-- Dekoodaa ja tulostaa kysymyksen luettavaksi -->
-	<div class="question">
-		<h4 class="questiontext">{decodeHTML(triviaManager.currentQuestion.question)}</h4>
-	</div>
-
-	<!-- Tulostaa correct / incorrect vastausvalinnan jälkeen -->
-	<div class="result-message-container">
-		{#if triviaManager.selectedAnswer !== null}
-			<div
-				class="result-message {triviaManager.selectedAnswer === 'TIMEOUT'
-					? 'timeout'
-					: triviaManager.isAnswerCorrect
-						? 'correct'
-						: 'incorrect'}"
-			>
-				{#if triviaManager.selectedAnswer === 'TIMEOUT'}
-					Ran out of time!
-				{:else if triviaManager.isAnswerCorrect}
-					Correct!
-				{:else}
-					Incorrect!
-				{/if}
-			</div>
-		{/if}
-	</div>
-
-	<div class="answers-box">
-		{#each triviaManager.shuffledAnswers as answer, i}
-			{#if answer === triviaManager.selectedAnswer}
-				<Button
-					text={decodeHTML(answer)}
-					color={triviaManager.isAnswerCorrect ? 'correctans-color' : 'wrongans-color'}
-					onclick={() => answerSelector(answer)}
-					disabled={!triviaManager.canSelectAnswer}
-					font="KoHo"
-					fontSize="26px"
-				/>
-			{:else}
-				<!-- Tulostaa buttonin värin ehdollisesti, riippuen kysymysnumerosta -->
-				<Button
-					text={decodeHTML(answer)}
-					color={i === 0
-						? 'ansbutton1-color'
-						: i === 1
-							? 'ansbutton2-color'
-							: i === 2
-								? 'ansbutton3-color'
-								: 'ansbutton4-color'}
-					font="KoHo"
-					fontSize="26px"
-					onclick={() => answerSelector(answer)}
-					disabled={!triviaManager.canSelectAnswer}
-				/>
+		<!-- Tulostaa correct / incorrect vastausvalinnan jälkeen -->
+		<div class="result-message-container">
+			{#if triviaManager.selectedAnswer !== null}
+				<div
+					class="result-message {triviaManager.selectedAnswer === 'TIMEOUT'
+						? 'timeout'
+						: triviaManager.isAnswerCorrect
+							? 'correct'
+							: 'incorrect'}"
+				>
+					{#if triviaManager.selectedAnswer === 'TIMEOUT'}
+						Ran out of time!
+					{:else if triviaManager.isAnswerCorrect}
+						Correct!
+					{:else}
+						Incorrect!
+					{/if}
+				</div>
 			{/if}
-		{/each}
+		</div>
+
+		<div class="answers-box">
+			{#each triviaManager.shuffledAnswers as answer, i}
+				{#if answer === triviaManager.selectedAnswer}
+					<Button
+						text={decodeHTML(answer)}
+						color={triviaManager.isAnswerCorrect ? 'correctans-color' : 'wrongans-color'}
+						onclick={() => answerSelector(answer)}
+						disabled={!triviaManager.canSelectAnswer}
+						font="KoHo"
+						fontSize="26px"
+					/>
+				{:else}
+					<!-- Tulostaa buttonin värin ehdollisesti, riippuen kysymysnumerosta -->
+					<Button
+						text={decodeHTML(answer)}
+						color={i === 0
+							? 'ansbutton1-color'
+							: i === 1
+								? 'ansbutton2-color'
+								: i === 2
+									? 'ansbutton3-color'
+									: 'ansbutton4-color'}
+						font="KoHo"
+						fontSize="26px"
+						onclick={() => answerSelector(answer)}
+						disabled={!triviaManager.canSelectAnswer}
+					/>
+				{/if}
+			{/each}
+		</div>
 	</div>
-</div>
+{:else}
+	<div class="container">
+		<h1>Getting your score</h1>
+		<span class="loader"></span>
+		<h2>Please wait a moment...</h2>
+	</div>
+{/if}
 
 <style>
 	.container {
@@ -106,12 +115,16 @@
 		flex-direction: column;
 		justify-content: space-evenly;
 		align-items: center;
-		max-width: 672px;
+		max-width: 100%;
 		width: 672px;
 	}
 
 	.header-container {
 		width: 100%;
+		margin: auto;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
 
 	.question-container {
@@ -131,6 +144,13 @@
 		font-size: 25px;
 		font-family: 'Protest Strike', sans-serif;
 		margin: auto;
+	}
+
+	.answers-container {
+		margin-top: auto;
+		max-width: 672px;
+		bottom: 0px;
+		margin-bottom: 20px;
 	}
 
 	.answers-box {
@@ -170,7 +190,6 @@
 		font-size: 0.9rem;
 		font-family: 'KoHo', sans-serif;
 	}
-
 	.progress-container {
 		width: 100%;
 		min-width: 200px;
@@ -181,11 +200,20 @@
 		overflow: hidden;
 	}
 
+	@keyframes countdown {
+		from {
+			width: 100%;
+		}
+		to {
+			width: 0%;
+		}
+	}
+
 	.progress-bar {
 		height: 20px;
-		width: 100%;
 		background-color: #4b1d6f;
-		transition: width 0.1s linear;
+		animation: countdown 20s linear forwards;
+		animation-play-state: running;
 	}
 
 	.question {
@@ -252,48 +280,20 @@
 		color: #d35400;
 		opacity: 1;
 	}
-
-	@media only screen and (max-width: 412px) {
-		.question,
-		.questiontext {
+	@media only screen and (max-width: 688px) {
+		.header-container {
 			width: 90%;
-			min-width: 180px;
-			height: auto;
-			font-size: 20px;
-			padding: 10px;
-			margin: 10px auto;
 		}
-
-		.header {
-			width: 90%;
-			max-width: 90%;
-		}
-
-		.progress-container {
-			width: 80%;
-		}
-	}
-
-	@media only screen and (min-width: 412px) and (max-width: 655px) {
-		.question,
-		.questiontext {
+		.question {
 			width: 80%;
 			min-width: 230px;
 			height: auto;
+		}
+
+		.questiontext {
 			font-size: 23px;
-			padding: 10px;
 			text-align: center;
 		}
-
-		.header {
-			width: 80%;
-			max-width: 80%;
-		}
-
-		.progress-container {
-			width: 70%;
-		}
-
 		/* h3 {
 			font-size: 18px;
 			padding: 15px;
@@ -308,31 +308,35 @@
 			padding: 8px 16px;
 		}
 	}
+	@media only screen and (max-width: 412px) {
+		.answers-container {
+			margin-bottom: 55px;
+		}
+	}
 
-	@media only screen and (min-height: 480px) and (max-height: 655px) {
-		.question,
-		.questiontext {
+	@media only screen and (max-height: 655px) {
+		.question {
 			width: 80%;
 			min-width: 30%;
 			height: auto;
-			min-height: 110px;
+		}
+		.questiontext {
 			font-size: 20px;
-			margin: 10px auto;
-			padding: 10px;
 			text-align: center;
 		}
 	}
 
 	@media only screen and (max-height: 480px) {
-		.question,
-		.questiontext {
+		.question {
 			width: 80%;
 			min-width: 40px;
 			min-height: 80px;
-			font-size: 15px;
 			margin: auto;
-			padding: 10px;
+		}
+
+		.questiontext {
 			text-align: center;
+			font-size: 15px;
 		}
 	}
 </style>
