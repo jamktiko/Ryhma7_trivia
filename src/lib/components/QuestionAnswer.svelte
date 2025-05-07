@@ -2,17 +2,17 @@
 	import Button from '$lib/components/Button.svelte';
 	import { triviaManager } from '$lib/stores/triviaStore.svelte';
 
-    function answerSelector(answer: string) {
-        triviaManager.selectAnswer(answer);
-    }
+	function answerSelector(answer: string) {
+		triviaManager.selectAnswer(answer);
+	}
 
-    // Tarvitsee tämän funtion, jotta HTML-koodit saadaan dekoodattua luettavaksi.
-    // Tullut täysin AI:lta, mutta pakollinen.
-    function decodeHTML(html: string): string {
-        const textarea = document.createElement('textarea');
-        textarea.innerHTML = html;
-        return textarea.value;
-    }
+	// Tarvitsee tämän funtion, jotta HTML-koodit saadaan dekoodattua luettavaksi.
+	// Tullut täysin AI:lta, mutta pakollinen.
+	function decodeHTML(html: string): string {
+		const textarea = document.createElement('textarea');
+		textarea.innerHTML = html;
+		return textarea.value;
+	}
 </script>
 
 {#if triviaManager.totalAnswers !== 20}
@@ -109,29 +109,29 @@
 {/if}
 
 <style>
-    .progress-bar {
-        width: 100%;
-        height: 10px;
-        background-color: #e0e0e0; /* Taustaväri */
-        border-radius: 5px;
-        overflow: hidden;
-    }
+	.progress-bar {
+		width: 100%;
+		height: 10px;
+		background-color: #e0e0e0; /* Taustaväri */
+		border-radius: 5px;
+		overflow: hidden;
+	}
 
 	.progress {
-    height: 100%;
-    background-color: #76c7c0; /* Progressin väri */
-    animation: decrease-width 20s linear forwards; /* 20 sekunnin animaatio */
-}
+		height: 100%;
+		background-color: #76c7c0; /* Progressin väri */
+		animation: decrease-width 20s linear forwards; /* 20 sekunnin animaatio */
+	}
 
-@keyframes decrease-width {
-    from {
-        width: 100%; /* Aloittaa täytenä */
-    }
-    to {
-        width: 0%; /* Päättyy tyhjänä */
-    }
-} 
-.container {
+	@keyframes decrease-width {
+		from {
+			width: 100%; /* Aloittaa täytenä */
+		}
+		to {
+			width: 0%; /* Päättyy tyhjänä */
+		}
+	}
+	.container {
 		flex: 1;
 		display: flex;
 		flex-direction: column;
@@ -245,7 +245,8 @@
 			2px 2px 4px rgba(0, 0, 0, 25%),
 			inset -3px -3px 4px rgba(0, 0, 0, 25%);
 		padding: 15px;
-	}  .questiontext {
+	}
+	.questiontext {
 		font-size: 24px;
 		font-weight: lighter;
 		padding: 0;
@@ -275,7 +276,8 @@
 		background-color: rgba(46, 204, 113, 0.3);
 		color: #27ae60;
 		opacity: 1;
-	} .incorrect {
+	}
+	.incorrect {
 		background-color: rgba(231, 76, 60, 0.3);
 		color: #c0392b;
 		opacity: 1;
@@ -348,7 +350,5 @@
 			text-align: center;
 			font-size: 15px;
 		}
-
 	}
-      
 </style>

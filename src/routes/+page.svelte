@@ -14,7 +14,6 @@
 	<CategorySelector categorySelector={categorySelect} />
 {:else}
 	<!-- Näytetään ajastin ja kysymys-vastauskomponentti, kun kategoria on valittu -->
-
 	<QuestionAnswer />
 {/if}
 
