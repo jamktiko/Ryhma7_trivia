@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte';
 	import { triviaManager } from '$lib/stores/triviaStore.svelte';
+	import { onMount } from 'svelte';
 
 	function answerSelector(answer: string) {
 		triviaManager.selectAnswer(answer);
@@ -30,7 +31,7 @@
 
 		<!-- Progress bar -->
 		<div class="progress-container">
-			<div class="progress-bar"></div>
+			<div class="progress-bar" style="width: {(triviaManager.ajastin / 20) * 100}%;"></div>
 		</div>
 	</div>
 </div>
@@ -181,11 +182,20 @@
 		overflow: hidden;
 	}
 
+	@keyframes countdown {
+		from {
+			width: 100%;
+		}
+		to {
+			width: 0%;
+		}
+	}
+
 	.progress-bar {
 		height: 20px;
-		width: 100%;
 		background-color: #4b1d6f;
-		transition: width 0.1s linear;
+		animation: countdown 20s linear forwards;
+		animation-play-state: running;
 	}
 
 	.question {
