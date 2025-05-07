@@ -77,11 +77,10 @@
 {/if}
 
 <style>
-	/* Copy the loader styles from CategorySelector.svelte */
 	.loader {
 		width: 48px;
 		height: 48px;
-		border: 5px solid #fff;
+		border: 5px solid rgba(245, 245, 245, 0.6);
 		border-bottom-color: transparent;
 		border-radius: 50%;
 		display: inline-block;
