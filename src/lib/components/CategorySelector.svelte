@@ -7,10 +7,9 @@
 	}
 	let { categorySelector }: Props = $props();
 
-	// Add loading state
+	// vaihda false trueksi, niin latausnäyttö pysyy kokoajan
 	let isLoading = $state(false);
 
-	// Wrap the category selection in a function that shows the loader
 	async function selectCategory(categoryId: number) {
 		isLoading = true;
 		await categorySelector(categoryId);
