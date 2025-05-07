@@ -36,12 +36,13 @@
 	</div>
 </div>
 
+<div class="question-container">
+
 <!-- Tulostaa kategorian nimen -->
 <div class="question-info">
 	<div class="category-name">{triviaManager.currentQuestion.category}</div>
 </div>
 
-<div class="question-container">
 	<!-- Dekoodaa ja tulostaa kysymyksen luettavaksi -->
 	<div class="question">
 		<h4 class="questiontext">{decodeHTML(triviaManager.currentQuestion.question)}</h4>
@@ -68,6 +69,7 @@
 		{/if}
 	</div>
 
+	<div class="answers-container">
 	<div class="answers-box">
 		{#each triviaManager.shuffledAnswers as answer, i}
 			{#if answer === triviaManager.selectedAnswer}
@@ -99,6 +101,8 @@
 		{/each}
 	</div>
 </div>
+</div>
+
 
 <style>
 	.container {
@@ -107,12 +111,16 @@
 		flex-direction: column;
 		justify-content: space-evenly;
 		align-items: center;
-		max-width: 672px;
+		max-width: 100%;
 		width: 672px;
 	}
 
 	.header-container {
 		width: 100%;
+		margin: auto;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
 
 	.question-container {
@@ -132,6 +140,13 @@
 		font-size: 25px;
 		font-family: 'Protest Strike', sans-serif;
 		margin: auto;
+	}
+
+	.answers-container {
+		margin-top: auto;
+		max-width: 672px;
+		bottom: 0px;
+		margin-bottom: 20px;
 	}
 
 	.answers-box {
@@ -171,7 +186,6 @@
 		font-size: 0.9rem;
 		font-family: 'KoHo', sans-serif;
 	}
-
 	.progress-container {
 		width: 100%;
 		min-width: 200px;
