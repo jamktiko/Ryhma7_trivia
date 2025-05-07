@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { triviaManager } from '$lib/stores/triviaStore.svelte';
-	import Pisteytys from '$lib/components/Pisteytys.svelte';
 	import CategorySelector from '$lib/components/CategorySelector.svelte';
 	import QuestionAnswer from '$lib/components/QuestionAnswer.svelte';
 
@@ -13,8 +12,8 @@
 
 {#if !triviaManager.isCategorySelected}
 	<CategorySelector categorySelector={categorySelect} />
-{:else} 
-<!-- Näytetään ajastin ja kysymys-vastauskomponentti, kun kategoria on valittu -->
+{:else}
+	<!-- Näytetään ajastin ja kysymys-vastauskomponentti, kun kategoria on valittu -->
 
 	<QuestionAnswer />
 {/if}
