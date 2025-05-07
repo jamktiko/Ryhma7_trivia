@@ -28,26 +28,32 @@
 		goto('/');
 	}
 </script>
-
 {#if isLoading}
-	<div class="container">
 		<h1>Loading a new game</h1>
 		<span class="loader"></span>
 		<h2>Please wait a moment.</h2>
-	</div>
 {:else}
+<div class="container">
 	{#if triviaManager.score < 75}
+	<div>
 		<h1>Oh no!</h1>
 		<h2>You don't have a spark mind!</h2>
+	</div>
 	{:else if triviaManager.score < 150}
+	<div>
 		<h1>You did ok.</h1>
 		<h2>But you can do better!</h2>
+	</div>
 	{:else if triviaManager.score < 225}
+	<div>
 		<h1>Good job!</h1>
 		<h2>Tähän jotain</h2>
+	</div>
 	{:else if triviaManager.score >= 225}
+	<div>
 		<h1>Wow!</h1>
 		<h2>You have a spark mind!</h2>
+	</div>
 	{/if}
 
 	<div class="scoretext">
@@ -55,15 +61,15 @@
 		<h4>You got {triviaManager.correctAnswers}/20 questions right!</h4>
 		<h4>Highscore for category {triviaManager.selectedCategory?.name}: {highScore}</h4>
 	</div>
-	<h3>Do you want to play again?</h3>
-
+</div>
 	<div class="button-container">
+		<h3>Do you want to play again?</h3>
 		<Button
 			text="Change categories"
 			color="button2-color"
 			onclick={handleChangeCategories}
 			font="Protest Strike"
-			fontSize="32px"
+			fontSize="26px"
 		/>
 
 		<Button
@@ -71,12 +77,23 @@
 			color="button1-color"
 			onclick={handlePlayAgain}
 			font="Protest Strike"
-			fontSize="40px"
+			fontSize="32px"
 		/>
 	</div>
+
 {/if}
 
 <style>
+	
+	.container {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		align-items: center;
+		max-width: 100%;
+		width: 672px;
+		height: 100%;
+	}
 	/* Copy the loader styles from CategorySelector.svelte */
 	.loader {
 		width: 48px;
@@ -96,14 +113,6 @@
 		100% {
 			transform: rotate(360deg);
 		}
-	}
-
-	.container {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-evenly;
-		align-items: center;
 	}
 
 	/* Keep your existing styles */
@@ -136,7 +145,14 @@
 	.scoretext {
 		margin: 5px auto 30px;
 	}
-	@media only screen and (min-width: 412px) and (max-width: 655px) {
+
+	.button-container {
+		margin-top: auto;
+		max-width: 672px;
+		bottom: 0px;
+		margin-bottom: 20px;
+	}
+	@media only screen and (max-width: 655px) {
 		h1 {
 			font-size: 48px;
 		}
@@ -163,5 +179,8 @@
 		h4 {
 			font-size: 28px;
 		}
+		.button-container {
+		margin-bottom: 40px;
+	}
 	}
 </style>
