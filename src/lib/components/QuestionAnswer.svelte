@@ -1,111 +1,137 @@
 <script lang="ts">
 	import Button from '$lib/components/Button.svelte';
 	import { triviaManager } from '$lib/stores/triviaStore.svelte';
-	import { onMount } from 'svelte';
 
-	function answerSelector(answer: string) {
-		triviaManager.selectAnswer(answer);
-	}
+    function answerSelector(answer: string) {
+        triviaManager.selectAnswer(answer);
+    }
 
-	// Tarvitsee tämän funtion, jotta HTML-koodit saadaan dekoodattua luettavaksi.
-	// Tullut täysin AI:lta, mutta pakollinen.
-	function decodeHTML(html: string): string {
-		const textarea = document.createElement('textarea');
-		textarea.innerHTML = html;
-		return textarea.value;
-	}
+    // Tarvitsee tämän funtion, jotta HTML-koodit saadaan dekoodattua luettavaksi.
+    // Tullut täysin AI:lta, mutta pakollinen.
+    function decodeHTML(html: string): string {
+        const textarea = document.createElement('textarea');
+        textarea.innerHTML = html;
+        return textarea.value;
+    }
 </script>
 
-<div class="container">
-	<!-- Ajastin ja kysymysnumero -->
-	<div class="header-container">
-		<div class="header">
-			<div class="question-counter">
-				{triviaManager.currentQuestionIndex + 1}/{triviaManager.questions.length}
+{#if triviaManager.totalAnswers !== 20}
+	<!-- Näytetään ajastin ja kysymys-vastauskomponentti, kun kategoria on valittu -->
+	<div class="container">
+		<!-- Ajastin ja kysymysnumero -->
+		<div class="header-container">
+			<div class="header">
+				<div class="question-counter">
+					{triviaManager.currentQuestionIndex + 1}/{triviaManager.questions.length}
+				</div>
+				<div class="points">Score: {triviaManager.score}</div>
+				<div class="timer">
+					<span class="material-symbols-outlined">timer</span>{triviaManager.ajastin}
+				</div>
 			</div>
-			<div class="points">Score: {triviaManager.score}</div>
-			<div class="timer">
-				<span class="material-symbols-outlined">timer</span>{triviaManager.ajastin}
+
+			<!-- Progress bar -->
+			<div class="progress-container">
+				<div class="progress-bar" style="width: {(triviaManager.ajastin / 20) * 100}%;"></div>
 			</div>
 		</div>
+	</div>
 
-		<!-- Progress bar -->
-		<div class="progress-container">
-			<div class="progress-bar" style="width: {(triviaManager.ajastin / 20) * 100}%;"></div>
+	<!-- Tulostaa kategorian nimen -->
+	<div class="question-info">
+		<div class="category-name">{triviaManager.currentQuestion.category}</div>
+	</div>
+
+	<div class="question-container">
+		<!-- Dekoodaa ja tulostaa kysymyksen luettavaksi -->
+		<div class="question">
+			<h4 class="questiontext">{decodeHTML(triviaManager.currentQuestion.question)}</h4>
 		</div>
-	</div>
-</div>
 
-<div class="question-container">
-
-<!-- Tulostaa kategorian nimen -->
-<div class="question-info">
-	<div class="category-name">{triviaManager.currentQuestion.category}</div>
-</div>
-
-	<!-- Dekoodaa ja tulostaa kysymyksen luettavaksi -->
-	<div class="question">
-		<h4 class="questiontext">{decodeHTML(triviaManager.currentQuestion.question)}</h4>
-	</div>
-
-	<!-- Tulostaa correct / incorrect vastausvalinnan jälkeen -->
-	<div class="result-message-container">
-		{#if triviaManager.selectedAnswer !== null}
-			<div
-				class="result-message {triviaManager.selectedAnswer === 'TIMEOUT'
-					? 'timeout'
-					: triviaManager.isAnswerCorrect
-						? 'correct'
-						: 'incorrect'}"
-			>
-				{#if triviaManager.selectedAnswer === 'TIMEOUT'}
-					Ran out of time!
-				{:else if triviaManager.isAnswerCorrect}
-					Correct!
-				{:else}
-					Incorrect!
-				{/if}
-			</div>
-		{/if}
-	</div>
-
-	<div class="answers-container">
-	<div class="answers-box">
-		{#each triviaManager.shuffledAnswers as answer, i}
-			{#if answer === triviaManager.selectedAnswer}
-				<Button
-					text={decodeHTML(answer)}
-					color={triviaManager.isAnswerCorrect ? 'correctans-color' : 'wrongans-color'}
-					onclick={() => answerSelector(answer)}
-					disabled={!triviaManager.canSelectAnswer}
-					font="KoHo"
-					fontSize="24px"
-				/>
-			{:else}
-				<!-- Tulostaa buttonin värin ehdollisesti, riippuen kysymysnumerosta -->
-				<Button
-					text={decodeHTML(answer)}
-					color={i === 0
-						? 'ansbutton1-color'
-						: i === 1
-							? 'ansbutton2-color'
-							: i === 2
-								? 'ansbutton3-color'
-								: 'ansbutton4-color'}
-					font="KoHo"
-					fontSize="24px"
-					onclick={() => answerSelector(answer)}
-					disabled={!triviaManager.canSelectAnswer}
-				/>
+		<!-- Tulostaa correct / incorrect vastausvalinnan jälkeen -->
+		<div class="result-message-container">
+			{#if triviaManager.selectedAnswer !== null}
+				<div
+					class="result-message {triviaManager.selectedAnswer === 'TIMEOUT'
+						? 'timeout'
+						: triviaManager.isAnswerCorrect
+							? 'correct'
+							: 'incorrect'}"
+				>
+					{#if triviaManager.selectedAnswer === 'TIMEOUT'}
+						Ran out of time!
+					{:else if triviaManager.isAnswerCorrect}
+						Correct!
+					{:else}
+						Incorrect!
+					{/if}
+				</div>
 			{/if}
-		{/each}
-	</div>
-</div>
-</div>
+		</div>
 
+		<div class="answers-box">
+			{#each triviaManager.shuffledAnswers as answer, i}
+				{#if answer === triviaManager.selectedAnswer}
+					<Button
+						text={decodeHTML(answer)}
+						color={triviaManager.isAnswerCorrect ? 'correctans-color' : 'wrongans-color'}
+						onclick={() => answerSelector(answer)}
+						disabled={!triviaManager.canSelectAnswer}
+						font="KoHo"
+						fontSize="24px"
+					/>
+				{:else}
+					<!-- Tulostaa buttonin värin ehdollisesti, riippuen kysymysnumerosta -->
+					<Button
+						text={decodeHTML(answer)}
+						color={i === 0
+							? 'ansbutton1-color'
+							: i === 1
+								? 'ansbutton2-color'
+								: i === 2
+									? 'ansbutton3-color'
+									: 'ansbutton4-color'}
+						font="KoHo"
+						fontSize="24px"
+						onclick={() => answerSelector(answer)}
+						disabled={!triviaManager.canSelectAnswer}
+					/>
+				{/if}
+			{/each}
+		</div>
+	</div>
+{:else}
+	<div class="container">
+		<h1>Getting your score</h1>
+		<span class="loader"></span>
+		<h2>Please wait a moment...</h2>
+	</div>
+{/if}
 
 <style>
-	.container {
+    .progress-bar {
+        width: 100%;
+        height: 10px;
+        background-color: #e0e0e0; /* Taustaväri */
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+	.progress {
+    height: 100%;
+    background-color: #76c7c0; /* Progressin väri */
+    animation: decrease-width 20s linear forwards; /* 20 sekunnin animaatio */
+}
+
+@keyframes decrease-width {
+    from {
+        width: 100%; /* Aloittaa täytenä */
+    }
+    to {
+        width: 0%; /* Päättyy tyhjänä */
+    }
+} 
+.container {
 		flex: 1;
 		display: flex;
 		flex-direction: column;
@@ -135,7 +161,6 @@
 	.question-info {
 		text-align: center;
 	}
-
 	.category-name {
 		font-size: 25px;
 		font-family: 'Protest Strike', sans-serif;
@@ -164,7 +189,6 @@
 		align-items: center;
 		font-family: 'Protest Strike', sans-serif;
 	}
-
 	.question-counter {
 		font-size: 1.5rem;
 		color: #4b1d6f;
@@ -195,16 +219,6 @@
 		border-radius: 999px;
 		overflow: hidden;
 	}
-
-	@keyframes countdown {
-		from {
-			width: 100%;
-		}
-		to {
-			width: 0%;
-		}
-	}
-
 	.progress-bar {
 		height: 20px;
 		background-color: #4b1d6f;
@@ -231,9 +245,7 @@
 			2px 2px 4px rgba(0, 0, 0, 25%),
 			inset -3px -3px 4px rgba(0, 0, 0, 25%);
 		padding: 15px;
-	}
-
-	.questiontext {
+	}  .questiontext {
 		font-size: 24px;
 		font-weight: lighter;
 		padding: 0;
@@ -263,9 +275,7 @@
 		background-color: rgba(46, 204, 113, 0.3);
 		color: #27ae60;
 		opacity: 1;
-	}
-
-	.incorrect {
+	} .incorrect {
 		background-color: rgba(231, 76, 60, 0.3);
 		color: #c0392b;
 		opacity: 1;
@@ -298,15 +308,13 @@
 		.category-name {
 			font-size: 20px;
 		}
-
 		.result-message {
 			font-size: 22px;
 			padding: 8px 16px;
 		}
-
 	}
 	@media only screen and (max-width: 412px) {
-	.answers-container {
+		.answers-container {
 			margin-bottom: 55px;
 		}
 	}
@@ -335,5 +343,12 @@
 			text-align: center;
 			font-size: 15px;
 		}
+
+		.questiontext {
+			text-align: center;
+			font-size: 15px;
+		}
+
 	}
+      
 </style>

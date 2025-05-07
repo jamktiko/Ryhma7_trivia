@@ -20,43 +20,48 @@ interface Question {
 }
 
 const triviaObject = $state({
-	categories: [
-		{ id: 21, name: 'Sports' },
-		{ id: 23, name: 'History' },
-		{ id: 22, name: 'Geography' },
-		{ id: 27, name: 'Animals' }
-	],
-	selectedCategoryId: null as number | null,
-	categorySelected: false,
-	questions: [] as Question[],
-	currentQuestionIndex: 0,
-	shuffledAnswers: [] as string[],
-	selectedAnswer: null as string | null,
-	isAnswerCorrect: null as boolean | null,
-	canSelectAnswer: true,
-	score: 0,
-	correctAnswers: 0,
-	incorrectAnswers: 0,
-	highScores: {} as Record<number, number>, // jokaiselle kategorialle oma highscore
-	ajastin: 0 // Ajastin sekunteina
+    categories: [
+        { id: 21, name: 'Sports' },
+        { id: 23, name: 'History' },
+        { id: 22, name: 'Geography' },
+        { id: 27, name: 'Animals' }
+    ],
+    selectedCategoryId: null as number | null,
+    categorySelected: false,
+    questions: [] as Question[],
+    currentQuestionIndex: 0,
+    shuffledAnswers: [] as string[],
+    selectedAnswer: null as string | null,
+    isAnswerCorrect: null as boolean | null,
+    canSelectAnswer: true,
+    score: 0,
+    correctAnswers: 0,
+    incorrectAnswers: 0,
+    totalAnswers: 0, // Lasketaan kaikkien kysymysten määrä
+    highScores: {} as Record<number, number>, // jokaiselle kategorialle oma highscore
+    ajastin: 0, // Ajastin sekunteina
+    progress: 0 // Progress barin tila prosentteina
+
 });
 
 let ajastinInterval: ReturnType<typeof setInterval> | null = null;
 
 function kaynnistaAjastin() {
-	pysaytaAjastin(); // Varmistetaan, ettei vanhoja ajastimia ole käynnissä
-	triviaObject.ajastin = 20; // Asetetaan ajastin haluttuun sekuntiin
+    pysaytaAjastin(); // Varmistetaan, ettei vanhoja ajastimia ole käynnissä
+    triviaObject.ajastin = 20; // Asetetaan ajastin haluttuun sekuntiin
+    triviaObject.progress = 0; // Nollataan progress bar
 
-	ajastinInterval = setInterval(() => {
-		if (triviaObject.ajastin > 0) {
-			triviaObject.ajastin--; // Vähennetään ajastinta yhdellä sekunnilla
-		} else {
-			pysaytaAjastin(); // Pysäytetään ajastin, kun aika loppuu
-			if (triviaObject.canSelectAnswer) {
-				triviaManager.timeOut();
-			}
-		}
-	}, 1000); // Päivitetään ajastinta sekunnin välein
+    ajastinInterval = setInterval(() => {
+        if (triviaObject.ajastin > 0) {
+            triviaObject.ajastin--; // Vähennetään ajastinta yhdellä sekunnilla
+            triviaObject.progress = ((triviaObject.ajastin) / 20) * 100; // Päivitetään progress bar
+        } else {
+            pysaytaAjastin(); // Pysäytetään ajastin, kun aika loppuu
+            if (triviaObject.canSelectAnswer) {
+                triviaManager.timeOut();
+            }
+        }
+    }, 1000); // Päivitetään ajastinta sekunnin välein
 }
 
 function pysaytaAjastin() {
@@ -82,16 +87,19 @@ function laskepisteet(onkoVastausOikein: boolean) {
 	}
 }
 
-// Getterit kategoriaa, valittua kategoriaa ja kysymyksiä varten
+// Getterit
 export const triviaManager = {
+	get totalAnswers() {
+		return triviaObject.totalAnswers;
+	},
 	get ajastin() {
-		return triviaObject.ajastin; // Palauttaa ajastimen arvon
+		return triviaObject.ajastin;
 	},
 	get score() {
 		return triviaObject.score;
 	},
 	get highScore() {
-		return triviaObject.highScores; // Palauttaa korkein pistemäärä
+		return triviaObject.highScores;
 	},
 	get correctAnswers() {
 		return triviaObject.correctAnswers;
@@ -136,6 +144,7 @@ export const triviaManager = {
 	},
 
 	shuffleAnswers() {
+		//sekoittaa vastaukset, että ovat satunnaisessa järjestyksessä
 		const currentQuestion = triviaObject.questions[triviaObject.currentQuestionIndex];
 		if (!currentQuestion) return;
 		const allAnswers = [currentQuestion.correct_answer, ...currentQuestion.incorrect_answers];
@@ -147,7 +156,6 @@ export const triviaManager = {
 		triviaObject.selectedAnswer = 'TIMEOUT';
 		triviaObject.isAnswerCorrect = false;
 		triviaObject.canSelectAnswer = false;
-
 		setTimeout(() => {
 			if (triviaObject.currentQuestionIndex < triviaObject.questions.length - 1) {
 				triviaObject.currentQuestionIndex++;
@@ -173,6 +181,7 @@ export const triviaManager = {
 			triviaObject.correctAnswers++;
 			const pisteet = laskepisteet(true); // Lasketaan pisteet oikeasta vastauksesta
 			triviaObject.score += pisteet;
+			//Päivittää highscoren jos tarve
 			if (triviaObject.score > (triviaObject.highScores[triviaObject.selectedCategoryId!] || 0)) {
 				triviaObject.highScores[triviaObject.selectedCategoryId!] = triviaObject.score;
 			}
@@ -255,18 +264,19 @@ export const triviaManager = {
 		}
 	},
 
-	reset() {
-		pysaytaAjastin();
-		triviaObject.selectedCategoryId = null;
-		triviaObject.questions = [];
-		triviaObject.currentQuestionIndex = 0;
-		triviaObject.shuffledAnswers = [];
-		triviaObject.selectedAnswer = null;
-		triviaObject.isAnswerCorrect = null;
-		triviaObject.canSelectAnswer = true;
-		triviaObject.score = 0;
-		triviaObject.correctAnswers = 0;
-		triviaObject.incorrectAnswers = 0;
-		triviaObject.categorySelected = false;
-	}
+    reset() {
+        pysaytaAjastin();
+        triviaObject.selectedCategoryId = null;
+        triviaObject.questions = [];
+        triviaObject.currentQuestionIndex = 0;
+        triviaObject.shuffledAnswers = [];
+        triviaObject.selectedAnswer = null;
+        triviaObject.isAnswerCorrect = null;
+        triviaObject.canSelectAnswer = true;
+        triviaObject.score = 0;
+        triviaObject.correctAnswers = 0;
+        triviaObject.incorrectAnswers = 0;
+        triviaObject.categorySelected = false;
+        triviaObject.progress = 0; // Nollataan progress bar
+    }
 };

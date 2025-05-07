@@ -5,8 +5,8 @@
 
 	//Funktio kategorian valintaan.
 	//Hakee Triviamanagerin API fetchillä datan.
-	async function categorySelect(categoryId: number) {
-		await triviaManager.selectCategory(categoryId);
+	async function categorySelect(categoryId: number): Promise<boolean> {
+		return await triviaManager.selectCategory(categoryId);
 	}
 </script>
 

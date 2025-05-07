@@ -3,21 +3,40 @@
 	import { triviaManager } from '$lib/stores/triviaStore.svelte';
 
 	interface Props {
-		categorySelector: (categoryId: number) => Promise<void>;
+		categorySelector: (categoryId: number) => Promise<boolean>;
 	}
 	let { categorySelector }: Props = $props();
 
-	// vaihda false trueksi, niin latausnäyttö pysyy kokoajan
+	//Nämä trueksi testaamista ja tyylittelyä varten
+	//Molemmat ei voi olla true samaan aikaan.
 	let isLoading = $state(false);
+	let error = $state(false);
 
 	async function selectCategory(categoryId: number) {
+		//Loadingscreen näkyviin kunnes kategoria on valittu
 		isLoading = true;
-		await categorySelector(categoryId);
-		isLoading = false;
+		error = false;
+		//Jos fetch epäonnistuu -> error message
+		try {
+			const success = await categorySelector(categoryId);
+			if (!success) {
+				error = true;
+			}
+		} catch (err) {
+			error = true;
+			console.error('Category selection error:', err);
+		} finally {
+			// Jos kaikki ok, loading screen pois ja peli alkaa
+			isLoading = false;
+		}
+	}
+
+	function tryAgain() {
+		error = false;
 	}
 </script>
 
-{#if !isLoading && !triviaManager.isCategorySelected}
+{#if !isLoading && !triviaManager.isCategorySelected && !error}
 	<div class="container">
 		<div>
 			<h1>Welcome to MindSpark!</h1>
@@ -28,7 +47,7 @@
 			<h4>
 				Choose the quiz category you want to play. You will be presented with 20 questions and your
 				objective is to answer them correctly as fast as possible to get the maximum amount of
-				points
+				points.
 			</h4>
 		</div>
 	</div>
@@ -46,6 +65,20 @@
 			{/each}
 		</div>
 	</div>
+{:else if error}
+	<div class="container">
+		<h1>Error Loading Questions</h1>
+		<div class="error-message">
+			<h3>Failed to load questions. Please try again.</h3>
+		</div>
+		<Button
+			text="Try Again"
+			color="button1-color"
+			onclick={tryAgain}
+			font="Protest Strike"
+			fontSize="32px"
+		/>
+	</div>
 {:else}
 	<div class="container">
 		<h1>Your game is loading</h1>
@@ -58,7 +91,7 @@
 	.loader {
 		width: 48px;
 		height: 48px;
-		border: 5px solid #fff;
+		border: 5px solid rgba(245, 245, 245, 0.6); /* CORRECT */
 		border-bottom-color: transparent;
 		border-radius: 50%;
 		display: inline-block;
@@ -110,7 +143,7 @@
 	}
 
 	.objcontainer {
-		width: 800px;
+		width: 600px;
 	}
 
 	h3 {
@@ -163,5 +196,14 @@
 		.objcontainer {
 			display: none;
 		}
+	}
+
+	.error-message {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 16px;
+		margin: 20px 0;
+		color: #e74c3c;
 	}
 </style>
