@@ -276,48 +276,20 @@
 		color: #d35400;
 		opacity: 1;
 	}
-
-	@media only screen and (max-width: 412px) {
-		.question,
-		.questiontext {
+	@media only screen and (max-width: 688px) {
+		.header-container {
 			width: 90%;
-			min-width: 180px;
-			height: auto;
-			font-size: 20px;
-			padding: 10px;
-			margin: 10px auto;
 		}
-
-		.header {
-			width: 90%;
-			max-width: 90%;
-		}
-
-		.progress-container {
-			width: 80%;
-		}
-	}
-
-	@media only screen and (min-width: 412px) and (max-width: 655px) {
-		.question,
-		.questiontext {
+		.question {
 			width: 80%;
 			min-width: 230px;
 			height: auto;
+		}
+
+		.questiontext {
 			font-size: 23px;
-			padding: 10px;
 			text-align: center;
 		}
-
-		.header {
-			width: 80%;
-			max-width: 80%;
-		}
-
-		.progress-container {
-			width: 70%;
-		}
-
 		/* h3 {
 			font-size: 18px;
 			padding: 15px;
@@ -331,32 +303,37 @@
 			font-size: 22px;
 			padding: 8px 16px;
 		}
+
+	}
+	@media only screen and (max-width: 412px) {
+	.answers-container {
+			margin-bottom: 55px;
+		}
 	}
 
-	@media only screen and (min-height: 480px) and (max-height: 655px) {
-		.question,
-		.questiontext {
+	@media only screen and (max-height: 655px) {
+		.question {
 			width: 80%;
 			min-width: 30%;
 			height: auto;
-			min-height: 110px;
+		}
+		.questiontext {
 			font-size: 20px;
-			margin: 10px auto;
-			padding: 10px;
 			text-align: center;
 		}
 	}
 
 	@media only screen and (max-height: 480px) {
-		.question,
-		.questiontext {
+		.question {
 			width: 80%;
 			min-width: 40px;
 			min-height: 80px;
-			font-size: 15px;
 			margin: auto;
-			padding: 10px;
+		}
+
+		.questiontext {
 			text-align: center;
+			font-size: 15px;
 		}
 	}
 </style>
