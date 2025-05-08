@@ -5,6 +5,7 @@
 		disabled?: boolean;
 		font?: string;
 		fontSize?: string;
+		sound?: string; // New prop for sound file path
 		color:
 			| 'button1-color'
 			| 'button2-color'
@@ -21,14 +22,30 @@
 		disabled = false,
 		color,
 		font = 'Protest Strike',
-		fontSize = '32px'
+		fontSize = '32px',
+		sound = '' // Default to no sound
 	}: Props = $props();
+
+	// Create a click handler that plays sound and calls the original onclick function
+	function handleClick() {
+		// Play sound if provided
+		if (sound) {
+			const audio = new Audio(sound);
+			audio.volume = 0.5; // Set volume to 50%
+			audio.play().catch((err) => console.error('Error playing sound:', err));
+		}
+
+		// Call the original onclick handler if provided
+		if (onclick) {
+			onclick();
+		}
+	}
 </script>
 
 <button
 	class={color}
 	style={`font-family: ${font}; --button-font-size: ${fontSize};`}
-	{onclick}
+	onclick={handleClick}
 	{disabled}>{text}</button
 >
 

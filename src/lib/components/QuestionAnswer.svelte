@@ -2,9 +2,20 @@
 	import Button from '$lib/components/Button.svelte';
 	import { triviaManager } from '$lib/stores/triviaStore.svelte';
 
-	function answerSelector(answer: string) {
+	async function answerSelector(answer: string) {
+		// First check if the answer is correct (before updating the state)
+		const currentQuestion = triviaManager.questions[triviaManager.currentQuestionIndex];
+		const isCorrect = answer === currentQuestion.correct_answer;
+
+		// Play the appropriate sound
+		const soundFile = isCorrect ? '/sound/button1.wav' : '/sound/button2.wav';
+		const audio = new Audio(soundFile);
+		audio.volume = 0.5;
+		audio.play().catch((err) => console.error('Error playing sound:', err));
+
 		triviaManager.selectAnswer(answer);
 	}
+
 	// Tarvitsee tämän funtion, jotta HTML-koodit saadaan dekoodattua luettavaksi.
 	// Tullut täysin AI:lta, mutta pakollinen.
 	function decodeHTML(html: string): string {
