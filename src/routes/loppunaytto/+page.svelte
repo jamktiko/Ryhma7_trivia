@@ -6,10 +6,11 @@
 
 	//Tähän true niin loader on näkyvissä kokoajan
 	let isLoading = $state(false);
-
 	const params = $page.url.searchParams;
 	const highScore = params.get('highScore');
 
+	//PLayagain nappi, joka kutsuu triviaManager.playAgain() funktiota ja lataa uuden pelin
+	//Jos kategoriaa ei ole valittu, ohjataan pääsivulle
 	async function handlePlayAgain() {
 		if (triviaManager.selectedCategoryId !== null) {
 			isLoading = true;
@@ -19,7 +20,7 @@
 			goto('/');
 		}
 	}
-
+	//Timeout toiminnallisuus, joka odottaa 1 sekunnin ennen kuin ohjaa kategorian valintaan
 	const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 	async function handleChangeCategories() {
 		isLoading = true;
@@ -28,40 +29,44 @@
 		goto('/');
 	}
 </script>
-{#if isLoading}
-		<h1>Loading a new game</h1>
-		<span class="loader"></span>
-		<h2>Please wait a moment.</h2>
-{:else}
-<div class="container">
-	{#if triviaManager.score < 75}
-	<div>
-		<h1>Oh no!</h1>
-		<h2>You don't have a spark mind!</h2>
-	</div>
-	{:else if triviaManager.score < 150}
-	<div>
-		<h1>You did ok.</h1>
-		<h2>But you can do better!</h2>
-	</div>
-	{:else if triviaManager.score < 225}
-	<div>
-		<h1>Good job!</h1>
-		<h2>Tähän jotain</h2>
-	</div>
-	{:else if triviaManager.score >= 225}
-	<div>
-		<h1>Wow!</h1>
-		<h2>You have a spark mind!</h2>
-	</div>
-	{/if}
 
-	<div class="scoretext">
-		<h4>You scored {triviaManager.score} points!</h4>
-		<h4>You got {triviaManager.correctAnswers}/20 questions right!</h4>
-		<h4>Highscore for category {triviaManager.selectedCategory?.name}: {highScore}</h4>
+<!-- Näytetään kun peli latautuu -->
+{#if isLoading}
+	<h1>Loading a new game</h1>
+	<span class="loader"></span>
+	<h2>Please wait a moment.</h2>
+{:else}
+	<!-- Tulostetaan "onnitteluviestit" pistemäärien mukaan -->
+	<div class="container">
+		{#if triviaManager.score < 75}
+			<div>
+				<h1>Oh no!</h1>
+				<h2>You don't have a spark mind!</h2>
+			</div>
+		{:else if triviaManager.score < 150}
+			<div>
+				<h1>You did ok.</h1>
+				<h2>But you can do better!</h2>
+			</div>
+		{:else if triviaManager.score < 225}
+			<div>
+				<h1>Good job!</h1>
+				<h2>Tähän jotain</h2>
+			</div>
+		{:else if triviaManager.score >= 225}
+			<div>
+				<h1>Wow!</h1>
+				<h2>You have a spark mind!</h2>
+			</div>
+		{/if}
+
+		<!-- Tulostaa pisteet -->
+		<div class="scoretext">
+			<h4>You scored {triviaManager.score} points!</h4>
+			<h4>You got {triviaManager.correctAnswers}/20 questions right!</h4>
+			<h4>Highscore for category {triviaManager.selectedCategory?.name}: {highScore}</h4>
+		</div>
 	</div>
-</div>
 	<div class="button-container">
 		<h3>Do you want to play again?</h3>
 		<Button
@@ -71,7 +76,6 @@
 			font="Protest Strike"
 			fontSize="26px"
 		/>
-
 		<Button
 			text="Play again"
 			color="button1-color"
@@ -80,11 +84,9 @@
 			fontSize="32px"
 		/>
 	</div>
-
 {/if}
 
 <style>
-	
 	.container {
 		display: flex;
 		flex-direction: column;
@@ -96,8 +98,8 @@
 	}
 	/* Copy the loader styles from CategorySelector.svelte */
 	.loader {
-		width: 48px;
-		height: 48px;
+		width: 58px;
+		height: 58px;
 		border: 5px solid rgba(245, 245, 245, 0.6);
 		border-bottom-color: transparent;
 		border-radius: 50%;
@@ -180,7 +182,7 @@
 			font-size: 28px;
 		}
 		.button-container {
-		margin-bottom: 40px;
-	}
+			margin-bottom: 40px;
+		}
 	}
 </style>
