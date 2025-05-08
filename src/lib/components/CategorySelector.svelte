@@ -51,19 +51,20 @@
 			</h4>
 		</div>
 
-	<div class="catcontainer">
-		<h3>Choose a category!</h3>
-		<div class="buttoncontainer">
-			<!-- Kategoriat nappeihin taulukosta each metodilla -->
-			{#each triviaManager.categories as category}
-				<Button
-					text={category.name}
-					color="button1-color"
-					onclick={() => selectCategory(category.id)}
-					font="Protest Strike"
-					fontSize="32px"
-				/>
-			{/each}
+		<div class="catcontainer">
+			<h3>Choose a category!</h3>
+			<div class="buttoncontainer">
+				<!-- Kategoriat nappeihin taulukosta each metodilla -->
+				{#each triviaManager.categories as category}
+					<Button
+						text={category.name}
+						color="button1-color"
+						onclick={() => selectCategory(category.id)}
+						font="Protest Strike"
+						fontSize="32px"
+					/>
+				{/each}
+			</div>
 		</div>
 	</div>
 	<!-- Jos fetch epäonnistuu, tulostuu "error message" ja "try again" nappi -->
