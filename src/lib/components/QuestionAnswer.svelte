@@ -37,17 +37,19 @@
 		</div>
 	</div>
 
+	<div class="question-container">
 	<!-- Tulostaa kategorian nimen -->
 	<div class="question-info">
 		<div class="category-name">{triviaManager.currentQuestion.category}</div>
 	</div>
 
-	<div class="question-container">
+
 		<!-- Dekoodaa ja tulostaa kysymyksen luettavaksi -->
 		<div class="question">
 			<h4 class="questiontext">{decodeHTML(triviaManager.currentQuestion.question)}</h4>
 		</div>
 
+		<div class="answers-container">
 		<!-- Tulostaa correct / incorrect vastausvalinnan jälkeen -->
 		<div class="result-message-container">
 			{#if triviaManager.selectedAnswer !== null}
@@ -100,6 +102,7 @@
 			{/each}
 		</div>
 	</div>
+	</div>
 {:else}
 	<div class="container">
 		<h1>Getting your score</h1>
@@ -117,10 +120,11 @@
 		overflow: hidden;
 	}
 
-	.progress {
-		height: 100%;
-		background-color: #76c7c0; /* Progressin väri */
-		animation: decrease-width 20s linear forwards; /* 20 sekunnin animaatio */
+	.progress-bar {
+		height: 20px;
+		background-color: #4b1d6f;
+		animation: countdown 20s linear forwards;
+		animation-play-state: running;
 	}
 
 	@keyframes decrease-width {
@@ -218,12 +222,6 @@
 		background-color: #f0eaf9;
 		border-radius: 999px;
 		overflow: hidden;
-	}
-	.progress-bar {
-		height: 20px;
-		background-color: #4b1d6f;
-		animation: countdown 20s linear forwards;
-		animation-play-state: running;
 	}
 
 	.question {
