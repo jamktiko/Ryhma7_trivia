@@ -44,7 +44,11 @@
 			</div>
 			<!-- Progress bar -->
 			<div class="progress-container">
-				<div class="progress-bar" style="width: {(triviaManager.ajastin / 20) * 100}%;"></div>
+				<div
+					class="progress-bar"
+					style="width: {(triviaManager.ajastin / 20) * 100}%; 
+									 transition: {triviaManager.ajastin < 20 ? 'linear 1s' : 'none'};"
+				></div>
 			</div>
 		</div>
 
@@ -144,14 +148,14 @@
 	}
 	h1 {
 		font-size: 55px;
-		font-family: 'Protest Strike';
+		font-family: 'Protest Strike', sans-serif;
 		padding: 3px;
 		margin: 0;
 	}
 
 	h2 {
 		font-size: 48px;
-		font-family: 'Protest Strike';
+		font-family: 'Protest Strike', sans-serif;
 		padding: 5px;
 		margin: 0;
 	}
@@ -359,18 +363,6 @@
 			font-size: 16px;
 			padding: 6px 14px;
 		}
-	}
-	h1 {
-		font-size: 40px;
-	}
-	h2 {
-		font-size: 32px;
-	}
-	h1 {
-		font-size: 40px;
-	}
-	h2 {
-		font-size: 32px;
 	}
 	@media only screen and (max-width: 412px) {
 		.answers-container {

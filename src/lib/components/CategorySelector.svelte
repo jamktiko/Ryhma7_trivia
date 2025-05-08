@@ -132,6 +132,19 @@
 		padding: 5px;
 		margin: 0;
 	}
+	h3 {
+		font-size: 40px;
+		font-family: 'KoHo';
+		padding: 30px 0 5px 0;
+		margin: 0;
+	}
+
+	h4 {
+		font-size: 20px;
+		font-family: 'Koho';
+		padding: 0;
+		margin: 0;
+	}
 
 	.catcontainer {
 		bottom: 0;
@@ -148,20 +161,6 @@
 
 	.objcontainer {
 		width: 600px;
-	}
-
-	h3 {
-		font-size: 40px;
-		font-family: 'KoHo';
-		padding: 30px 0 5px 0;
-		margin: 0;
-	}
-
-	h4 {
-		font-size: 20px;
-		font-family: 'Koho';
-		padding: 0;
-		margin: 0;
 	}
 
 	@media only screen and (max-width: 840px) {
