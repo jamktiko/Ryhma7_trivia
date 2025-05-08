@@ -44,7 +44,11 @@
 			</div>
 			<!-- Progress bar -->
 			<div class="progress-container">
-				<div class="progress-bar" style="width: {(triviaManager.ajastin / 20) * 100}%;"></div>
+				<div
+					class="progress-bar"
+					style="width: {(triviaManager.ajastin / 20) * 100}%; 
+									 transition: {triviaManager.ajastin < 20 ? 'linear 1s' : 'none'};"
+				></div>
 			</div>
 		</div>
 
