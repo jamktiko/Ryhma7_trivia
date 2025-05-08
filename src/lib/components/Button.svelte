@@ -137,7 +137,7 @@
 			width: 45%;
 			min-width: 150px;
 			height: 128px;
-			font-size: calc(var(--button-font-size) * 0.75);
+			font-size: calc(var(--button-font-size) * 0.85);
 		}
 	}
 
@@ -146,7 +146,7 @@
 			width: 45%;
 			min-width: 150px;
 			height: 128px;
-			font-size: calc(var(--button-font-size) * 0.55);
+			font-size: calc(var(--button-font-size) * 0.68);
 		}
 	}
 </style>

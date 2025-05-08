@@ -38,11 +38,10 @@
 	</div>
 
 	<div class="question-container">
-	<!-- Tulostaa kategorian nimen -->
-	<div class="question-info">
-		<div class="category-name">{triviaManager.currentQuestion.category}</div>
-	</div>
-
+		<!-- Tulostaa kategorian nimen -->
+		<div class="question-info">
+			<div class="category-name">{triviaManager.currentQuestion.category}</div>
+		</div>
 
 		<!-- Dekoodaa ja tulostaa kysymyksen luettavaksi -->
 		<div class="question">
@@ -50,58 +49,58 @@
 		</div>
 
 		<div class="answers-container">
-		<!-- Tulostaa correct / incorrect vastausvalinnan jälkeen -->
-		<div class="result-message-container">
-			{#if triviaManager.selectedAnswer !== null}
-				<div
-					class="result-message {triviaManager.selectedAnswer === 'TIMEOUT'
-						? 'timeout'
-						: triviaManager.isAnswerCorrect
-							? 'correct'
-							: 'incorrect'}"
-				>
-					{#if triviaManager.selectedAnswer === 'TIMEOUT'}
-						Ran out of time!
-					{:else if triviaManager.isAnswerCorrect}
-						Correct!
-					{:else}
-						Incorrect!
-					{/if}
-				</div>
-			{/if}
-		</div>
-
-		<div class="answers-box">
-			{#each triviaManager.shuffledAnswers as answer, i}
-				{#if answer === triviaManager.selectedAnswer}
-					<Button
-						text={decodeHTML(answer)}
-						color={triviaManager.isAnswerCorrect ? 'correctans-color' : 'wrongans-color'}
-						onclick={() => answerSelector(answer)}
-						disabled={!triviaManager.canSelectAnswer}
-						font="KoHo"
-						fontSize="24px"
-					/>
-				{:else}
-					<!-- Tulostaa buttonin värin ehdollisesti, riippuen kysymysnumerosta -->
-					<Button
-						text={decodeHTML(answer)}
-						color={i === 0
-							? 'ansbutton1-color'
-							: i === 1
-								? 'ansbutton2-color'
-								: i === 2
-									? 'ansbutton3-color'
-									: 'ansbutton4-color'}
-						font="KoHo"
-						fontSize="24px"
-						onclick={() => answerSelector(answer)}
-						disabled={!triviaManager.canSelectAnswer}
-					/>
+			<!-- Tulostaa correct / incorrect vastausvalinnan jälkeen -->
+			<div class="result-message-container">
+				{#if triviaManager.selectedAnswer !== null}
+					<div
+						class="result-message {triviaManager.selectedAnswer === 'TIMEOUT'
+							? 'timeout'
+							: triviaManager.isAnswerCorrect
+								? 'correct'
+								: 'incorrect'}"
+					>
+						{#if triviaManager.selectedAnswer === 'TIMEOUT'}
+							Ran out of time!
+						{:else if triviaManager.isAnswerCorrect}
+							Correct!
+						{:else}
+							Incorrect!
+						{/if}
+					</div>
 				{/if}
-			{/each}
+			</div>
+
+			<div class="answers-box">
+				{#each triviaManager.shuffledAnswers as answer, i}
+					{#if answer === triviaManager.selectedAnswer}
+						<Button
+							text={decodeHTML(answer)}
+							color={triviaManager.isAnswerCorrect ? 'correctans-color' : 'wrongans-color'}
+							onclick={() => answerSelector(answer)}
+							disabled={!triviaManager.canSelectAnswer}
+							font="KoHo"
+							fontSize="24px"
+						/>
+					{:else}
+						<!-- Tulostaa buttonin värin ehdollisesti, riippuen kysymysnumerosta -->
+						<Button
+							text={decodeHTML(answer)}
+							color={i === 0
+								? 'ansbutton1-color'
+								: i === 1
+									? 'ansbutton2-color'
+									: i === 2
+										? 'ansbutton3-color'
+										: 'ansbutton4-color'}
+							font="KoHo"
+							fontSize="24px"
+							onclick={() => answerSelector(answer)}
+							disabled={!triviaManager.canSelectAnswer}
+						/>
+					{/if}
+				{/each}
+			</div>
 		</div>
-	</div>
 	</div>
 {:else}
 	<div class="container">
@@ -112,21 +111,6 @@
 {/if}
 
 <style>
-	.progress-bar {
-		width: 100%;
-		height: 10px;
-		background-color: #e0e0e0; /* Taustaväri */
-		border-radius: 5px;
-		overflow: hidden;
-	}
-
-	.progress-bar {
-		height: 20px;
-		background-color: #4b1d6f;
-		animation: countdown 20s linear forwards;
-		animation-play-state: running;
-	}
-
 	@keyframes decrease-width {
 		from {
 			width: 100%; /* Aloittaa täytenä */
@@ -224,6 +208,14 @@
 		overflow: hidden;
 	}
 
+	.progress-bar {
+		height: 20px;
+		background-color: #4b1d6f;
+		animation: countdown 20s linear forwards;
+		animation-play-state: running;
+		border-radius: 999px;
+	}
+
 	.question {
 		display: flex;
 		flex-wrap: wrap;
@@ -309,13 +301,17 @@
 			font-size: 20px;
 		}
 		.result-message {
-			font-size: 22px;
-			padding: 8px 16px;
+			font-size: 16px;
+			padding: 6px 14px;
 		}
 	}
 	@media only screen and (max-width: 412px) {
 		.answers-container {
 			margin-bottom: 55px;
+		}
+		.result-message {
+			font-size: 16px;
+			padding: 6px 14px;
 		}
 	}
 
