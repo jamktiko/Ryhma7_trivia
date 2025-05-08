@@ -78,7 +78,7 @@
 		/>
 		<Button
 			text="Play again"
-			color="button1-color"
+			color="button3-color"
 			onclick={handlePlayAgain}
 			font="Protest Strike"
 			fontSize="32px"
