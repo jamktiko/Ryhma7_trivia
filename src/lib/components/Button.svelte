@@ -8,6 +8,7 @@
 		color:
 			| 'button1-color'
 			| 'button2-color'
+			| 'button3-color'
 			| 'ansbutton1-color'
 			| 'ansbutton2-color'
 			| 'ansbutton3-color'
@@ -65,6 +66,17 @@
 	.button2-color:hover {
 		cursor: pointer;
 		background-color: rgba(253, 170, 83, 25%);
+		box-shadow:
+			1px 1px 4px rgba(0, 0, 0, 25%),
+			inset -3px -3px 4px rgba(0, 0, 0, 25%);
+	}
+	.button3-color {
+		background-color: var(--button3-color);
+	}
+
+	.button3-color:hover {
+		cursor: pointer;
+		background-color: rgba(253, 171, 83, 70%);
 		box-shadow:
 			1px 1px 4px rgba(0, 0, 0, 25%),
 			inset -3px -3px 4px rgba(0, 0, 0, 25%);
@@ -137,7 +149,7 @@
 			width: 45%;
 			min-width: 150px;
 			height: 128px;
-			font-size: calc(var(--button-font-size) * 0.75);
+			font-size: calc(var(--button-font-size) * 0.85);
 		}
 	}
 
@@ -146,7 +158,7 @@
 			width: 45%;
 			min-width: 150px;
 			height: 128px;
-			font-size: calc(var(--button-font-size) * 0.55);
+			font-size: calc(var(--button-font-size) * 0.68);
 		}
 	}
 </style>
