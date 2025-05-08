@@ -29,13 +29,13 @@
 
 	:global html {
 		min-height: 100vh;
-		height: 100vh;
 		max-height: 100vh;
+		height: 100vh;
 	}
 	:global body {
 		min-height: 100vh;
-		height: 100vh;
 		max-height: 100vh;
+		height: 100vh;
 		margin: 0;
 		padding: 0;
 		background-color: var(--body-color);
@@ -47,8 +47,8 @@
 		align-items: center;
 		width: 100%;
 		min-height: 100vh;
-		height: 100vh;
 		max-height: 100vh;
+		height: 100vh;
 		font-size: 100%;
 		text-align: center;
 		color: #411c5e;

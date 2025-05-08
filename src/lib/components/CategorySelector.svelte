@@ -50,7 +50,7 @@
 				points.
 			</h4>
 		</div>
-	</div>
+
 	<div class="catcontainer">
 		<h3>Choose a category!</h3>
 		<div class="buttoncontainer">
@@ -65,6 +65,7 @@
 			{/each}
 		</div>
 	</div>
+</div>
 {:else if error}
 	<div class="container">
 		<h1>Error Loading Questions</h1>
