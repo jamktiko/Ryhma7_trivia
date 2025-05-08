@@ -47,7 +47,8 @@
 				<div class="progress-bar" style="width: {(triviaManager.ajastin / 20) * 100}%;"></div>
 			</div>
 		</div>
-	</div>
+
+
 	<div class="question-container">
 		<!-- Tulostaa kategorian nimen -->
 		<div class="question-info">
@@ -113,7 +114,7 @@
 			</div>
 		</div>
 	</div>
-	<!-- Kun peli päättyy, näytetään loading screen ennen reititystä -->
+</div>
 {:else}
 	<div class="container">
 		<h1>Getting your score</h1>
@@ -406,11 +407,6 @@
 			min-width: 40px;
 			min-height: 80px;
 			margin: auto;
-		}
-
-		.questiontext {
-			text-align: center;
-			font-size: 15px;
 		}
 
 		.questiontext {

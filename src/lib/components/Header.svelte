@@ -88,6 +88,11 @@
 		visibility: visible;
 	}
 
+	@media only screen and (max-width: 480px) {
+		.tooltiptext {
+			display: none;
+		}
+	}
 	@media only screen and (max-height: 630px) {
 		header,
 		.logo-container {
