@@ -48,73 +48,72 @@
 			</div>
 		</div>
 
-
-	<div class="question-container">
-		<!-- Tulostaa kategorian nimen -->
-		<div class="question-info">
-			<div class="category-name">{triviaManager.currentQuestion.category}</div>
-		</div>
-		<!-- Dekoodaa ja tulostaa kysymyksen luettavaksi -->
-		<div class="question">
-			<h4 class="questiontext">{decodeHTML(triviaManager.currentQuestion.question)}</h4>
-		</div>
-		<div class="answers-container">
-			<!-- Tulostaa correct / incorrect vastausvalinnan jälkeen -->
-			<!-- Jos aika loppuu, tulostuu Ran out of time -->
-			<div class="result-message-container">
-				{#if triviaManager.selectedAnswer !== null}
-					<div
-						class="result-message {triviaManager.selectedAnswer === 'TIMEOUT'
-							? 'timeout'
-							: triviaManager.isAnswerCorrect
-								? 'correct'
-								: 'incorrect'}"
-					>
-						{#if triviaManager.selectedAnswer === 'TIMEOUT'}
-							Ran out of time!
-						{:else if triviaManager.isAnswerCorrect}
-							Correct!
-						{:else}
-							Incorrect!
-						{/if}
-					</div>
-				{/if}
+		<div class="question-container">
+			<!-- Tulostaa kategorian nimen -->
+			<div class="question-info">
+				<div class="category-name">{triviaManager.currentQuestion.category}</div>
 			</div>
-			<div class="answers-box">
-				<!-- Vastaus vaihtoehdot nappeihin each metodilla -->
-				<!-- Vastauksien paikat seikoitettu shuffledAnswers funktiolla -->
-				<!-- Tulostaa buttonin värin ehdollisesti, riippuen kysymysnumerosta ja vastauksen tuloksesta -->
-				{#each triviaManager.shuffledAnswers as answer, i}
-					{#if answer === triviaManager.selectedAnswer}
-						<Button
-							text={decodeHTML(answer)}
-							color={triviaManager.isAnswerCorrect ? 'correctans-color' : 'wrongans-color'}
-							onclick={() => answerSelector(answer)}
-							disabled={!triviaManager.canSelectAnswer}
-							font="KoHo"
-							fontSize="24px"
-						/>
-					{:else}
-						<Button
-							text={decodeHTML(answer)}
-							color={i === 0
-								? 'ansbutton1-color'
-								: i === 1
-									? 'ansbutton2-color'
-									: i === 2
-										? 'ansbutton3-color'
-										: 'ansbutton4-color'}
-							font="KoHo"
-							fontSize="24px"
-							onclick={() => answerSelector(answer)}
-							disabled={!triviaManager.canSelectAnswer}
-						/>
+			<!-- Dekoodaa ja tulostaa kysymyksen luettavaksi -->
+			<div class="question">
+				<h4 class="questiontext">{decodeHTML(triviaManager.currentQuestion.question)}</h4>
+			</div>
+			<div class="answers-container">
+				<!-- Tulostaa correct / incorrect vastausvalinnan jälkeen -->
+				<!-- Jos aika loppuu, tulostuu Ran out of time -->
+				<div class="result-message-container">
+					{#if triviaManager.selectedAnswer !== null}
+						<div
+							class="result-message {triviaManager.selectedAnswer === 'TIMEOUT'
+								? 'timeout'
+								: triviaManager.isAnswerCorrect
+									? 'correct'
+									: 'incorrect'}"
+						>
+							{#if triviaManager.selectedAnswer === 'TIMEOUT'}
+								Ran out of time!
+							{:else if triviaManager.isAnswerCorrect}
+								Correct!
+							{:else}
+								Incorrect!
+							{/if}
+						</div>
 					{/if}
-				{/each}
+				</div>
+				<div class="answers-box">
+					<!-- Vastaus vaihtoehdot nappeihin each metodilla -->
+					<!-- Vastauksien paikat seikoitettu shuffledAnswers funktiolla -->
+					<!-- Tulostaa buttonin värin ehdollisesti, riippuen kysymysnumerosta ja vastauksen tuloksesta -->
+					{#each triviaManager.shuffledAnswers as answer, i}
+						{#if answer === triviaManager.selectedAnswer}
+							<Button
+								text={decodeHTML(answer)}
+								color={triviaManager.isAnswerCorrect ? 'correctans-color' : 'wrongans-color'}
+								onclick={() => answerSelector(answer)}
+								disabled={!triviaManager.canSelectAnswer}
+								font="KoHo"
+								fontSize="24px"
+							/>
+						{:else}
+							<Button
+								text={decodeHTML(answer)}
+								color={i === 0
+									? 'ansbutton1-color'
+									: i === 1
+										? 'ansbutton2-color'
+										: i === 2
+											? 'ansbutton3-color'
+											: 'ansbutton4-color'}
+								font="KoHo"
+								fontSize="24px"
+								onclick={() => answerSelector(answer)}
+								disabled={!triviaManager.canSelectAnswer}
+							/>
+						{/if}
+					{/each}
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 {:else}
 	<div class="container">
 		<h1>Getting your score</h1>
@@ -145,14 +144,14 @@
 	}
 	h1 {
 		font-size: 55px;
-		font-family: 'Protest Strike';
+		font-family: 'Protest Strike', sans-serif;
 		padding: 3px;
 		margin: 0;
 	}
 
 	h2 {
 		font-size: 48px;
-		font-family: 'Protest Strike';
+		font-family: 'Protest Strike', sans-serif;
 		padding: 5px;
 		margin: 0;
 	}
@@ -360,18 +359,6 @@
 			font-size: 16px;
 			padding: 6px 14px;
 		}
-	}
-	h1 {
-		font-size: 40px;
-	}
-	h2 {
-		font-size: 32px;
-	}
-	h1 {
-		font-size: 40px;
-	}
-	h2 {
-		font-size: 32px;
 	}
 	@media only screen and (max-width: 412px) {
 		.answers-container {
