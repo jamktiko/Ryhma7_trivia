@@ -15,7 +15,6 @@
 	let error = $state(false);
 
 	async function selectCategory(categoryId: number) {
-		//Loadingscreen näkyviin kunnes kategoria on valittu
 		isLoading = true;
 		error = false;
 		//Jos fetch epäonnistuu -> error message
@@ -34,17 +33,18 @@
 	}
 
 	function tryAgain() {
+		//"Resettaa" kategorian valinnan ja lataa sen uudestaan
 		error = false;
 	}
 </script>
 
+<!-- Jos kaikki ok, näytetään kategoria valinta -->
 {#if !isLoading && !triviaManager.isCategorySelected && !error}
 	<div class="container">
 		<div>
 			<h1>Welcome to MindSpark!</h1>
 			<h2>Are you ready to test your knowledge?</h2>
 		</div>
-
 		<div class="objcontainer">
 			<h4>
 				Choose the quiz category you want to play. You will be presented with 20 questions and your
@@ -52,21 +52,24 @@
 				points.
 			</h4>
 		</div>
-	</div>
-	<div class="catcontainer">
-		<h3>Choose a category!</h3>
-		<div class="buttoncontainer">
-			{#each triviaManager.categories as category}
-				<Button
-					text={category.name}
-					color="button1-color"
-					onclick={() => selectCategory(category.id)}
-					font="Protest Strike"
-					fontSize="32px"
-				/>
-			{/each}
+
+		<div class="catcontainer">
+			<h3>Choose a category!</h3>
+			<div class="buttoncontainer">
+				<!-- Kategoriat nappeihin taulukosta each metodilla -->
+				{#each triviaManager.categories as category}
+					<Button
+						text={category.name}
+						color="button1-color"
+						onclick={() => selectCategory(category.id)}
+						font="Protest Strike"
+						fontSize="32px"
+					/>
+				{/each}
+			</div>
 		</div>
 	</div>
+	<!-- Jos fetch epäonnistuu, tulostuu "error message" ja "try again" nappi -->
 {:else if error}
 	<div class="container">
 		<h1>Error Loading Questions</h1>
@@ -82,6 +85,7 @@
 		/>
 	</div>
 {:else}
+	<!-- Lautausnäyttö, kun kategoria on valittu onnistuneesti -->
 	<div class="container">
 		<h1>Your game is loading</h1>
 		<span class="loader"></span>
@@ -91,16 +95,16 @@
 
 <style>
 	.loader {
-		width: 48px;
-		height: 48px;
-		border: 5px solid rgba(245, 245, 245, 0.6); /* CORRECT */
+		width: 58px;
+		height: 58px;
+		border: 5px solid rgba(245, 245, 245, 0.6);
 		border-bottom-color: transparent;
 		border-radius: 50%;
 		display: inline-block;
 		box-sizing: border-box;
 		animation: rotation 1s linear infinite;
 	}
-
+	/* Loader keyframes */
 	@keyframes rotation {
 		0% {
 			transform: rotate(0deg);
@@ -130,6 +134,19 @@
 		padding: 5px;
 		margin: 0;
 	}
+	h3 {
+		font-size: 40px;
+		font-family: 'KoHo';
+		padding: 30px 0 5px 0;
+		margin: 0;
+	}
+
+	h4 {
+		font-size: 20px;
+		font-family: 'Koho';
+		padding: 0;
+		margin: 0;
+	}
 
 	.catcontainer {
 		bottom: 0;
@@ -146,20 +163,6 @@
 
 	.objcontainer {
 		width: 600px;
-	}
-
-	h3 {
-		font-size: 40px;
-		font-family: 'KoHo';
-		padding: 30px 0 5px 0;
-		margin: 0;
-	}
-
-	h4 {
-		font-size: 20px;
-		font-family: 'Koho';
-		padding: 0;
-		margin: 0;
 	}
 
 	@media only screen and (max-width: 840px) {

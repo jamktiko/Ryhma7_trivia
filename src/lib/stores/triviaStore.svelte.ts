@@ -176,37 +176,49 @@ export const triviaManager = {
 		if (!triviaObject.canSelectAnswer) return;
 		const currentQuestion = triviaObject.questions[triviaObject.currentQuestionIndex];
 		const isCorrect = answer === currentQuestion.correct_answer;
+
 		if (isCorrect) {
 			triviaObject.correctAnswers++;
-			const pisteet = laskepisteet(true); // Lasketaan pisteet oikeasta vastauksesta
+			const pisteet = laskepisteet(true);
 			triviaObject.score += pisteet;
-			//Päivittää highscoren jos tarve
 			if (triviaObject.score > (triviaObject.highScores[triviaObject.selectedCategoryId!] || 0)) {
 				triviaObject.highScores[triviaObject.selectedCategoryId!] = triviaObject.score;
 			}
 		} else {
 			triviaObject.incorrectAnswers++;
-			laskepisteet(false); // Ei pisteitä väärästä vastauksesta
+			laskepisteet(false);
 		}
+
 		triviaObject.selectedAnswer = answer;
 		triviaObject.isAnswerCorrect = isCorrect;
 		triviaObject.canSelectAnswer = false;
-		pysaytaAjastin(); // Pysäytetään ajastin, kun vastaus on valittu
-		setTimeout(() => {
-			if (triviaObject.currentQuestionIndex < triviaObject.questions.length - 1) {
+		pysaytaAjastin();
+
+		if (triviaObject.currentQuestionIndex < triviaObject.questions.length - 1) {
+			triviaObject.totalAnswers++;
+		}
+
+		if (triviaObject.currentQuestionIndex >= triviaObject.questions.length - 1) {
+			setTimeout(() => {
+				triviaObject.totalAnswers = 20;
+				setTimeout(() => {
+					goto(
+						`/loppunaytto?categoryId=${triviaObject.selectedCategoryId}&highScore=${
+							triviaObject.highScores[triviaObject.selectedCategoryId!] || 0
+						}`
+					);
+				}, 1000); // Timeout, jotta loadingscreen ehtii tulla näkyviin
+			}, 1000); // Timeout, että viimeisin vastauksen tulos ehtii näkyä
+		} else {
+			// For non-final questions, continue as before
+			setTimeout(() => {
 				triviaObject.currentQuestionIndex++;
 				this.shuffleAnswers();
-			} else {
-				goto(
-					`/loppunaytto?categoryId=${triviaObject.selectedCategoryId}&highScore=${
-						triviaObject.highScores[triviaObject.selectedCategoryId!] || 0
-					}`
-				);
-			}
-			triviaObject.selectedAnswer = null;
-			triviaObject.isAnswerCorrect = null;
-			triviaObject.canSelectAnswer = true;
-		}, 100);
+				triviaObject.selectedAnswer = null;
+				triviaObject.isAnswerCorrect = null;
+				triviaObject.canSelectAnswer = true;
+			}, 1000); // Kysymyksien välinen timeout
+		}
 	},
 
 	async selectCategory(categoryId: number): Promise<boolean> {
@@ -246,6 +258,7 @@ export const triviaManager = {
 		triviaObject.score = 0;
 		triviaObject.correctAnswers = 0;
 		triviaObject.incorrectAnswers = 0;
+		triviaObject.totalAnswers = 0;
 		//Tämä litania resettaa pelin lukuunottamatta kategoriaa
 		// Ei toiminut joka kerta jos kutsuu reset() funktiota
 		// ja asetti sen jälkeen vielä erikseen categorySelected trueksi.
@@ -276,6 +289,7 @@ export const triviaManager = {
 		triviaObject.correctAnswers = 0;
 		triviaObject.incorrectAnswers = 0;
 		triviaObject.categorySelected = false;
-		triviaObject.progress = 0; // Nollataan progress bar
+		triviaObject.progress = 0;
+		triviaObject.totalAnswers = 0;
 	}
 };

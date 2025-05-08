@@ -18,6 +18,7 @@
 		--body-color: rgba(130, 79, 157, 30%);
 		--button1-color: rgba(253, 170, 83, 30%);
 		--button2-color: rgba(253, 171, 83, 20%);
+		--button3-color: rgba(253, 171, 83, 60%);
 		--buttontext-color: #411c5e;
 		--ansbutton1-color: rgba(160, 198, 207, 80%);
 		--ansbutton2-color: rgba(192, 155, 173, 90%);
@@ -29,13 +30,13 @@
 
 	:global html {
 		min-height: 100vh;
-		height: 100vh;
 		max-height: 100vh;
+		height: 100vh;
 	}
 	:global body {
 		min-height: 100vh;
-		height: 100vh;
 		max-height: 100vh;
+		height: 100vh;
 		margin: 0;
 		padding: 0;
 		background-color: var(--body-color);
@@ -47,8 +48,8 @@
 		align-items: center;
 		width: 100%;
 		min-height: 100vh;
-		height: 100vh;
 		max-height: 100vh;
+		height: 100vh;
 		font-size: 100%;
 		text-align: center;
 		color: #411c5e;
