@@ -239,6 +239,8 @@
 		justify-content: space-between;
 		align-items: center;
 		font-family: 'Protest Strike', sans-serif;
+		/* Alla oleva koodi lisätty, jotta points -luokka staattinen*/
+		position: relative;
 	}
 	.question-counter {
 		font-size: 1.5rem;
@@ -247,7 +249,12 @@
 	.points {
 		font-size: 1.6rem;
 		color: #4b1d6f;
-		padding-left: 30px;
+		/* Tästä alaspäin lisätty, jotta luokka saadaan staattiseksi. Poistettu padding 30px */
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		text-align: center;
+		width: 180px;
 	}
 	.timer {
 		background-color: rgba(65, 28, 94, 30%);
