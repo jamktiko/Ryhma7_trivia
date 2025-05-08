@@ -20,48 +20,47 @@ interface Question {
 }
 
 const triviaObject = $state({
-    categories: [
-        { id: 21, name: 'Sports' },
-        { id: 23, name: 'History' },
-        { id: 22, name: 'Geography' },
-        { id: 27, name: 'Animals' }
-    ],
-    selectedCategoryId: null as number | null,
-    categorySelected: false,
-    questions: [] as Question[],
-    currentQuestionIndex: 0,
-    shuffledAnswers: [] as string[],
-    selectedAnswer: null as string | null,
-    isAnswerCorrect: null as boolean | null,
-    canSelectAnswer: true,
-    score: 0,
-    correctAnswers: 0,
-    incorrectAnswers: 0,
-    totalAnswers: 0, // Lasketaan kaikkien kysymysten määrä
-    highScores: {} as Record<number, number>, // jokaiselle kategorialle oma highscore
-    ajastin: 0, // Ajastin sekunteina
-    progress: 0 // Progress barin tila prosentteina
-
+	categories: [
+		{ id: 21, name: 'Sports' },
+		{ id: 23, name: 'History' },
+		{ id: 22, name: 'Geography' },
+		{ id: 27, name: 'Animals' }
+	],
+	selectedCategoryId: null as number | null,
+	categorySelected: false,
+	questions: [] as Question[],
+	currentQuestionIndex: 0,
+	shuffledAnswers: [] as string[],
+	selectedAnswer: null as string | null,
+	isAnswerCorrect: null as boolean | null,
+	canSelectAnswer: true,
+	score: 0,
+	correctAnswers: 0,
+	incorrectAnswers: 0,
+	totalAnswers: 0, // Lasketaan kaikkien kysymysten määrä
+	highScores: {} as Record<number, number>, // jokaiselle kategorialle oma highscore
+	ajastin: 0, // Ajastin sekunteina
+	progress: 0 // Progress barin tila prosentteina
 });
 
 let ajastinInterval: ReturnType<typeof setInterval> | null = null;
 
 function kaynnistaAjastin() {
-    pysaytaAjastin(); // Varmistetaan, ettei vanhoja ajastimia ole käynnissä
-    triviaObject.ajastin = 20; // Asetetaan ajastin haluttuun sekuntiin
-    triviaObject.progress = 0; // Nollataan progress bar
+	pysaytaAjastin(); // Varmistetaan, ettei vanhoja ajastimia ole käynnissä
+	triviaObject.ajastin = 20; // Asetetaan ajastin haluttuun sekuntiin
+	triviaObject.progress = 0; // Nollataan progress bar
 
-    ajastinInterval = setInterval(() => {
-        if (triviaObject.ajastin > 0) {
-            triviaObject.ajastin--; // Vähennetään ajastinta yhdellä sekunnilla
-            triviaObject.progress = ((triviaObject.ajastin) / 20) * 100; // Päivitetään progress bar
-        } else {
-            pysaytaAjastin(); // Pysäytetään ajastin, kun aika loppuu
-            if (triviaObject.canSelectAnswer) {
-                triviaManager.timeOut();
-            }
-        }
-    }, 1000); // Päivitetään ajastinta sekunnin välein
+	ajastinInterval = setInterval(() => {
+		if (triviaObject.ajastin > 0) {
+			triviaObject.ajastin--; // Vähennetään ajastinta yhdellä sekunnilla
+			triviaObject.progress = (triviaObject.ajastin / 20) * 100; // Päivitetään progress bar
+		} else {
+			pysaytaAjastin(); // Pysäytetään ajastin, kun aika loppuu
+			if (triviaObject.canSelectAnswer) {
+				triviaManager.timeOut();
+			}
+		}
+	}, 1000); // Päivitetään ajastinta sekunnin välein
 }
 
 function pysaytaAjastin() {
@@ -162,7 +161,7 @@ export const triviaManager = {
 				this.shuffleAnswers();
 			} else {
 				goto(
-					`/loppunäyttö?categoryId=${triviaObject.selectedCategoryId}&highScore=${
+					`/loppunaytto?categoryId=${triviaObject.selectedCategoryId}&highScore=${
 						triviaObject.highScores[triviaObject.selectedCategoryId!] || 0
 					}`
 				);
@@ -199,7 +198,7 @@ export const triviaManager = {
 				this.shuffleAnswers();
 			} else {
 				goto(
-					`/loppunäyttö?categoryId=${triviaObject.selectedCategoryId}&highScore=${
+					`/loppunaytto?categoryId=${triviaObject.selectedCategoryId}&highScore=${
 						triviaObject.highScores[triviaObject.selectedCategoryId!] || 0
 					}`
 				);
@@ -264,19 +263,19 @@ export const triviaManager = {
 		}
 	},
 
-    reset() {
-        pysaytaAjastin();
-        triviaObject.selectedCategoryId = null;
-        triviaObject.questions = [];
-        triviaObject.currentQuestionIndex = 0;
-        triviaObject.shuffledAnswers = [];
-        triviaObject.selectedAnswer = null;
-        triviaObject.isAnswerCorrect = null;
-        triviaObject.canSelectAnswer = true;
-        triviaObject.score = 0;
-        triviaObject.correctAnswers = 0;
-        triviaObject.incorrectAnswers = 0;
-        triviaObject.categorySelected = false;
-        triviaObject.progress = 0; // Nollataan progress bar
-    }
+	reset() {
+		pysaytaAjastin();
+		triviaObject.selectedCategoryId = null;
+		triviaObject.questions = [];
+		triviaObject.currentQuestionIndex = 0;
+		triviaObject.shuffledAnswers = [];
+		triviaObject.selectedAnswer = null;
+		triviaObject.isAnswerCorrect = null;
+		triviaObject.canSelectAnswer = true;
+		triviaObject.score = 0;
+		triviaObject.correctAnswers = 0;
+		triviaObject.incorrectAnswers = 0;
+		triviaObject.categorySelected = false;
+		triviaObject.progress = 0; // Nollataan progress bar
+	}
 };
