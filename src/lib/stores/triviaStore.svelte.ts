@@ -191,6 +191,7 @@ export const triviaManager = {
 		triviaObject.selectedAnswer = answer;
 		triviaObject.isAnswerCorrect = isCorrect;
 		triviaObject.canSelectAnswer = false;
+		triviaObject.totalAnswers++;
 		pysaytaAjastin(); // Pysäytetään ajastin, kun vastaus on valittu
 		setTimeout(() => {
 			if (triviaObject.currentQuestionIndex < triviaObject.questions.length - 1) {
@@ -206,7 +207,7 @@ export const triviaManager = {
 			triviaObject.selectedAnswer = null;
 			triviaObject.isAnswerCorrect = null;
 			triviaObject.canSelectAnswer = true;
-		}, 100);
+		}, 1000);
 	},
 
 	async selectCategory(categoryId: number): Promise<boolean> {
@@ -246,6 +247,7 @@ export const triviaManager = {
 		triviaObject.score = 0;
 		triviaObject.correctAnswers = 0;
 		triviaObject.incorrectAnswers = 0;
+		triviaObject.totalAnswers = 0;
 		//Tämä litania resettaa pelin lukuunottamatta kategoriaa
 		// Ei toiminut joka kerta jos kutsuu reset() funktiota
 		// ja asetti sen jälkeen vielä erikseen categorySelected trueksi.
@@ -276,6 +278,7 @@ export const triviaManager = {
 		triviaObject.correctAnswers = 0;
 		triviaObject.incorrectAnswers = 0;
 		triviaObject.categorySelected = false;
-		triviaObject.progress = 0; // Nollataan progress bar
+		triviaObject.progress = 0;
+		triviaObject.totalAnswers = 0;
 	}
 };

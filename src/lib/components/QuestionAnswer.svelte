@@ -5,7 +5,6 @@
 	function answerSelector(answer: string) {
 		triviaManager.selectAnswer(answer);
 	}
-
 	// Tarvitsee tämän funtion, jotta HTML-koodit saadaan dekoodattua luettavaksi.
 	// Tullut täysin AI:lta, mutta pakollinen.
 	function decodeHTML(html: string): string {
@@ -15,41 +14,41 @@
 	}
 </script>
 
+<!-- Peli käynnissä, kunnes vastattu 20 kysymykseen tai ajastin loppuu. -->
 {#if triviaManager.totalAnswers !== 20}
 	<!-- Näytetään ajastin ja kysymys-vastauskomponentti, kun kategoria on valittu -->
 	<div class="container">
-		<!-- Ajastin ja kysymysnumero -->
 		<div class="header-container">
 			<div class="header">
+				<!-- Kysymysnumero -->
 				<div class="question-counter">
 					{triviaManager.currentQuestionIndex + 1}/{triviaManager.questions.length}
 				</div>
+				<!-- Pisteet -->
 				<div class="points">Score: {triviaManager.score}</div>
+				<!-- Ajastin -->
 				<div class="timer">
 					<span class="material-symbols-outlined">timer</span>{triviaManager.ajastin}
 				</div>
 			</div>
-
 			<!-- Progress bar -->
 			<div class="progress-container">
 				<div class="progress-bar" style="width: {(triviaManager.ajastin / 20) * 100}%;"></div>
 			</div>
 		</div>
 	</div>
-
 	<div class="question-container">
 		<!-- Tulostaa kategorian nimen -->
 		<div class="question-info">
 			<div class="category-name">{triviaManager.currentQuestion.category}</div>
 		</div>
-
 		<!-- Dekoodaa ja tulostaa kysymyksen luettavaksi -->
 		<div class="question">
 			<h4 class="questiontext">{decodeHTML(triviaManager.currentQuestion.question)}</h4>
 		</div>
-
 		<div class="answers-container">
 			<!-- Tulostaa correct / incorrect vastausvalinnan jälkeen -->
+			<!-- Jos aika loppuu, tulostuu Ran out of time -->
 			<div class="result-message-container">
 				{#if triviaManager.selectedAnswer !== null}
 					<div
@@ -69,8 +68,10 @@
 					</div>
 				{/if}
 			</div>
-
 			<div class="answers-box">
+				<!-- Vastaus vaihtoehdot nappeihin each metodilla -->
+				<!-- Vastauksien paikat seikoitettu shuffledAnswers funktiolla -->
+				<!-- Tulostaa buttonin värin ehdollisesti, riippuen kysymysnumerosta ja vastauksen tuloksesta -->
 				{#each triviaManager.shuffledAnswers as answer, i}
 					{#if answer === triviaManager.selectedAnswer}
 						<Button
@@ -82,7 +83,6 @@
 							fontSize="24px"
 						/>
 					{:else}
-						<!-- Tulostaa buttonin värin ehdollisesti, riippuen kysymysnumerosta -->
 						<Button
 							text={decodeHTML(answer)}
 							color={i === 0
@@ -102,6 +102,7 @@
 			</div>
 		</div>
 	</div>
+	<!-- Kun peli päättyy, näytetään loading screen ennen reititystä -->
 {:else}
 	<div class="container">
 		<h1>Getting your score</h1>
@@ -111,6 +112,53 @@
 {/if}
 
 <style>
+	.loader {
+		width: 58px;
+		height: 58px;
+		border: 5px solid rgba(245, 245, 245, 0.6);
+		border-bottom-color: transparent;
+		border-radius: 50%;
+		display: inline-block;
+		box-sizing: border-box;
+		animation: rotation 1s linear infinite;
+	}
+	/* Loader keyframes */
+	@keyframes rotation {
+		0% {
+			transform: rotate(0deg);
+		}
+		100% {
+			transform: rotate(360deg);
+		}
+	}
+	h1 {
+		font-size: 55px;
+		font-family: 'Protest Strike';
+		padding: 3px;
+		margin: 0;
+	}
+
+	h2 {
+		font-size: 48px;
+		font-family: 'Protest Strike';
+		padding: 5px;
+		margin: 0;
+	}
+	.progress-bar {
+		width: 100%;
+		height: 10px;
+		background-color: #e0e0e0; /* Taustaväri */
+		border-radius: 5px;
+		overflow: hidden;
+	}
+
+	.progress-bar {
+		height: 20px;
+		background-color: #4b1d6f;
+		animation: countdown 20s linear forwards;
+		animation-play-state: running;
+	}
+
 	@keyframes decrease-width {
 		from {
 			width: 100%; /* Aloittaa täytenä */
@@ -292,10 +340,6 @@
 			font-size: 23px;
 			text-align: center;
 		}
-		/* h3 {
-			font-size: 18px;
-			padding: 15px;
-		} */
 
 		.category-name {
 			font-size: 20px;
@@ -304,6 +348,18 @@
 			font-size: 16px;
 			padding: 6px 14px;
 		}
+	}
+	h1 {
+		font-size: 40px;
+	}
+	h2 {
+		font-size: 32px;
+	}
+	h1 {
+		font-size: 40px;
+	}
+	h2 {
+		font-size: 32px;
 	}
 	@media only screen and (max-width: 412px) {
 		.answers-container {
@@ -316,6 +372,12 @@
 	}
 
 	@media only screen and (max-height: 655px) {
+		h1 {
+			font-size: 40px;
+		}
+		h2 {
+			font-size: 32px;
+		}
 		.question {
 			width: 80%;
 			min-width: 30%;

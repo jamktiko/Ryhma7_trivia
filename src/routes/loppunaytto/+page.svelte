@@ -6,10 +6,11 @@
 
 	//Tähän true niin loader on näkyvissä kokoajan
 	let isLoading = $state(false);
-
 	const params = $page.url.searchParams;
 	const highScore = params.get('highScore');
 
+	//PLayagain nappi, joka kutsuu triviaManager.playAgain() funktiota ja lataa uuden pelin
+	//Jos kategoriaa ei ole valittu, ohjataan pääsivulle
 	async function handlePlayAgain() {
 		if (triviaManager.selectedCategoryId !== null) {
 			isLoading = true;
@@ -19,7 +20,7 @@
 			goto('/');
 		}
 	}
-
+	//Timeout toiminnallisuus, joka odottaa 1 sekunnin ennen kuin ohjaa kategorian valintaan
 	const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 	async function handleChangeCategories() {
 		isLoading = true;
@@ -29,11 +30,13 @@
 	}
 </script>
 
+<!-- Näytetään kun peli latautuu -->
 {#if isLoading}
 	<h1>Loading a new game</h1>
 	<span class="loader"></span>
 	<h2>Please wait a moment.</h2>
 {:else}
+	<!-- Tulostetaan "onnitteluviestit" pistemäärien mukaan -->
 	<div class="container">
 		{#if triviaManager.score < 75}
 			<div>
@@ -57,6 +60,7 @@
 			</div>
 		{/if}
 
+		<!-- Tulostaa pisteet -->
 		<div class="scoretext">
 			<h4>You scored {triviaManager.score} points!</h4>
 			<h4>You got {triviaManager.correctAnswers}/20 questions right!</h4>
@@ -72,7 +76,6 @@
 			font="Protest Strike"
 			fontSize="26px"
 		/>
-
 		<Button
 			text="Play again"
 			color="button1-color"
@@ -95,8 +98,8 @@
 	}
 	/* Copy the loader styles from CategorySelector.svelte */
 	.loader {
-		width: 48px;
-		height: 48px;
+		width: 58px;
+		height: 58px;
 		border: 5px solid rgba(245, 245, 245, 0.6);
 		border-bottom-color: transparent;
 		border-radius: 50%;
