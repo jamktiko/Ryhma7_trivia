@@ -48,9 +48,10 @@
 
 <button
 	class={`${color} ${customClass}`}
-    style={`font-family: ${font}; --button-font-size: ${fontSize}; width: ${width}; height: ${height};`}
-    onclick={handleClick}
-    {disabled}>{text}</button>
+	style={`font-family: ${font}; --button-font-size: ${fontSize}; width: ${width}; height: ${height};`}
+	onclick={handleClick}
+	{disabled}>{text}</button
+>
 
 <style>
 	button {
@@ -197,9 +198,9 @@
 		}
 	}
 	.sound-button {
-    position: absolute;
-    top: 5px; /* Etäisyys yläreunasta */
-    right: 190px; /* Etäisyys oikeasta reunasta */
-    z-index: 10; /* Varmistaa, että nappi näkyy muiden elementtien päällä */}
-	
+		position: absolute;
+		top: 5px; /* Etäisyys yläreunasta */
+		right: 190px; /* Etäisyys oikeasta reunasta */
+		z-index: 10; /* Varmistaa, että nappi näkyy muiden elementtien päällä */
+	}
 </style>

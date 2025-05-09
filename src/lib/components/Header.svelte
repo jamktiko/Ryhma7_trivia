@@ -2,20 +2,22 @@
 	import { goto } from '$app/navigation';
 	import { triviaManager } from '$lib/stores/triviaStore.svelte';
 	import { startMusic, stopMusic } from '$lib/stores/backgroundmusic';
-	import Button from '$lib/components/Button.svelte';
-	
-	
-	
+
 	let isSoundOn = $state(false); // Ääniasetuksen tila
 	// Käynnistä musiikki
 	function toggleSound() {
-        isSoundOn = !isSoundOn;
-        if (isSoundOn) {
-            startMusic();
-        } else {
-            stopMusic();
-        }
-    }
+		isSoundOn = !isSoundOn;
+		if (isSoundOn) {
+			startMusic();
+		} else {
+			stopMusic();
+		}
+	}
+	// Function for home button
+	function goToHome() {
+		triviaManager.reset();
+		goto('/');
+	}
 </script>
 
 <header>
@@ -33,26 +35,27 @@
 			<span class="tooltiptext">Main menu</span>
 		</div>
 	</div>
-	   <!-- Ääniasetuksen nappi -->
-	   <Button
-	   text={`Sound: ${isSoundOn ? 'ON' : 'OFF'}`}
-	   color="button2-color"
-	   onclick={toggleSound}
-	   font="KoHo"
-	   fontSize="20px"
-	   width="200px"
-	   height="40px"
-	   customClass="sound-button" 
-   />
+	<!-- Home button -->
+	<button class="home-icon-button" onclick={goToHome} aria-label="Go to main menu">
+		<span class="material-symbols-outlined"> home </span>
+		<span class="home-tooltip">Main menu</span>
+	</button>
+	<!-- Ääniasetuksen nappi -->
+	<button class="sound-icon-button" onclick={toggleSound} aria-label="Toggle sound">
+		<span class="material-symbols-outlined">
+			{isSoundOn ? 'volume_up' : 'volume_off'}
+		</span>
+		<span class="sound-tooltip">{isSoundOn ? 'Sound ON' : 'Sound OFF'}</span>
+	</button>
 </header>
 
 <style>
 	header {
 		flex-shrink: 0;
-		width: 120px;
+		width: 100%; /* Expand header width to allow for right corner positioning */
 		height: 80px;
-		margin: auto;
-		margin-top: 0;
+		margin: 0;
+		position: relative; /* Enable absolute positioning of children */
 	}
 
 	.logo-container {
@@ -113,10 +116,102 @@
 	.tooltip:hover .tooltiptext {
 		visibility: visible;
 	}
+	.sound-icon-button {
+		background-color: transparent; /* Remove background */
+		border: none;
+		color: var(--buttontext-color);
+		width: 40px;
+		height: 40px;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: absolute; /* Position absolutely */
+		top: 10px; /* Distance from top */
+		right: 10px; /* Distance from right */
+		z-index: 10; /* Ensure it's above other elements */
+	}
+	.sound-icon-button .material-symbols-outlined {
+		font-size: 40px; /* Increase icon size */
+	}
+	.sound-icon-button:hover {
+		opacity: 0.9;
+	}
+
+	.sound-tooltip {
+		visibility: hidden;
+		background-color: var(--button2-color);
+		color: var(--buttontext-color);
+		text-align: center;
+		border-radius: 6px;
+		padding: 5px;
+		position: absolute;
+		z-index: 11;
+		bottom: 125%;
+		left: 50%;
+		transform: translateX(-50%);
+		font-family: 'KoHo', sans-serif;
+		font-size: 14px;
+		white-space: nowrap;
+	}
+
+	.sound-icon-button:hover .sound-tooltip {
+		visibility: visible;
+	}
+	.home-icon-button {
+		background-color: transparent;
+		border: none;
+		color: var(--buttontext-color);
+		width: 40px;
+		height: 40px;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: absolute;
+		top: 10px;
+		right: 60px; /* Position to left of sound button */
+		z-index: 10;
+	}
+
+	.home-icon-button .material-symbols-outlined {
+		font-size: 40px; /* Match sound button size */
+	}
+	.home-icon-button:hover {
+		opacity: 0.9;
+	}
+
+	.home-tooltip {
+		visibility: hidden;
+		background-color: var(--button2-color);
+		color: var(--buttontext-color);
+		text-align: center;
+		border-radius: 6px;
+		padding: 5px;
+		position: absolute;
+		z-index: 11;
+		bottom: 125%;
+		left: 50%;
+		transform: translateX(-50%);
+		font-family: 'KoHo', sans-serif;
+		font-size: 14px;
+		white-space: nowrap;
+	}
+
+	.home-icon-button:hover .home-tooltip {
+		visibility: visible;
+	}
 
 	@media only screen and (max-width: 480px) {
 		.tooltiptext {
 			display: none;
+		}
+		.home-icon-button .material-symbols-outlined,
+		.sound-icon-button .material-symbols-outlined {
+			font-size: 25px;
+		}
+		.home-icon-button {
+			right: 45px;
 		}
 	}
 	@media only screen and (max-height: 630px) {
@@ -126,5 +221,4 @@
 			height: 79px;
 		}
 	}
-
 </style>
