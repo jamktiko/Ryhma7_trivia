@@ -47,7 +47,7 @@
 				<div
 					class="progress-bar"
 					style="width: {(triviaManager.ajastin / 20) * 100}%; 
-									 transition: {triviaManager.ajastin < 20 ? 'linear 1s' : 'none'};"
+									transition: {triviaManager.ajastin < 20 ? 'linear 1s' : 'none'};"
 				></div>
 			</div>
 		</div>
@@ -156,20 +156,7 @@
 			transform: rotate(360deg);
 		}
 	}
-	@keyframes blink-green {
-		0% {
-			background-color: #86e77f68;
-		}
-		50% {
-			background-color: #86e77fd5;
-		}
-		100% {
-			background-color: #86e77f68;
-		}
-	}
-	:global(.correct-answer-highlight) {
-		animation: blink-green 1s infinite !important;
-	}
+
 	h1 {
 		font-size: 55px;
 		font-family: 'Protest Strike', sans-serif;

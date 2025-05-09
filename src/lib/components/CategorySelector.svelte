@@ -2,12 +2,10 @@
 	import Button from '$lib/components/Button.svelte';
 	import { triviaManager } from '$lib/stores/triviaStore.svelte';
 
-
 	interface Props {
 		categorySelector: (categoryId: number) => Promise<boolean>;
 	}
 	let { categorySelector }: Props = $props();
-	
 
 	//Nämä trueksi testaamista ja tyylittelyä varten
 	//Molemmat ei voi olla true samaan aikaan.

@@ -15,7 +15,8 @@
 			| 'ansbutton3-color'
 			| 'ansbutton4-color'
 			| 'correctans-color'
-			| 'wrongans-color';
+			| 'wrongans-color'
+			| 'correct-answer-highlight';
 	}
 	let {
 		text,
@@ -24,19 +25,15 @@
 		color,
 		font = 'Protest Strike',
 		fontSize = '32px',
-		sound = '' // Default to no sound
+		sound = ''
 	}: Props = $props();
 
-	// Create a click handler that plays sound and calls the original onclick function
 	function handleClick() {
-		// Play sound if provided
 		if (sound) {
 			const audio = new Audio(sound);
-			audio.volume = 0.5; // Set volume to 50%
+			audio.volume = 0.5;
 			audio.play().catch((err) => console.error('Error playing sound:', err));
 		}
-
-		// Call the original onclick handler if provided
 		if (onclick) {
 			onclick();
 		}
@@ -159,6 +156,22 @@
 	}
 	.correctans-color:hover {
 		background-color: var(--correctans-color);
+	}
+
+	@keyframes blink-green {
+		0% {
+			background-color: #86e77f68;
+		}
+		50% {
+			background-color: #86e77fd5;
+		}
+		100% {
+			background-color: #86e77f68;
+		}
+	}
+
+	.correct-answer-highlight {
+		animation: blink-green 1s infinite;
 	}
 
 	@media only screen and (max-width: 658px) {
