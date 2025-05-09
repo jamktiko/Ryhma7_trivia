@@ -1,6 +1,21 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { triviaManager } from '$lib/stores/triviaStore.svelte';
+	import { startMusic, stopMusic } from '$lib/stores/backgroundmusic';
+	import Button from '$lib/components/Button.svelte';
+	
+	
+	
+	let isSoundOn = $state(false); // Ääniasetuksen tila
+	// Käynnistä musiikki
+	function toggleSound() {
+        isSoundOn = !isSoundOn;
+        if (isSoundOn) {
+            startMusic();
+        } else {
+            stopMusic();
+        }
+    }
 </script>
 
 <header>
@@ -18,6 +33,17 @@
 			<span class="tooltiptext">Main menu</span>
 		</div>
 	</div>
+	   <!-- Ääniasetuksen nappi -->
+	   <Button
+	   text={`Sound: ${isSoundOn ? 'ON' : 'OFF'}`}
+	   color="button2-color"
+	   onclick={toggleSound}
+	   font="KoHo"
+	   fontSize="20px"
+	   width="200px"
+	   height="40px"
+	   customClass="sound-button" 
+   />
 </header>
 
 <style>
@@ -100,4 +126,5 @@
 			height: 79px;
 		}
 	}
+
 </style>

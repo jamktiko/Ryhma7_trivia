@@ -1,8 +1,7 @@
 <script lang="ts">
     import Button from '$lib/components/Button.svelte';
     import { triviaManager } from '$lib/stores/triviaStore.svelte';
-    import { startMusic, stopMusic } from '$lib/stores/backgroundmusic';
-
+    
     interface Props {
         categorySelector: (categoryId: number) => Promise<boolean>;
     }
@@ -12,17 +11,9 @@
     // Molemmat ei voi olla true samaan aikaan.
     let isLoading = $state(false);
     let error = $state(false);
-    let isSoundOn = $state(false); // Ääniasetuksen tila
+   
 
-    // Käynnistä musiikki
-	function toggleSound() {
-        isSoundOn = !isSoundOn;
-        if (isSoundOn) {
-            startMusic();
-        } else {
-            stopMusic();
-        }
-    }
+    
 
   
 
@@ -81,17 +72,7 @@
             </div>
         </div>
 
-        <!-- Ääniasetuksen nappi -->
-		<Button
-    text={`Sound: ${isSoundOn ? 'ON' : 'OFF'}`}
-    color="button2-color"
-    onclick={toggleSound}
-    font="KoHo"
-    fontSize="20px"
-    width="200px"
-    height="40px"
-    customClass="sound-button" 
-/>
+
     </div>
     <!-- Jos fetch epäonnistuu, tulostuu "error message" ja "try again" nappi -->
 {:else if error}
