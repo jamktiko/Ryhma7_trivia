@@ -15,7 +15,7 @@
 				}}
 				>⟳
 			</button>
-			<span class="tooltiptext">Back to start</span>
+			<span class="tooltiptext">Main menu</span>
 		</div>
 	</div>
 </header>

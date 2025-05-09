@@ -97,6 +97,16 @@
 								font="KoHo"
 								fontSize="24px"
 							/>
+						{:else if !triviaManager.isAnswerCorrect && triviaManager.selectedAnswer !== null && answer === triviaManager.currentQuestion.correct_answer}
+							<!-- Show the correct answer with blinking effect when user answered incorrectly -->
+							<Button
+								text={decodeHTML(answer)}
+								color="correct-answer-highlight"
+								onclick={() => answerSelector(answer)}
+								disabled={!triviaManager.canSelectAnswer}
+								font="KoHo"
+								fontSize="24px"
+							/>
 						{:else}
 							<Button
 								text={decodeHTML(answer)}
@@ -145,6 +155,20 @@
 		100% {
 			transform: rotate(360deg);
 		}
+	}
+	@keyframes blink-green {
+		0% {
+			background-color: #86e77f68;
+		}
+		50% {
+			background-color: #86e77fd5;
+		}
+		100% {
+			background-color: #86e77f68;
+		}
+	}
+	:global(.correct-answer-highlight) {
+		animation: blink-green 1s infinite !important;
 	}
 	h1 {
 		font-size: 55px;
