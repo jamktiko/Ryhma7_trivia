@@ -171,14 +171,23 @@
 
 	@media only screen and (max-width: 655px) {
 		h1 {
-			font-size: 40px;
+			font-size: 35px !important;
 		}
 		h2 {
-			font-size: 32px;
+			font-size: 28px !important;
 		}
 		h3 {
-			font-size: 28px;
-			padding: 10px 0 5px 0;
+			font-size: 25px !important;
+			padding: 5px 0 !important;
+		}
+	}
+	@media only screen and (max-width: 380px) {
+		h1 {
+			font-size: 30px !important;
+		}
+		h2 {
+			font-size: 25px !important;
+			padding: 3px 13px !important;
 		}
 	}
 

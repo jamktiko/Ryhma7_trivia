@@ -387,8 +387,11 @@
 			margin-bottom: 55px;
 		}
 		.result-message {
-			font-size: 16px;
-			padding: 6px 14px;
+			font-size: 14px;
+			padding: 4px 12px;
+		}
+		.questiontext {
+			font-size: 18px !important;
 		}
 	}
 
