@@ -6,9 +6,6 @@
 		font?: string;
 		fontSize?: string;
 		sound?: string; // New prop for sound file path
-		height?: string; // New prop for button height
-		width?: string; // New prop for button width
-		customClass?: string; // New prop for custom CSS class
 		color:
 			| 'button1-color'
 			| 'button2-color'
@@ -28,10 +25,7 @@
 		color,
 		font = 'Protest Strike',
 		fontSize = '32px',
-		sound = '', // Default to no sound
-		width = '272px',
-		height = '128px',
-		customClass = '' // Default to an empty string
+		sound = '' // Default to no sound
 	}: Props = $props();
 
 	function handleClick() {
@@ -47,8 +41,8 @@
 </script>
 
 <button
-	class={`${color} ${customClass}`}
-	style={`font-family: ${font}; --button-font-size: ${fontSize}; width: ${width}; height: ${height};`}
+	class={color}
+	style={`font-family: ${font}; --button-font-size: ${fontSize};`}
 	onclick={handleClick}
 	{disabled}>{text}</button
 >
@@ -196,11 +190,5 @@
 			height: 120px;
 			font-size: calc(var(--button-font-size) * 0.68);
 		}
-	}
-	.sound-button {
-		position: absolute;
-		top: 5px; /* Etäisyys yläreunasta */
-		right: 190px; /* Etäisyys oikeasta reunasta */
-		z-index: 10; /* Varmistaa, että nappi näkyy muiden elementtien päällä */
 	}
 </style>
