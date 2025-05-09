@@ -6,6 +6,9 @@
 		font?: string;
 		fontSize?: string;
 		sound?: string; // New prop for sound file path
+		height?: string; // New prop for button height
+		width?: string; // New prop for button width
+		customClass?: string; // New prop for custom CSS class
 		color:
 			| 'button1-color'
 			| 'button2-color'
@@ -15,11 +18,8 @@
 			| 'ansbutton3-color'
 			| 'ansbutton4-color'
 			| 'correctans-color'
-			| 'wrongans-color';
-		width?: string;
-		height?: string;
-		customClass?: string; // Optional custom class for additional styling
-		
+			| 'wrongans-color'
+			| 'correct-answer-highlight';
 	}
 	let {
 		text,
@@ -34,16 +34,12 @@
 		customClass = '' // Default to an empty string
 	}: Props = $props();
 
-	// Create a click handler that plays sound and calls the original onclick function
 	function handleClick() {
-		// Play sound if provided
 		if (sound) {
 			const audio = new Audio(sound);
-			audio.volume = 0.5; // Set volume to 50%
+			audio.volume = 0.5;
 			audio.play().catch((err) => console.error('Error playing sound:', err));
 		}
-
-		// Call the original onclick handler if provided
 		if (onclick) {
 			onclick();
 		}
@@ -167,9 +163,25 @@
 		background-color: var(--correctans-color);
 	}
 
+	@keyframes blink-green {
+		0% {
+			background-color: #86e77f68;
+		}
+		50% {
+			background-color: #86e77fd5;
+		}
+		100% {
+			background-color: #86e77f68;
+		}
+	}
+
+	.correct-answer-highlight {
+		animation: blink-green 1s infinite;
+	}
+
 	@media only screen and (max-width: 658px) {
 		button {
-			width: 45%;
+			width: 40%;
 			min-width: 150px;
 			height: 128px;
 			font-size: calc(var(--button-font-size) * 0.85);
@@ -178,9 +190,9 @@
 
 	@media only screen and (max-width: 412px) {
 		button {
-			width: 45%;
-			min-width: 150px;
-			height: 128px;
+			width: 35%;
+			min-width: 110px;
+			height: 120px;
 			font-size: calc(var(--button-font-size) * 0.68);
 		}
 	}

@@ -47,7 +47,7 @@
 				<div
 					class="progress-bar"
 					style="width: {(triviaManager.ajastin / 20) * 100}%; 
-									 transition: {triviaManager.ajastin < 20 ? 'linear 1s' : 'none'};"
+									transition: {triviaManager.ajastin < 20 ? 'linear 1s' : 'none'};"
 				></div>
 			</div>
 		</div>
@@ -92,6 +92,16 @@
 							<Button
 								text={decodeHTML(answer)}
 								color={triviaManager.isAnswerCorrect ? 'correctans-color' : 'wrongans-color'}
+								onclick={() => answerSelector(answer)}
+								disabled={!triviaManager.canSelectAnswer}
+								font="KoHo"
+								fontSize="24px"
+							/>
+						{:else if !triviaManager.isAnswerCorrect && triviaManager.selectedAnswer !== null && answer === triviaManager.currentQuestion.correct_answer}
+							<!-- Show the correct answer with blinking effect when user answered incorrectly -->
+							<Button
+								text={decodeHTML(answer)}
+								color="correct-answer-highlight"
 								onclick={() => answerSelector(answer)}
 								disabled={!triviaManager.canSelectAnswer}
 								font="KoHo"
@@ -146,6 +156,7 @@
 			transform: rotate(360deg);
 		}
 	}
+
 	h1 {
 		font-size: 55px;
 		font-family: 'Protest Strike', sans-serif;
@@ -376,8 +387,11 @@
 			margin-bottom: 55px;
 		}
 		.result-message {
-			font-size: 16px;
-			padding: 6px 14px;
+			font-size: 14px;
+			padding: 4px 12px;
+		}
+		.questiontext {
+			font-size: 18px !important;
 		}
 	}
 
