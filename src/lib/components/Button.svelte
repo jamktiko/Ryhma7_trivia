@@ -5,7 +5,7 @@
 		disabled?: boolean;
 		font?: string;
 		fontSize?: string;
-		sound?: string; // New prop for sound file path
+		sound?: string;
 		color:
 			| 'button1-color'
 			| 'button2-color'
@@ -25,7 +25,7 @@
 		color,
 		font = 'Protest Strike',
 		fontSize = '32px',
-		sound = '' // Default to no sound
+		sound = ''
 	}: Props = $props();
 
 	function handleClick() {

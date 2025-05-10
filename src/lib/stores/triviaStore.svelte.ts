@@ -37,10 +37,10 @@ const triviaObject = $state({
 	score: 0,
 	correctAnswers: 0,
 	incorrectAnswers: 0,
-	totalAnswers: 0, // Lasketaan kaikkien kysymysten määrä
+	totalAnswers: 0,
 	highScores: {} as Record<number, number>, // jokaiselle kategorialle oma highscore
-	ajastin: 0, // Ajastin sekunteina
-	progress: 0 // Progress barin tila prosentteina
+	ajastin: 0,
+	progress: 0
 });
 
 let ajastinInterval: ReturnType<typeof setInterval> | null = null;
@@ -210,7 +210,6 @@ export const triviaManager = {
 				}, 1000); // Timeout, jotta loadingscreen ehtii tulla näkyviin
 			}, 1000); // Timeout, että viimeisin vastauksen tulos ehtii näkyä
 		} else {
-			// For non-final questions, continue as before
 			setTimeout(() => {
 				triviaObject.currentQuestionIndex++;
 				this.shuffleAnswers();
