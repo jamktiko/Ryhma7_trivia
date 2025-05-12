@@ -364,7 +364,7 @@
 			padding: 6px 14px;
 		}
 	}
-	@media only screen and (max-width: 412px) {
+	@media only screen and (max-width: 444px) {
 		.answers-container {
 			margin-bottom: 55px;
 		}
