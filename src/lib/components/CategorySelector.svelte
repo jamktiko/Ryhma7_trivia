@@ -51,23 +51,25 @@
 			</h4>
 		</div>
 
-		<div class="catcontainer">
-			<h3>Choose a category!</h3>
-			<div class="buttoncontainer">
-				<!-- Kategoriat nappeihin taulukosta each metodilla -->
-				{#each triviaManager.categories as category}
-					<Button
-						text={category.name}
-						color="button1-color"
-						onclick={() => selectCategory(category.id)}
-						font="Protest Strike"
-						fontSize="32px"
-					/>
-				{/each}
-			</div>
-		</div>
-	</div>
-	<!-- Jos fetch epäonnistuu, tulostuu "error message" ja "try again" nappi -->
+        <div class="catcontainer">
+            <h3>Choose a category!</h3>
+            <div class="buttoncontainer">
+                <!-- Kategoriat nappeihin taulukosta each metodilla -->
+                {#each triviaManager.categories as category}
+                    <Button
+                        text={category.name}
+                        color="button1-color"
+                        onclick={() => selectCategory(category.id)}
+                        font="Protest Strike"
+                        fontSize="32px"
+                    />
+                {/each}
+            </div>
+        </div>
+
+
+    </div>
+    <!-- Jos fetch epäonnistuu, tulostuu "error message" ja "try again" nappi -->
 {:else if error}
 	<div class="container">
 		<h1>Error Loading Questions</h1>
@@ -92,33 +94,33 @@
 {/if}
 
 <style>
-	.loader {
-		width: 58px;
-		height: 58px;
-		border: 5px solid rgba(245, 245, 245, 0.6);
-		border-bottom-color: transparent;
-		border-radius: 50%;
-		display: inline-block;
-		box-sizing: border-box;
-		animation: rotation 1s linear infinite;
-	}
-	/* Loader keyframes */
-	@keyframes rotation {
-		0% {
-			transform: rotate(0deg);
-		}
-		100% {
-			transform: rotate(360deg);
-		}
-	}
-	.container {
-		flex: 1;
-		display: flex;
-		flex-direction: column;
-		justify-content: space-evenly;
-		align-items: center;
-		position: relative;
-	}
+    .loader {
+        width: 58px;
+        height: 58px;
+        border: 5px solid rgba(245, 245, 245, 0.6);
+        border-bottom-color: transparent;
+        border-radius: 50%;
+        display: inline-block;
+        box-sizing: border-box;
+        animation: rotation 1s linear infinite;
+    }
+    /* Loader keyframes */
+    @keyframes rotation {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+    .container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+		position: relative
+    }
 
 	h1 {
 		font-size: 55px;
@@ -147,19 +149,19 @@
 		margin: 0;
 	}
 
-	.catcontainer {
-		bottom: 0;
-		max-width: 672px;
-		padding-bottom: 20px;
-	}
+    .catcontainer {
+        bottom: 0;
+        max-width: 672px;
+        margin-bottom: 20px;
+    }
 
-	.buttoncontainer {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: center;
-		min-height: 200px;
+    .buttoncontainer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        min-height: 200px;
 		margin-bottom: -50px;
-	}
+    }
 
 	.objcontainer {
 		width: 600px;
@@ -171,18 +173,24 @@
 		}
 	}
 
-	@media only screen and (max-width: 655px) {
-		h1 {
-			font-size: 40px;
-		}
-		h2 {
-			font-size: 32px;
-		}
-		h3 {
-			font-size: 28px;
-			padding: 10px 0 5px 0;
-		}
-	}
+    @media only screen and (max-width: 655px) {
+        h1 {
+            font-size: 40px;
+        }
+        h2 {
+            font-size: 32px;
+        }
+        h3 {
+            font-size: 28px;
+            padding: 10px 0 5px 0;
+        }
+    }
+
+    @media only screen and (max-width: 444px) {
+        .catcontainer {
+            margin-bottom: 55px;
+        }
+    }
 
 	@media only screen and (max-height: 745px) {
 		h1 {

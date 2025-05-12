@@ -67,7 +67,7 @@
 			<h4>You got {triviaManager.correctAnswers}/20 questions right!</h4>
 			<h4>Highscore for category {triviaManager.selectedCategory?.name}: {highScore}</h4>
 		</div>
-	</div>
+
 	<div>
 		<h3>Do you want to play again?</h3>
 		<div class="button-container">
@@ -86,6 +86,7 @@
 				fontSize="32px"
 			/>
 		</div>
+	</div>
 	</div>
 {/if}
 
@@ -172,7 +173,7 @@
 			padding: 1px 20px;
 		}
 	}
-	@media only screen and (max-width: 412px) {
+	@media only screen and (max-width: 444px) {
 		h1 {
 			font-size: 40px;
 		}
@@ -188,7 +189,7 @@
 			padding: 1px 20px;
 		}
 		.button-container {
-			margin-bottom: 40px;
+			margin-bottom: 55px;
 		}
 	}
 </style>
