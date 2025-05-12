@@ -46,9 +46,9 @@
 			<div class="progress-container">
 				<div
 					class="progress-bar"
-					style="width: {(triviaManager.ajastin / 20) * 100}%; 
-									transition: {triviaManager.ajastin < 20 ? 'linear 1s' : 'none'};"
-				></div>
+					style="width: {(triviaManager.ajastin / 20) * 100}%;  <!--  Lasketaan progressiivisen palkin leveys suhteessa jäljellä olevaan aikaan -->
+									transition: {triviaManager.ajastin < 20 ? 'linear 1s' : 'none'};" 
+				></div>  <!-- Määritetään animaation tyyli: lineaarinen siirtymä, jos aikaa on jäljellä -->
 			</div>
 		</div>
 

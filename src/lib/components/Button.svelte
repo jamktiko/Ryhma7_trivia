@@ -5,7 +5,7 @@
 		disabled?: boolean;
 		font?: string;
 		fontSize?: string;
-		sound?: string; // New prop for sound file path
+		sound?: string; // äänen tiedostopolku
 		color:
 			| 'button1-color'
 			| 'button2-color'
@@ -25,17 +25,17 @@
 		color,
 		font = 'Protest Strike',
 		fontSize = '32px',
-		sound = '' // Default to no sound
+		sound = '' // asetetaan oletusarvo tyhjäksi.  Tekee komponentista joustavamman ja estää virheitä tilanteissa, joissa ääntä ei ole määritelty
 	}: Props = $props();
 
-	function handleClick() {
-		if (sound) {
+	function handleClick() {  // klikkaustapahtuman käsittelijä, joka suorittaa äänen toistaminen ja määritellyn onclick-toiminnon suorittamisen.
+		if (sound) {   // tarkistetaan, onko sound-muuttujalle määritelty arvo. 
 			const audio = new Audio(sound);
-			audio.volume = 0.5;
-			audio.play().catch((err) => console.error('Error playing sound:', err));
-		}
-		if (onclick) {
-			onclick();
+			audio.volume = 0.3;  //  Äänenvoimakkuus asetetaan arvoon 0.5, mikä tarkoittaa 50 % maksimivoimakkuudesta
+			audio.play().catch((err) => console.error('Error playing sound:', err)); //Tämän jälkeen kutsutaan audio.play()-metodia äänen toistamiseksi
+		}                                                                             //.catch()-metodia käytetään mahdollisten virheiden käsittelemiseen.
+		if (onclick) {  // tarkistetaan, onko onclick-funktio määritelty. Jos se on, funktio kutsutaan.
+			onclick();  //mahdollistaa sen, että painikkeen klikkaus voi suorittaa ulkoisesti määritellyn toiminnon
 		}
 	}
 </script>

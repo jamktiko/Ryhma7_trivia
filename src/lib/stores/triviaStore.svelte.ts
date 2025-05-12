@@ -172,8 +172,8 @@ export const triviaManager = {
 		}, 1000);
 	},
 
-	selectAnswer(answer: string) {
-		if (!triviaObject.canSelectAnswer) return;
+	selectAnswer(answer: string) { // vastaa käyttäjän valitseman vastauksen käsittelystä trivia-pelissä. Se päivittää pelin tilan sen perusteella,
+		if (!triviaObject.canSelectAnswer) return; // oliko vastaus oikein vai väärin, ja hallitsee pisteiden laskemisen sekä ajastimen pysäyttämisen.
 		const currentQuestion = triviaObject.questions[triviaObject.currentQuestionIndex];
 		const isCorrect = answer === currentQuestion.correct_answer;
 
