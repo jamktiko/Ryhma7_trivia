@@ -152,15 +152,17 @@ export const triviaManager = {
 	},
 
 	timeOut() {
-		triviaObject.selectedAnswer = 'TIMEOUT';
-		triviaObject.isAnswerCorrect = false;
-		triviaObject.canSelectAnswer = false;
+		triviaObject.selectedAnswer = 'TIMEOUT'; // Asetetaan valituksi vastaukseksi TIMEOUT, jotta voidaan tulostaa eri teksti ehdollisesti
+		triviaObject.isAnswerCorrect = false; // Asetetaan onko vastaus oikea falseksi
+		triviaObject.canSelectAnswer = false; // Estetään vastausten valinta
 		setTimeout(() => {
+			//Timeout, jotta tulosviesti kerkee näkyä
 			if (triviaObject.currentQuestionIndex < triviaObject.questions.length - 1) {
 				triviaObject.currentQuestionIndex++;
 				this.shuffleAnswers();
 			} else {
 				goto(
+					// Reititys loppunäytölle jos ollaan viimeisessä kysymyksessä
 					`/loppunaytto?categoryId=${triviaObject.selectedCategoryId}&highScore=${
 						triviaObject.highScores[triviaObject.selectedCategoryId!] || 0
 					}`
@@ -173,33 +175,36 @@ export const triviaManager = {
 	},
 
 	selectAnswer(answer: string) {
-		if (!triviaObject.canSelectAnswer) return;
-		const currentQuestion = triviaObject.questions[triviaObject.currentQuestionIndex];
-		const isCorrect = answer === currentQuestion.correct_answer;
+		if (!triviaObject.canSelectAnswer) return; // Tarkistetaan, onko vastaus valittavissa
+		const currentQuestion = triviaObject.questions[triviaObject.currentQuestionIndex]; // Haetaan nykyinen kysymys
+		const isCorrect = answer === currentQuestion.correct_answer; // Tarkistetaan onko vastaus oikea
 
 		if (isCorrect) {
-			triviaObject.correctAnswers++;
-			const pisteet = laskepisteet(true);
-			triviaObject.score += pisteet;
+			// Jos vastaus on oikea ->
+			triviaObject.correctAnswers++; // Kasvatetaan oikeiden vastausten määrää
+			const pisteet = laskepisteet(true); // Lasketaan pisteet
+			triviaObject.score += pisteet; // Lisätään pisteet kokonaispisteisiin
 			if (triviaObject.score > (triviaObject.highScores[triviaObject.selectedCategoryId!] || 0)) {
-				triviaObject.highScores[triviaObject.selectedCategoryId!] = triviaObject.score;
+				triviaObject.highScores[triviaObject.selectedCategoryId!] = triviaObject.score; // Päivitetään highscore
 			}
 		} else {
-			triviaObject.incorrectAnswers++;
-			laskepisteet(false);
+			// Jos vastaus on väärä ->
+			triviaObject.incorrectAnswers++; // Kasvatetaan väärien vastausten määrää
+			// laskepisteet(false); // Ei pisteitä väärästä vastauksesta
 		}
 
-		triviaObject.selectedAnswer = answer;
-		triviaObject.isAnswerCorrect = isCorrect;
-		triviaObject.canSelectAnswer = false;
-		pysaytaAjastin();
+		triviaObject.selectedAnswer = answer; // Asetetaan valittu vastaus
+		triviaObject.isAnswerCorrect = isCorrect; // Asetetaan onko vastaus oikea
+		triviaObject.canSelectAnswer = false; // Estetään vastausten valinta
+		pysaytaAjastin(); // Pysäytetään ajastin, kun vastaus on valittu
 
 		if (triviaObject.currentQuestionIndex < triviaObject.questions.length - 1) {
 			triviaObject.totalAnswers++;
-		}
+		} // Kasvatetaan vastausten määrää vain, jos ei olla viimeisessä kysymyksessä
 
 		if (triviaObject.currentQuestionIndex >= triviaObject.questions.length - 1) {
 			setTimeout(() => {
+				// Jos ollaan viimeisessä kysymyksessä ->
 				triviaObject.totalAnswers = 20;
 				setTimeout(() => {
 					goto(
@@ -211,6 +216,7 @@ export const triviaManager = {
 			}, 1000); // Timeout, että viimeisin vastauksen tulos ehtii näkyä
 		} else {
 			setTimeout(() => {
+				// Resettaamista seuraavaa kysymystä varten
 				triviaObject.currentQuestionIndex++;
 				this.shuffleAnswers();
 				triviaObject.selectedAnswer = null;
@@ -223,19 +229,17 @@ export const triviaManager = {
 	async selectCategory(categoryId: number): Promise<boolean> {
 		console.log(`Valittu kategoria: ${categoryId}`);
 		try {
-			triviaObject.currentQuestionIndex = 0;
-			triviaObject.selectedCategoryId = categoryId;
+			triviaObject.currentQuestionIndex = 0; // Nollataan nykyinen kysymys
+			triviaObject.selectedCategoryId = categoryId; //Asetetaan kategoria id fetchausta varten
 			const response = await fetch(
 				`https://opentdb.com/api.php?amount=20&category=${categoryId}&difficulty=medium&type=multiple`
 			);
 			const data = await response.json();
-			triviaObject.questions = data.results;
-			if (data.results.length > 0) {
-				this.shuffleAnswers();
-			}
-			triviaObject.categorySelected = true;
+			triviaObject.questions = data.results || []; // Varmistaa, että data.results on taulukko
+			this.shuffleAnswers(); // Kutsutaan shuffleAnswers funktio, jotta se sekoittaa vastaukset
+			triviaObject.categorySelected = true; // Asetetaan kategoria valituksi
 			console.log(`Haettu ${data.results.length} kysymystä kategorialle ${categoryId}`);
-			return true;
+			return true; // Palautetaan boolean arvo CategorySelector komponenttia varten, jotta saadaan ehdollista tulostusta.
 		} catch (error) {
 			console.error('Haku ei onnistunut', error);
 			triviaObject.questions = [];
@@ -259,36 +263,39 @@ export const triviaManager = {
 		triviaObject.incorrectAnswers = 0;
 		triviaObject.totalAnswers = 0;
 		//Tämä litania resettaa pelin lukuunottamatta kategoriaa
-		// Ei toiminut joka kerta jos kutsuu reset() funktiota
+		// Tarkennukset propertyille reset() funktiossa
+		// Ei toiminut joka kerta jos kutsuu suoraan reset() funktiota
 		// ja asetti sen jälkeen vielä erikseen categorySelected trueksi.
+
 		try {
+			// Fetchataan kysymykset uudestaan
 			const response = await fetch(
 				`https://opentdb.com/api.php?amount=20&category=${selectedCategoryId}&difficulty=medium&type=multiple`
 			);
 			const data = await response.json();
-			triviaObject.questions = data.results || [];
-			this.shuffleAnswers();
-			goto('/');
+			triviaObject.questions = data.results || []; // Varmistetaan, että data.results on taulukko
+			this.shuffleAnswers(); // Kutsutaan shuffleAnswers funktio, jotta se sekoittaa vastaukset
+			goto('/'); //Reititys takaisin pelinäytölle
 		} catch (error) {
 			console.error('Failed to fetch questions for replay', error);
-			goto('/');
+			goto('/'); //Reititys takaisin alkunäytölle, jos fetch epäonnistuu
 		}
 	},
 
 	reset() {
 		pysaytaAjastin();
-		triviaObject.selectedCategoryId = null;
-		triviaObject.questions = [];
-		triviaObject.currentQuestionIndex = 0;
-		triviaObject.shuffledAnswers = [];
-		triviaObject.selectedAnswer = null;
-		triviaObject.isAnswerCorrect = null;
-		triviaObject.canSelectAnswer = true;
-		triviaObject.score = 0;
-		triviaObject.correctAnswers = 0;
-		triviaObject.incorrectAnswers = 0;
-		triviaObject.categorySelected = false;
-		triviaObject.progress = 0;
-		triviaObject.totalAnswers = 0;
+		triviaObject.selectedCategoryId = null; //Kategoria nollataan
+		triviaObject.questions = []; //Kaikki kysymykset nollataan
+		triviaObject.currentQuestionIndex = 0; //Kysymys nollataan
+		triviaObject.shuffledAnswers = []; //Vastaukset nollataan
+		triviaObject.selectedAnswer = null; //Valittu vastaus nollataan
+		triviaObject.isAnswerCorrect = null; //Oikea vastaus nollataan
+		triviaObject.canSelectAnswer = true; //Valinta mahdollistetaan
+		triviaObject.score = 0; //Pisteet nollataan
+		triviaObject.correctAnswers = 0; //Oikeiden vastausten määrä nollataan
+		triviaObject.incorrectAnswers = 0; //Väärien vastausten määrä nollataan
+		triviaObject.categorySelected = false; //Kategoria valinta nollataan
+		triviaObject.progress = 0; //Progress bar nollataan
+		triviaObject.totalAnswers = 0; //Vastausten määrä nollataan
 	}
 };
