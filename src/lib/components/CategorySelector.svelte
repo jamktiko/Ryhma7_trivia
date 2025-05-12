@@ -154,7 +154,7 @@
     .catcontainer {
         margin-top: auto;
         max-width: 672px;
-        padding-bottom: 20px;
+        margin-bottom: 20px;
     }
 
     .buttoncontainer {
@@ -184,6 +184,12 @@
         h3 {
             font-size: 28px;
             padding: 10px 0 5px 0;
+        }
+    }
+
+    @media only screen and (max-width: 444px) {
+        .catcontainer {
+            margin-bottom: 55px;
         }
     }
 
