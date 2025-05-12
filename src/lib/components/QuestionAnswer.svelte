@@ -3,16 +3,16 @@
 	import { triviaManager } from '$lib/stores/triviaStore.svelte';
 
 	async function answerSelector(answer: string) {
-		// First check if the answer is correct (before updating the state)
+		// Sijoittaa valitun vastauksen currentQuestion muuttujaan
+		// isCorrect = true, jos valittu vastaus on sama kuin currentQuestion.correct_answer
 		const currentQuestion = triviaManager.questions[triviaManager.currentQuestionIndex];
 		const isCorrect = answer === currentQuestion.correct_answer;
 
-		// Play the appropriate sound
+		// Ehdollinen äänen toisto
 		const soundFile = isCorrect ? '/sound/button1.wav' : '/sound/button2.wav';
 		const audio = new Audio(soundFile);
 		audio.volume = 0.5;
 		audio.play().catch((err) => console.error('Error playing sound:', err));
-
 		triviaManager.selectAnswer(answer);
 	}
 
@@ -98,7 +98,7 @@
 								fontSize="24px"
 							/>
 						{:else if !triviaManager.isAnswerCorrect && triviaManager.selectedAnswer !== null && answer === triviaManager.currentQuestion.correct_answer}
-							<!-- Show the correct answer with blinking effect when user answered incorrectly -->
+							<!-- Vilkuttaa oikeaa vastausta, kun valitsee väärän vastauksen -->
 							<Button
 								text={decodeHTML(answer)}
 								color="correct-answer-highlight"
@@ -147,7 +147,7 @@
 		box-sizing: border-box;
 		animation: rotation 1s linear infinite;
 	}
-	/* Loader keyframes */
+
 	@keyframes rotation {
 		0% {
 			transform: rotate(0deg);
@@ -156,14 +156,12 @@
 			transform: rotate(360deg);
 		}
 	}
-
 	h1 {
 		font-size: 55px;
 		font-family: 'Protest Strike', sans-serif;
 		padding: 3px;
 		margin: 0;
 	}
-
 	h2 {
 		font-size: 48px;
 		font-family: 'Protest Strike', sans-serif;
@@ -177,14 +175,12 @@
 		border-radius: 5px;
 		overflow: hidden;
 	}
-
 	.progress-bar {
 		height: 20px;
 		background-color: #4b1d6f;
 		animation: countdown 20s linear forwards;
 		animation-play-state: running;
 	}
-
 	@keyframes decrease-width {
 		from {
 			width: 100%; /* Aloittaa täytenä */
@@ -202,7 +198,6 @@
 		max-width: 100%;
 		width: 672px;
 	}
-
 	.header-container {
 		width: 100%;
 		margin: auto;
@@ -210,7 +205,6 @@
 		flex-direction: column;
 		align-items: center;
 	}
-
 	.question-container {
 		max-width: 672px;
 		margin: 0px;
@@ -219,7 +213,6 @@
 		flex-direction: column;
 		align-items: center;
 	}
-
 	.question-info {
 		text-align: center;
 	}
@@ -228,20 +221,17 @@
 		font-family: 'Protest Strike', sans-serif;
 		margin: auto;
 	}
-
 	.answers-container {
 		margin-top: auto;
 		max-width: 672px;
 		bottom: 0px;
 		margin-bottom: 20px;
 	}
-
 	.answers-box {
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
 	}
-
 	.header {
 		width: 100%;
 		max-width: 100%;
@@ -288,7 +278,6 @@
 		border-radius: 999px;
 		overflow: hidden;
 	}
-
 	.progress-bar {
 		height: 20px;
 		background-color: #4b1d6f;
@@ -296,7 +285,6 @@
 		animation-play-state: running;
 		border-radius: 999px;
 	}
-
 	.question {
 		display: flex;
 		flex-wrap: wrap;
@@ -323,14 +311,12 @@
 		padding: 0;
 		margin: 0;
 	}
-
 	.result-message-container {
 		height: 40px; /* Reserve space for the result message */
 		display: flex;
 		align-items: center; /* Vertically center the message */
 		justify-content: center; /* Horizontally center the message */
 	}
-
 	.result-message {
 		margin: 0; /* Remove any margin to prevent shifting */
 		padding: 2px 10px;
@@ -342,7 +328,6 @@
 		opacity: 0; /* Start hidden */
 		transition: opacity 0.3s ease-in-out; /* Smooth fade-in effect */
 	}
-
 	.correct {
 		background-color: rgba(46, 204, 113, 0.3);
 		color: #27ae60;
@@ -353,7 +338,6 @@
 		color: #c0392b;
 		opacity: 1;
 	}
-
 	.timeout {
 		background-color: rgba(241, 196, 15, 0.3);
 		color: #d35400;
@@ -368,12 +352,10 @@
 			min-width: 230px;
 			height: auto;
 		}
-
 		.questiontext {
 			font-size: 23px;
 			text-align: center;
 		}
-
 		.category-name {
 			font-size: 20px;
 		}
@@ -394,7 +376,6 @@
 			font-size: 18px !important;
 		}
 	}
-
 	@media only screen and (max-height: 655px) {
 		h1 {
 			font-size: 40px;
@@ -412,7 +393,6 @@
 			text-align: center;
 		}
 	}
-
 	@media only screen and (max-height: 480px) {
 		.question {
 			width: 80%;
@@ -420,7 +400,6 @@
 			min-height: 80px;
 			margin: auto;
 		}
-
 		.questiontext {
 			text-align: center;
 			font-size: 15px;
