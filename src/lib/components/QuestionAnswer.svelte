@@ -2,7 +2,7 @@
 	import Button from '$lib/components/Button.svelte';
 	import { triviaManager } from '$lib/stores/triviaStore.svelte';
 
-	async function answerSelector(answer: string) {
+	async function answerSelector(answer: string): Promise<void> {
 		// Sijoittaa valitun vastauksen currentQuestion muuttujaan
 		// isCorrect = true, jos valittu vastaus on sama kuin currentQuestion.correct_answer
 		const currentQuestion = triviaManager.questions[triviaManager.currentQuestionIndex];
