@@ -184,6 +184,7 @@
 	@media only screen and (max-width: 400px) {
 		h1 {
 			font-size: 28px !important;
+			margin-bottom: 5px !important;
 		}
 		h2 {
 			font-size: 25px !important;

@@ -371,7 +371,7 @@
 			padding: 4px 12px;
 		}
 		.questiontext {
-			font-size: 17px !important;
+			font-size: 18px !important;
 		}
 	}
 	@media only screen and (max-width: 380px) {
@@ -380,7 +380,7 @@
 			display: none;
 		}
 		.questiontext {
-			font-size: 12px !important;
+			font-size: 15px !important;
 		}
 		.question-counter,
 		.points {
