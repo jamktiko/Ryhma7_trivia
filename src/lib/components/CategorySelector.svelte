@@ -119,7 +119,6 @@
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
-		position: relative
     }
 
 	h1 {
@@ -150,7 +149,7 @@
 	}
 
     .catcontainer {
-        bottom: 0;
+        margin-top: auto;
         max-width: 672px;
         margin-bottom: 20px;
     }
@@ -160,7 +159,6 @@
         flex-wrap: wrap;
         justify-content: center;
         min-height: 200px;
-		margin-bottom: -50px;
     }
 
 	.objcontainer {
@@ -183,12 +181,6 @@
         h3 {
             font-size: 28px;
             padding: 10px 0 5px 0;
-        }
-    }
-
-    @media only screen and (max-width: 444px) {
-        .catcontainer {
-            margin-bottom: 55px;
         }
     }
 

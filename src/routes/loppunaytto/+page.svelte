@@ -189,7 +189,7 @@
 			padding: 1px 20px;
 		}
 		.button-container {
-			margin-bottom: 55px;
+			gap: 0;
 		}
 	}
 </style>

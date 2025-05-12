@@ -196,6 +196,7 @@
 		justify-content: space-evenly;
 		align-items: center;
 		max-width: 100%;
+		max-height: 100%;
 		width: 672px;
 	}
 	.header-container {
@@ -365,9 +366,6 @@
 		}
 	}
 	@media only screen and (max-width: 444px) {
-		.answers-container {
-			margin-bottom: 55px;
-		}
 		.result-message {
 			font-size: 14px;
 			padding: 4px 12px;
