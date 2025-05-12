@@ -374,6 +374,13 @@
 			font-size: 18px !important;
 		}
 	}
+
+	@media only screen and (max-height: 700px) {
+		.result-message-container {
+			display: none;
+		}
+	}
+
 	@media only screen and (max-height: 655px) {
 		h1 {
 			font-size: 40px;
