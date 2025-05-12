@@ -28,28 +28,31 @@
 		--correctans-color: #86e77f;
 	}
 
+	:global * {
+		box-sizing: border-box;
+	}
+
 	:global html {
-		min-height: 100vh;
-		max-height: 100vh;
-		height: 100vh;
+		min-height: 100%;
+		max-height: 100%;
+		height: 100%;
+		margin: 0;
+		padding: 0;
+		overflow: hidden; /*Doesn't allow scrolling, but can also hide things at the bottom without correct settings*/
 	}
 	:global body {
-		min-height: 100vh;
-		max-height: 100vh;
-		height: 100vh;
+		height: 100%;
 		margin: 0;
 		padding: 0;
 		background-color: var(--body-color);
-		overflow: hidden; /*Doesn't allow scrolling, but can also hide things at the bottom without correct settings*/
+		overflow: hidden;
 	}
 	main {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		width: 100%;
-		min-height: 100vh;
-		max-height: 100vh;
-		height: 100vh;
+		height: 100%;
 		font-size: 100%;
 		text-align: center;
 		color: #411c5e;

@@ -9,7 +9,7 @@
 	const params = $page.url.searchParams;
 	const highScore = params.get('highScore');
 
-	//PLayagain nappi, joka kutsuu triviaManager.playAgain() funktiota ja lataa uuden pelin
+	//Play Again nappi, joka kutsuu triviaManager.playAgain() funktiota ja lataa uuden pelin
 	//Jos kategoriaa ei ole valittu, ohjataan pääsivulle
 	async function handlePlayAgain() {
 		if (triviaManager.selectedCategoryId !== null) {
@@ -20,7 +20,8 @@
 			goto('/');
 		}
 	}
-	//Timeout toiminnallisuus, joka odottaa 1 sekunnin ennen kuin ohjaa kategorian valintaan
+	//Timeout toiminnallisuus, joka odottaa 1 sekunnin ennen kuin ohjaa kategorian valintaan.
+	//Ilman tätä latausnäyttö ei näy, koska tässä ei oikeasti ladata mitään.
 	const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 	async function handleChangeCategories() {
 		isLoading = true;
@@ -51,7 +52,7 @@
 		{:else if triviaManager.score < 225}
 			<div>
 				<h1>Good job!</h1>
-				<h2>Tähän jotain</h2>
+				<h2>Your mind has quite the spark!</h2>
 			</div>
 		{:else if triviaManager.score >= 225}
 			<div>
@@ -66,7 +67,7 @@
 			<h4>You got {triviaManager.correctAnswers}/20 questions right!</h4>
 			<h4>Highscore for category {triviaManager.selectedCategory?.name}: {highScore}</h4>
 		</div>
-	</div>
+
 	<div>
 		<h3>Do you want to play again?</h3>
 		<div class="button-container">
@@ -86,6 +87,7 @@
 			/>
 		</div>
 	</div>
+	</div>
 {/if}
 
 <style>
@@ -98,7 +100,6 @@
 		width: 672px;
 		height: 100%;
 	}
-	/* Copy the loader styles from CategorySelector.svelte */
 	.loader {
 		width: 58px;
 		height: 58px;
@@ -109,7 +110,6 @@
 		box-sizing: border-box;
 		animation: rotation 1s linear infinite;
 	}
-
 	@keyframes rotation {
 		0% {
 			transform: rotate(0deg);
@@ -118,8 +118,6 @@
 			transform: rotate(360deg);
 		}
 	}
-
-	/* Keep your existing styles */
 	h1 {
 		font-size: 46px;
 		font-family: 'Protest Strike', sans-serif;
@@ -132,7 +130,6 @@
 		padding-bottom: 5px;
 		margin: auto;
 	}
-
 	h3 {
 		font-size: 38px;
 		font-family: 'KoHo', sans-serif;
@@ -149,7 +146,6 @@
 	.scoretext {
 		margin: 5px auto 30px;
 	}
-
 	.button-container {
 		margin-top: auto;
 		max-width: 672px;
@@ -177,7 +173,7 @@
 			padding: 1px 20px;
 		}
 	}
-	@media only screen and (max-width: 412px) {
+	@media only screen and (max-width: 444px) {
 		h1 {
 			font-size: 40px;
 		}
@@ -193,7 +189,7 @@
 			padding: 1px 20px;
 		}
 		.button-container {
-			margin-bottom: 40px;
+			gap: 0;
 		}
 	}
 </style>
