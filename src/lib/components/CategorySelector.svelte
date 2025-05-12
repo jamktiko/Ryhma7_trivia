@@ -51,25 +51,23 @@
 			</h4>
 		</div>
 
-        <div class="catcontainer">
-            <h3>Choose a category!</h3>
-            <div class="buttoncontainer">
-                <!-- Kategoriat nappeihin taulukosta each metodilla -->
-                {#each triviaManager.categories as category}
-                    <Button
-                        text={category.name}
-                        color="button1-color"
-                        onclick={() => selectCategory(category.id)}
-                        font="Protest Strike"
-                        fontSize="32px"
-                    />
-                {/each}
-            </div>
-        </div>
-
-
-    </div>
-    <!-- Jos fetch epäonnistuu, tulostuu "error message" ja "try again" nappi -->
+		<div class="catcontainer">
+			<h3>Choose a category!</h3>
+			<div class="buttoncontainer">
+				<!-- Kategoriat nappeihin taulukosta each metodilla -->
+				{#each triviaManager.categories as category}
+					<Button
+						text={category.name}
+						color="button1-color"
+						onclick={() => selectCategory(category.id)}
+						font="Protest Strike"
+						fontSize="32px"
+					/>
+				{/each}
+			</div>
+		</div>
+	</div>
+	<!-- Jos fetch epäonnistuu, tulostuu "error message" ja "try again" nappi -->
 {:else if error}
 	<div class="container">
 		<h1>Error Loading Questions</h1>
@@ -94,72 +92,72 @@
 {/if}
 
 <style>
-    .loader {
-        width: 58px;
-        height: 58px;
-        border: 5px solid rgba(245, 245, 245, 0.6);
-        border-bottom-color: transparent;
-        border-radius: 50%;
-        display: inline-block;
-        box-sizing: border-box;
-        animation: rotation 1s linear infinite;
-    }
-    /* Loader keyframes */
-    @keyframes rotation {
-        0% {
-            transform: rotate(0deg);
-        }
-        100% {
-            transform: rotate(360deg);
-        }
-    }
-    .container {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        align-items: center;
-    }
+	.loader {
+		width: 58px;
+		height: 58px;
+		border: 5px solid rgba(245, 245, 245, 0.6);
+		border-bottom-color: transparent;
+		border-radius: 50%;
+		display: inline-block;
+		box-sizing: border-box;
+		animation: rotation 1s linear infinite;
+	}
+	/* Loader keyframes */
+	@keyframes rotation {
+		0% {
+			transform: rotate(0deg);
+		}
+		100% {
+			transform: rotate(360deg);
+		}
+	}
+	.container {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-evenly;
+		align-items: center;
+	}
 
 	h1 {
-		font-size: 55px;
+		font-size: 55px !important;
 		font-family: 'Protest Strike';
-		padding: 3px;
+		padding: 3px !important;
 		margin: 0;
 	}
 
 	h2 {
-		font-size: 48px;
+		font-size: 45px !important;
 		font-family: 'Protest Strike';
-		padding: 5px;
+		padding: 5px !important;
 		margin: 0;
 	}
 	h3 {
-		font-size: 40px;
+		font-size: 40px !important;
 		font-family: 'KoHo';
-		padding: 30px 0 5px 0;
-		margin: 0;
+		padding: 30px 0 5px 0 !important;
+		margin: 0 !important;
 	}
 
 	h4 {
-		font-size: 20px;
+		font-size: 20px !important;
 		font-family: 'Koho';
-		padding: 0;
-		margin: 0;
+		padding: 0 !important;
+		margin: 0 !important;
 	}
 
-    .catcontainer {
-        margin-top: auto;
-        max-width: 672px;
-        margin-bottom: 20px;
-    }
+	.catcontainer {
+		margin-top: auto;
+		max-width: 672px;
+		margin-bottom: 20px;
+	}
 
-    .buttoncontainer {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        min-height: 200px;
-    }
+	.buttoncontainer {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		min-height: 200px;
+	}
 
 	.objcontainer {
 		width: 600px;
@@ -171,18 +169,30 @@
 		}
 	}
 
-    @media only screen and (max-width: 655px) {
-        h1 {
-            font-size: 40px;
-        }
-        h2 {
-            font-size: 32px;
-        }
-        h3 {
-            font-size: 28px;
-            padding: 10px 0 5px 0;
-        }
-    }
+	@media only screen and (max-width: 655px) {
+		h1 {
+			font-size: 40px !important;
+		}
+		h2 {
+			font-size: 32px !important;
+		}
+		h3 {
+			font-size: 28px !important;
+			padding: 10px 0 5px 0 !important;
+		}
+	}
+	@media only screen and (max-width: 400px) {
+		h1 {
+			font-size: 28px !important;
+		}
+		h2 {
+			font-size: 25px !important;
+		}
+		h3 {
+			font-size: 20px !important;
+			padding: 5px !important;
+		}
+	}
 
 	@media only screen and (max-height: 745px) {
 		h1 {

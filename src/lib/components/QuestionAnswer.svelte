@@ -354,7 +354,7 @@
 			height: auto;
 		}
 		.questiontext {
-			font-size: 23px;
+			font-size: 19px !important;
 			text-align: center;
 		}
 		.category-name {
@@ -371,7 +371,23 @@
 			padding: 4px 12px;
 		}
 		.questiontext {
-			font-size: 18px !important;
+			font-size: 17px !important;
+		}
+	}
+	@media only screen and (max-width: 380px) {
+		.result-message,
+		.result-message-container {
+			display: none;
+		}
+		.questiontext {
+			font-size: 12px !important;
+		}
+		.question-counter,
+		.points {
+			font-size: 18px;
+		}
+		.timer {
+			padding: 3px 7px !important;
 		}
 	}
 	@media only screen and (max-height: 655px) {

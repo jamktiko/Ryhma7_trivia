@@ -207,15 +207,6 @@
 			display: none;
 		}
 	}
-	@media only screen and (max-width: 480px) {
-		.home-icon-button .material-symbols-outlined,
-		.sound-icon-button .material-symbols-outlined {
-			font-size: 25px;
-		}
-		.home-icon-button {
-			right: 45px;
-		}
-	}
 	@media only screen and (max-height: 630px) {
 		/* Keep header full width but adjust logo container */
 		.logo-container {
@@ -238,6 +229,15 @@
 		.home-icon-button .material-symbols-outlined,
 		.sound-icon-button .material-symbols-outlined {
 			font-size: 35px;
+		}
+	}
+	@media only screen and (max-width: 480px) {
+		.home-icon-button .material-symbols-outlined,
+		.sound-icon-button .material-symbols-outlined {
+			font-size: 25px;
+		}
+		.home-icon-button {
+			right: 40px;
 		}
 	}
 </style>
