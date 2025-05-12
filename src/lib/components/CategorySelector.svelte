@@ -66,6 +66,8 @@
                 {/each}
             </div>
         </div>
+
+
     </div>
     <!-- Jos fetch epäonnistuu, tulostuu "error message" ja "try again" nappi -->
 {:else if error}
@@ -117,6 +119,7 @@
         flex-direction: column;
         justify-content: space-evenly;
         align-items: center;
+		position: relative
     }
 
 	h1 {
@@ -147,7 +150,7 @@
 	}
 
     .catcontainer {
-        margin-top: auto;
+        bottom: 0;
         max-width: 672px;
         margin-bottom: 20px;
     }
@@ -157,6 +160,7 @@
         flex-wrap: wrap;
         justify-content: center;
         min-height: 200px;
+		margin-bottom: -50px;
     }
 
 	.objcontainer {
