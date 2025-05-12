@@ -185,9 +185,9 @@
 
 	@media only screen and (max-width: 412px) {
 		button {
-			width: 35%;
-			min-width: 110px;
-			height: 120px;
+			width: 45%;
+			min-width: 150px;
+			height: 128px;
 			font-size: calc(var(--button-font-size) * 0.68);
 		}
 	}

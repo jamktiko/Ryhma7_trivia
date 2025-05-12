@@ -215,10 +215,27 @@
 		}
 	}
 	@media only screen and (max-height: 630px) {
-		header,
+		/* Keep header full width but adjust logo container */
 		.logo-container {
 			width: 109px;
 			height: 79px;
+		}
+
+		/* Don't change header width - it should stay 100% */
+		header {
+			height: 79px; /* Match the height of logo container */
+		}
+
+		/* Ensure buttons stay properly positioned */
+		.home-icon-button,
+		.sound-icon-button {
+			top: 5px; /* Move slightly higher */
+		}
+
+		/* Optionally reduce button size for better fit */
+		.home-icon-button .material-symbols-outlined,
+		.sound-icon-button .material-symbols-outlined {
+			font-size: 35px;
 		}
 	}
 </style>
