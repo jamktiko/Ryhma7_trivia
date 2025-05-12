@@ -50,7 +50,8 @@
 				points.
 			</h4>
 		</div>
-
+	</div>
+    
 		<div class="catcontainer">
 			<h3>Choose a category!</h3>
 			<div class="buttoncontainer">
@@ -66,7 +67,6 @@
 				{/each}
 			</div>
 		</div>
-	</div>
 	<!-- Jos fetch epäonnistuu, tulostuu "error message" ja "try again" nappi -->
 {:else if error}
 	<div class="container">
