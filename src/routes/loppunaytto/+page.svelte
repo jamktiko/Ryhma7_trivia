@@ -68,25 +68,25 @@
 			<h4>Highscore for category {triviaManager.selectedCategory?.name}: {highScore}</h4>
 		</div>
 
-	<div>
-		<h3>Do you want to play again?</h3>
-		<div class="button-container">
-			<Button
-				text="Change categories"
-				color="button2-color"
-				onclick={handleChangeCategories}
-				font="Protest Strike"
-				fontSize="26px"
-			/>
-			<Button
-				text="Play again"
-				color="button3-color"
-				onclick={handlePlayAgain}
-				font="Protest Strike"
-				fontSize="32px"
-			/>
+		<div>
+			<h3>Do you want to play again?</h3>
+			<div class="button-container">
+				<Button
+					text="Change categories"
+					color="button2-color"
+					onclick={handleChangeCategories}
+					font="Protest Strike"
+					fontSize="26px"
+				/>
+				<Button
+					text="Play again"
+					color="button3-color"
+					onclick={handlePlayAgain}
+					font="Protest Strike"
+					fontSize="32px"
+				/>
+			</div>
 		</div>
-	</div>
 	</div>
 {/if}
 
@@ -189,7 +189,26 @@
 			padding: 1px 20px;
 		}
 		.button-container {
-			margin-bottom: 55px;
+			gap: 0;
+		}
+	}
+	@media only screen and (max-width: 350px) {
+		h1 {
+			font-size: 30px;
+		}
+		h2 {
+			font-size: 25px;
+			padding: 5px 20px;
+		}
+		h3 {
+			font-size: 22px;
+		}
+		h4 {
+			font-size: 15px;
+			padding: 1px 20px;
+		}
+		.button-container {
+			gap: 0;
 		}
 	}
 </style>

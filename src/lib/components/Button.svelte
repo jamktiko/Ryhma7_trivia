@@ -28,14 +28,17 @@
 		sound = '' // asetetaan oletusarvo tyhjäksi.  Tekee komponentista joustavamman ja estää virheitä tilanteissa, joissa ääntä ei ole määritelty
 	}: Props = $props();
 
-	function handleClick() {  // klikkaustapahtuman käsittelijä, joka suorittaa äänen toistaminen ja määritellyn onclick-toiminnon suorittamisen.
-		if (sound) {   // tarkistetaan, onko sound-muuttujalle määritelty arvo. 
+	function handleClick() {
+		// klikkaustapahtuman käsittelijä, joka suorittaa äänen toistaminen ja määritellyn onclick-toiminnon suorittamisen.
+		if (sound) {
+			// tarkistetaan, onko sound-muuttujalle määritelty arvo.
 			const audio = new Audio(sound);
-			audio.volume = 0.3;  //  Äänenvoimakkuus asetetaan arvoon 0.5, mikä tarkoittaa 50 % maksimivoimakkuudesta
+			audio.volume = 0.3; //  Äänenvoimakkuus asetetaan arvoon 0.5, mikä tarkoittaa 50 % maksimivoimakkuudesta
 			audio.play().catch((err) => console.error('Error playing sound:', err)); //Tämän jälkeen kutsutaan audio.play()-metodia äänen toistamiseksi
-		}                                                                             //.catch()-metodia käytetään mahdollisten virheiden käsittelemiseen.
-		if (onclick) {  // tarkistetaan, onko onclick-funktio määritelty. Jos se on, funktio kutsutaan.
-			onclick();  //mahdollistaa sen, että painikkeen klikkaus voi suorittaa ulkoisesti määritellyn toiminnon
+		} //.catch()-metodia käytetään mahdollisten virheiden käsittelemiseen.
+		if (onclick) {
+			// tarkistetaan, onko onclick-funktio määritelty. Jos se on, funktio kutsutaan.
+			onclick(); //mahdollistaa sen, että painikkeen klikkaus voi suorittaa ulkoisesti määritellyn toiminnon
 		}
 	}
 </script>
@@ -189,6 +192,14 @@
 			min-width: 150px;
 			height: 128px;
 			font-size: calc(var(--button-font-size) * 0.68);
+		}
+		@media only screen and (max-width: 350px) {
+			button {
+				width: 43%;
+				min-width: 80px;
+				height: 100px;
+				font-size: calc(var(--button-font-size) * 0.6);
+			}
 		}
 	}
 </style>

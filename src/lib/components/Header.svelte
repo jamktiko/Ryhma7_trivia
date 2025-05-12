@@ -202,16 +202,9 @@
 		visibility: visible;
 	}
 
-	@media only screen and (max-width: 480px) {
+	@media only screen and (max-width: 600px) {
 		.tooltiptext {
 			display: none;
-		}
-		.home-icon-button .material-symbols-outlined,
-		.sound-icon-button .material-symbols-outlined {
-			font-size: 25px;
-		}
-		.home-icon-button {
-			right: 45px;
 		}
 	}
 	@media only screen and (max-height: 630px) {
@@ -236,6 +229,15 @@
 		.home-icon-button .material-symbols-outlined,
 		.sound-icon-button .material-symbols-outlined {
 			font-size: 35px;
+		}
+	}
+	@media only screen and (max-width: 480px) {
+		.home-icon-button .material-symbols-outlined,
+		.sound-icon-button .material-symbols-outlined {
+			font-size: 25px;
+		}
+		.home-icon-button {
+			right: 40px;
 		}
 	}
 </style>
