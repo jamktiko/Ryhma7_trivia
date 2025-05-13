@@ -217,4 +217,18 @@
 			gap: 0;
 		}
 	}
+	@media only screen and (max-height: 600px) {
+		h1 {
+			font-size: 40px;
+		}
+		h2 {
+			font-size: 32px;
+		}
+		h3 {
+			font-size: 26px;
+		}
+		h4 {
+			font-size: 20px;
+		}
+	}
 </style>
