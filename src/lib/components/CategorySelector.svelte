@@ -212,7 +212,26 @@
 		.objcontainer {
 			display: none;
 		}
+		h1 {
+			font-size: 48px !important;
+		}
+		h2 {
+			font-size: 40px !important;
+		}
 	}
+
+	@media only screen and (max-height: 600px) {
+		h1 {
+			font-size: 40px !important;
+		}
+		h2 {
+			font-size: 32px !important;
+		}
+		h3 {
+			padding-top: 5px !important;
+		}
+	}
+
 
 	.error-message {
 		display: flex;
