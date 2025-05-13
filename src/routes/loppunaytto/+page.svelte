@@ -68,7 +68,7 @@
 			<h4>Highscore for category {triviaManager.selectedCategory?.name}: {highScore}</h4>
 		</div>
 
-		<div>
+		<div class="bt-contcontainer">
 			<h3>Do you want to play again?</h3>
 			<div class="button-container">
 				<Button
@@ -148,7 +148,7 @@
 	}
 	.button-container {
 		margin-top: auto;
-		max-width: 672px;
+		width: 100%;
 		bottom: 0px;
 		margin-bottom: 20px;
 		display: flex;
@@ -156,6 +156,9 @@
 		gap: 15px;
 		justify-content: center;
 		flex-wrap: wrap;
+	}
+	.bt-contcontainer {
+		width: 100%
 	}
 	@media only screen and (max-width: 655px) {
 		h1 {
@@ -171,6 +174,9 @@
 		h4 {
 			font-size: 28px;
 			padding: 1px 20px;
+		}
+		.button-container {
+			gap: 0;
 		}
 	}
 	@media only screen and (max-width: 444px) {
@@ -209,6 +215,20 @@
 		}
 		.button-container {
 			gap: 0;
+		}
+	}
+	@media only screen and (max-height: 600px) {
+		h1 {
+			font-size: 40px;
+		}
+		h2 {
+			font-size: 32px;
+		}
+		h3 {
+			font-size: 26px;
+		}
+		h4 {
+			font-size: 20px;
 		}
 	}
 </style>

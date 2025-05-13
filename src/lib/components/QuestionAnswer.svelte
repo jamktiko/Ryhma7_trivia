@@ -413,6 +413,9 @@
 			font-size: 20px;
 			text-align: center;
 		}
+		.question-info {
+			display:none;
+		}
 	}
 	@media only screen and (max-height: 480px) {
 		.question {
