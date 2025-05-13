@@ -67,7 +67,7 @@
 			<h4>You got {triviaManager.correctAnswers}/20 questions right!</h4>
 			<h4>Highscore for category {triviaManager.selectedCategory?.name}: {highScore}</h4>
 		</div>
-
+	</div>
 		<div class="bt-contcontainer">
 			<h3>Do you want to play again?</h3>
 			<div class="button-container">
@@ -87,7 +87,6 @@
 				/>
 			</div>
 		</div>
-	</div>
 {/if}
 
 <style>
@@ -160,42 +159,52 @@
 	.bt-contcontainer {
 		width: 100%
 	}
-	@media only screen and (max-width: 655px) {
+
+	@media only screen and (max-height: 600px) {
 		h1 {
-			font-size: 44px;
+			font-size: 40px;
 		}
 		h2 {
-			font-size: 36px;
-			padding: 5px 20px;
+			font-size: 32px;
 		}
 		h3 {
-			font-size: 33px;
+			font-size: 26px;
 		}
 		h4 {
-			font-size: 28px;
-			padding: 1px 20px;
+			font-size: 20px;
+		}
+	}
+	@media only screen and (max-width: 655px) {
+
+		h1 {
+			font-size: 40px;
+		}
+		h2 {
+			font-size: 32px;
+		}
+		h3 {
+			font-size: 26px;
+		}
+		h4 {
+			font-size: 20px;
 		}
 		.button-container {
 			gap: 0;
 		}
 	}
-	@media only screen and (max-width: 444px) {
+
+	@media only screen and (max-width: 378px) {
 		h1 {
-			font-size: 40px;
+			font-size: 36px;
 		}
 		h2 {
-			font-size: 34px;
-			padding: 5px 20px;
-		}
-		h3 {
 			font-size: 30px;
 		}
-		h4 {
-			font-size: 25px;
-			padding: 1px 20px;
+		h3 {
+			font-size: 26px;
 		}
-		.button-container {
-			gap: 0;
+		h4 {
+			font-size: 22px;
 		}
 	}
 	@media only screen and (max-width: 350px) {
@@ -215,20 +224,6 @@
 		}
 		.button-container {
 			gap: 0;
-		}
-	}
-	@media only screen and (max-height: 600px) {
-		h1 {
-			font-size: 40px;
-		}
-		h2 {
-			font-size: 32px;
-		}
-		h3 {
-			font-size: 26px;
-		}
-		h4 {
-			font-size: 20px;
 		}
 	}
 </style>

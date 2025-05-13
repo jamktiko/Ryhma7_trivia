@@ -61,6 +61,7 @@
 			<div class="question">
 				<h4 class="questiontext">{decodeHTML(triviaManager.currentQuestion.question)}</h4>
 			</div>
+				</div>
 			<div class="answers-container">
 				<!-- Tulostaa correct / incorrect vastausvalinnan jälkeen -->
 				<!-- Jos aika loppuu, tulostuu Ran out of time -->
@@ -127,7 +128,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
 {:else}
 	<div class="container">
 		<h1>Getting your score</h1>
@@ -201,7 +201,7 @@
 	}
 	.header-container {
 		width: 100%;
-		margin: auto;
+		margin: 5px;
 		display: flex;
 		flex-direction: column;
 		align-items: center;

@@ -163,38 +163,8 @@
 		width: 600px;
 	}
 
-	@media only screen and (max-width: 840px) {
-		.objcontainer {
-			display: none;
-		}
-	}
 
-	@media only screen and (max-width: 655px) {
-		h1 {
-			font-size: 40px !important;
-		}
-		h2 {
-			font-size: 32px !important;
-		}
-		h3 {
-			font-size: 28px !important;
-			padding: 10px 0 5px 0 !important;
-		}
-	}
-	@media only screen and (max-width: 400px) {
-		h1 {
-			font-size: 28px !important;
-			margin-bottom: 5px !important;
-		}
-		h2 {
-			font-size: 25px !important;
-		}
-		h3 {
-			font-size: 20px !important;
-			padding: 5px !important;
-		}
-	}
-
+	
 	@media only screen and (max-height: 745px) {
 		h1 {
 			font-size: 40px;
@@ -220,7 +190,7 @@
 		}
 	}
 
-	@media only screen and (max-height: 600px) {
+		@media only screen and (max-height: 600px) {
 		h1 {
 			font-size: 40px !important;
 		}
@@ -232,6 +202,37 @@
 		}
 	}
 
+	@media only screen and (max-width: 840px) {
+		.objcontainer {
+			display: none;
+		}
+	}
+
+	@media only screen and (max-width: 700px) {
+		h1 {
+			font-size: 40px !important;
+		}
+		h2 {
+			font-size: 32px !important;
+		}
+		h3 {
+			font-size: 28px !important;
+			padding: 10px 0 5px 0 !important;
+		}
+	}
+	@media only screen and (max-width: 435px) {
+		h1 {
+			font-size: 28px !important;
+			margin-bottom: 5px !important;
+		}
+		h2 {
+			font-size: 25px !important;
+		}
+		h3 {
+			font-size: 20px !important;
+			padding: 5px !important;
+		}
+	}
 
 	.error-message {
 		display: flex;
