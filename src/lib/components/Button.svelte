@@ -179,10 +179,16 @@
 
 	@media only screen and (max-width: 658px) {
 		button {
-			width: 40%;
+			width: 45%;
 			min-width: 150px;
 			height: 128px;
 			font-size: calc(var(--button-font-size) * 0.85);
+		}
+	}
+
+	@media only screen and (max-width: 460px) {
+		button {
+			font-size: calc(var(--button-font-size) * 0.72);
 		}
 	}
 
