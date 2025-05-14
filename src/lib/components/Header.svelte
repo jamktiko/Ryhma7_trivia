@@ -2,8 +2,11 @@
 	import { goto } from '$app/navigation';
 	import { triviaManager } from '$lib/stores/triviaStore.svelte';
 	import { startMusic, stopMusic } from '$lib/stores/backgroundmusic';
+	import InfoModal from './InfoModal.svelte';
 
-	let isSoundOn = $state(false); // Ääniasetuksen tila
+	let isSoundOn = $state(false);
+	let isInfoModalOpen = $state(false);
+
 	// Käynnistä musiikki
 	function toggleSound() {
 		isSoundOn = !isSoundOn;
@@ -13,10 +16,12 @@
 			stopMusic();
 		}
 	}
-	// Function for home button
 	function goToHome() {
 		triviaManager.reset();
 		goto('/');
+	}
+	function toggleInfoModal() {
+		isInfoModalOpen = !isInfoModalOpen;
 	}
 </script>
 
@@ -36,9 +41,9 @@
 		</div>
 	</div>
 	<!-- Info button -->
-	<button class="info-icon-button" onclick={goToHome} aria-label="Go to main menu">
+	<button class="info-icon-button" onclick={toggleInfoModal} aria-label="App Information">
 		<span class="material-symbols-outlined"> info </span>
-		<span class="info-tooltip">Main menu</span>
+		<span class="info-tooltip">App Info</span>
 	</button>
 	<!-- Home button -->
 	<button class="home-icon-button" onclick={goToHome} aria-label="Go to main menu">
@@ -52,6 +57,8 @@
 		</span>
 		<span class="sound-tooltip">{isSoundOn ? 'Sound ON' : 'Sound OFF'}</span>
 	</button>
+
+	<InfoModal isOpen={isInfoModalOpen} onClose={toggleInfoModal} />
 </header>
 
 <style>
