@@ -72,14 +72,14 @@
 	}
 
 	.modal {
-		padding: 1.5rem;
+		padding: 1.2rem;
 		position: fixed;
-		top: 10vh;
+		top: 8vh;
 		left: 50%;
 		transform: translateX(-50%);
-		width: 500px;
+		width: 480px;
 		max-width: 90%;
-		max-height: 80vh;
+		max-height: 75vh;
 		background: #f8f5fc;
 		border-radius: 5px;
 		z-index: 100;
@@ -135,7 +135,8 @@
 
 	.modal footer {
 		border-top: 1px solid var(--button2-color);
-		padding-top: 1rem;
+		padding-top: 0.75rem;
+		padding-bottom: 0.25rem;
 		display: flex;
 		justify-content: flex-end;
 	}
@@ -143,7 +144,7 @@
 	.modal-close-button {
 		background-color: var(--button1-color);
 		border: none;
-		padding: 0.5rem 1.5rem;
+		padding: 0.4rem 1.2rem;
 		border-radius: 20px;
 		color: var(--buttontext-color);
 		font-family: 'Protest Strike', sans-serif;
@@ -164,27 +165,63 @@
 	@media only screen and (max-width: 600px) {
 		.modal {
 			width: 90%;
+			max-height: 80vh;
+			padding: 1rem;
+		}
+		
+		.modal-content {
+			padding: 0.75rem 0;
+		}
+		
+		.credits {
+			margin-top: 0.25rem;
+			margin-bottom: 0.25rem;
+		}
+		
+		.modal footer {
+			padding-top: 0.5rem;
 		}
 	}
 
 	@media only screen and (max-height: 600px) {
 		.modal {
-			top: 5vh;
+			top: 2vh;
 			max-height: 90vh;
-			padding: 1rem;
+			padding: 0.75rem;
 		}
 
 		.modal h2 {
 			font-size: 1.5rem;
 		}
+		
+		.modal header {
+			padding-bottom: 0.75rem;
+		}
 
 		.modal-content h3 {
 			font-size: 1.2rem;
+			margin-top: 0.75rem;
+			margin-bottom: 0.25rem;
 		}
 
 		.modal-content p,
 		.modal-content li {
 			font-size: 0.9rem;
+			line-height: 1.3;
+			margin: 0.3rem 0;
+		}
+		
+		.modal-content ul {
+			margin-bottom: 0.75rem;
+		}
+		
+		.modal footer {
+			padding-top: 0.5rem;
+		}
+		
+		.modal-close-button {
+			padding: 0.3rem 1rem;
+			font-size: 1rem;
 		}
 	}
 </style>
