@@ -57,11 +57,14 @@ npm run dev
 - 0.8
   - Various bug fixes.
   - Responsivity.
+  - 
 - 0.7
   - Responsivity.
+  - Music added 
 - 0.6
   - Various bug fixes.
   - Responsivity.
+  - Button sounds added
 - 0.5
   - End screen page added. 
   - Styles mostly finished for all pages.
@@ -74,9 +77,11 @@ npm run dev
   - Timer added to game screen. 
   - Game page added. 
   - Main Page and buttons stylised.
+  - Points calculation system created.
 - 0.2
   - Basic functionality. 
   - Starting page added.
+  - Components added
 - 0.1
   - Initial Release
 
