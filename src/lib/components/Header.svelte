@@ -35,6 +35,11 @@
 			<span class="tooltiptext">Main menu</span>
 		</div>
 	</div>
+	<!-- Info button -->
+	<button class="info-icon-button" onclick={goToHome} aria-label="Go to main menu">
+		<span class="material-symbols-outlined"> info </span>
+		<span class="info-tooltip">Main menu</span>
+	</button>
 	<!-- Home button -->
 	<button class="home-icon-button" onclick={goToHome} aria-label="Go to main menu">
 		<span class="material-symbols-outlined"> home </span>
@@ -201,6 +206,49 @@
 	.home-icon-button:hover .home-tooltip {
 		visibility: visible;
 	}
+	.info-icon-button {
+		background-color: transparent;
+		border: none;
+		color: var(--buttontext-color);
+		width: 40px;
+		height: 40px;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: absolute;
+		top: 10px;
+		right: 110px; /* Position to left of home button */
+		z-index: 10;
+	}
+
+	.info-icon-button .material-symbols-outlined {
+		font-size: 40px;
+	}
+
+	.info-icon-button:hover {
+		opacity: 0.9;
+	}
+	.info-tooltip {
+		visibility: hidden;
+		background-color: var(--button2-color);
+		color: var(--buttontext-color);
+		text-align: center;
+		border-radius: 6px;
+		padding: 5px;
+		position: absolute;
+		z-index: 11;
+		bottom: 125%;
+		left: 50%;
+		transform: translateX(-50%);
+		font-family: 'KoHo', sans-serif;
+		font-size: 14px;
+		white-space: nowrap;
+	}
+
+	.info-icon-button:hover .info-tooltip {
+		visibility: visible;
+	}
 
 	@media only screen and (max-width: 600px) {
 		.tooltiptext {
@@ -221,20 +269,26 @@
 
 		/* Ensure buttons stay properly positioned */
 		.home-icon-button,
-		.sound-icon-button {
+		.sound-icon-button,
+		.info-icon-button {
 			top: 5px; /* Move slightly higher */
 		}
 
 		/* Optionally reduce button size for better fit */
 		.home-icon-button .material-symbols-outlined,
-		.sound-icon-button .material-symbols-outlined {
+		.sound-icon-button .material-symbols-outlined,
+		.info-icon-button .material-symbols-outlined {
 			font-size: 35px;
 		}
 	}
 	@media only screen and (max-width: 480px) {
 		.home-icon-button .material-symbols-outlined,
-		.sound-icon-button .material-symbols-outlined {
+		.sound-icon-button .material-symbols-outlined,
+		.info-icon-button .material-symbols-outlined {
 			font-size: 25px;
+		}
+		.info-icon-button {
+			right: 70px;
 		}
 		.home-icon-button {
 			right: 40px;
