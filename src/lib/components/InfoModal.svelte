@@ -64,8 +64,6 @@
 					<li>Jesse Kokki - Frontend & SFX</li>
 					<li>Jarius Korpisaari - Frontend</li>
 				</ul>
-
-				<p class="credits">Developed by the MindSpark Team</p>
 				<p class="credits">Music by Ikoliks</p>
 			{/if}
 		</div>
