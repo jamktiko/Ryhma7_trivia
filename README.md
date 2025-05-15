@@ -57,7 +57,6 @@ npm run dev
 - 0.8
   - Various bug fixes.
   - Responsivity.
-  - 
 - 0.7
   - Responsivity.
   - Music added 
